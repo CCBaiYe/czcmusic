@@ -4,10 +4,7 @@ QT += sql
 QT+=widgets
 CONFIG += c++17
 SOURCES += \
-        fileio.cpp \
-        localmusicmodel.cpp \
         main.cpp \
-        player.cpp
         
 DISTFILES += \
     CurrentList.qml \
@@ -21,7 +18,6 @@ DISTFILES += \
     NavBarBtn.qml \
     NavigationBar.qml \
     PlaySlider.qml \
-    VolumeControlDlg.qml \
     VolumnControl.qml
 
 resources.files = main.qml  $$DISTFILES
@@ -40,6 +36,3 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 HEADERS += \
-    fileio.h \
-    localmusicmodel.h \
-    player.h
