@@ -1,6 +1,6 @@
 import QtQuick 2.0
 import QtQuick.Dialogs
-import Player
+//import Player
 FileDialog {
         id: fileDialog
         property alias listM: listm
