@@ -1,6 +1,9 @@
 import QtQuick 2.15
 import Qt.labs.folderlistmodel
+<<<<<<< HEAD
 //import FileIo 1.0
+=======
+>>>>>>> 206b447981d4bac30f21d93d12a85b4018950c6f
 import QtQuick.Controls
 Rectangle{
     color: "#dddde1"
