@@ -5,7 +5,6 @@ import QtQuick.Dialogs
 import QtMultimedia
 //import Qt.labs.platform
 import Qt.labs.folderlistmodel
-//import "Mediaplayer.qml"
 Page {
     id:pageroot
     property int interval : 20*dp
@@ -31,21 +30,7 @@ Page {
             font.family: "Arial"
         }
 
-        Label {
-            id: musicNum
-            y: 37
-            width: 47
-            height: 20
-            //text: localmusic.m_musicNum +qsTr("首音乐，")
-            text: qsTr("首音乐，")
-            font.pixelSize: 14
-            horizontalAlignment: Text.AlignHCenter
-            verticalAlignment: Text.AlignBottom
-            anchors.bottom: title.bottom
-            anchors.bottomMargin: 3
-            anchors.left: title.right
-            anchors.leftMargin: 20
-        }
+
 
         Label{
             id: chooseDir
@@ -54,13 +39,14 @@ Page {
             height: 20
             anchors.bottom: title.bottom
             anchors.bottomMargin: 3
-            anchors.left: musicNum.right
+            anchors.left: title.right
             anchors.leftMargin: 10
             text: qsTr("选择目录")
             color: "#0C9DDA"
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignBottom
             font.pixelSize: 14
+
             MouseArea{
                 anchors.fill: parent
                 cursorShape: Qt.PointingHandCursor
@@ -145,10 +131,11 @@ Page {
                             }
                         }
                     }
-                    MouseArea{
-                        anchors.fill: parent
+                    TapHandler{
                         cursorShape: hovered ?  Qt.PointingHandCursor : Qt.ArrowCursor
-                        onClicked: fileDialog.open()
+                        onTapped: {
+                            fileDialog.open()
+                        }
                     }
                 }
 

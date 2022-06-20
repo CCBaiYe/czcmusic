@@ -10,12 +10,12 @@ Rectangle{
         width: parent.width
         height: parent.height
 
-//        FolderListModel {
-//            id: folderModel
-//            //folder: "file:///root/tmp"
-//            folder: fileDialog.setFile()
-//            nameFilters: ["*.mp3",]
-//        }
+        //        FolderListModel {
+        //            id: folderModel
+        //            //folder: "file:///root/tmp"
+        //            folder: fileDialog.setFile()
+        //            nameFilters: ["*.mp3",]
+        //        }
         //滚动条
         ScrollBar.vertical: ScrollBar{
             width: 30
@@ -25,8 +25,26 @@ Rectangle{
 
         model: fileDialog.listM
 
-        delegate: CurrentListBtn{count:Count;filename:fileName}
+        delegate: Item {
+
+            width: parent.width
+            height: 30
+            CurrentListBtn{count:Count;filename:fileName}
+            MouseArea{
+                anchors.fill: parent
+                onClicked: {
+                    console.log(fileDialog.listM.get(index).filePath)
+                    mdp.mdplayer.stop()
+                    footer.palyslider.musicName=fileDialog.listM.get(index).fileName
+                    mdp.mdplayer.source=fileDialog.listM.get(index).filePath
+                    mdp.mdplayer.play()
+
+                }
+            }
+
+
         }
     }
+}
 
 

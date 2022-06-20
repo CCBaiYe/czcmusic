@@ -181,12 +181,13 @@ Rectangle{
         }
         width: height
         text:"\uf03c"
-        MouseArea{
-            anchors.fill: parent
-            onClicked:{
-                   currentlist.visible=!currentlist.visible
+        TapHandler{
+            onTapped: {
+                currentlist.visible=!currentlist.visible
             }
         }
+
+
     }
     CurrentList{
         id:currentlist

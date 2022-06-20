@@ -27,7 +27,6 @@ import QtQuick.Controls 2.15
          anchors.top:parent.top
          height: parent.height
          width: 3*dp
-         //color: titleColor
      }
 
      Label{
@@ -46,11 +45,6 @@ import QtQuick.Controls 2.15
          }
          font.pixelSize: 12*dp;
      }
-        MouseArea{
-            anchors.fill: parent
-            onDoubleClicked: {
-                //var count=fileDialog.listM.
-            }
-        }
+
 
 }
