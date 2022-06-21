@@ -4,6 +4,7 @@ QT += sql
 QT+=widgets
 CONFIG += c++17
 SOURCES += \
+        getinformation.cpp \
         main.cpp \
         
 DISTFILES += \
@@ -37,3 +38,4 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 HEADERS += \
+    getinformation.h
