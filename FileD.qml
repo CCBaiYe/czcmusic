@@ -27,10 +27,10 @@ Item{
                 //root.statusBar.text = "Not Supported!";
             }
         }
-        function setFile()
+        function getFilePath()
         {
-            console.log(fileDialog.currentFile)
-            return fileDialog.currentFile;
+            console.log(filePath)
+            return filePath;
         }
 
         function setMusicName(path){

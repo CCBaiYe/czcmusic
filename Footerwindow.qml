@@ -184,12 +184,14 @@ Rectangle{
         width: height
         text:"\uf03c"
         TapHandler{
-            //anchors.fill: parent
             cursorShape: Qt.PointingHandCursor;
             onTapped: {
                    currentlist.visible=!currentlist.visible
+
             }
         }
+
+
     }
     CurrentList{
         id:currentlist

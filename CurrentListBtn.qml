@@ -47,8 +47,9 @@ import QtQuick.Controls 2.15
          }
          font.pixelSize: 12*dp;
      }
+
         TapHandler{
-            //anchors.fill: parent
         }
+
 
 }

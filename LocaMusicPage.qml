@@ -53,7 +53,6 @@ Item{
             verticalAlignment: Text.AlignBottom
             font.pixelSize: 14
             TapHandler{
-                //anchors.fill: chooseDir
                 cursorShape: Qt.PointingHandCursor;
                 onTapped: {
                     dialogs.folderDialog.open();

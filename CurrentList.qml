@@ -10,7 +10,6 @@ Rectangle{
         id:listv
         width: parent.width
         height: parent.height
-
         //滚动条
         ScrollBar.vertical: ScrollBar{
             width: 30
@@ -18,8 +17,25 @@ Rectangle{
         }
         model: dialogs.listM
 
-        delegate: CurrentListBtn{count:Count;filename:fileName}
+        delegate: Item {
+            width: parent.width
+            height: 30
+            CurrentListBtn{count:Count;filename:fileName}
+            MouseArea{
+                anchors.fill: parent
+                onDoubleClicked: {
+                    //console.log(dialogs.listM.get(index).filePath)
+                    mdp.mdplayer.stop()
+                    footer.palyslider.musicName=dialogs.listM.get(index).fileName
+                    mdp.mdplayer.source=dialogs.listM.get(index).filePath
+                    mdp.mdplayer.play()
+
+                }
+            }
+
+
         }
     }
+}
 
 
