@@ -6,7 +6,7 @@ Rectangle{
     id:button
     width: 30*dp
     height:width
-    signal clicked()
+    //signal clicked()
     property alias text:btn_label.text;
     property string secondText: "";
     property color btnColor: "#DC2F2E";

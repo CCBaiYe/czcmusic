@@ -36,10 +36,11 @@ Rectangle{
             leftMargin: 15*dp
             verticalCenter: parent.verticalCenter
         }
-        MouseArea{
-            anchors.fill: parent
-            onClicked: {
-                fileDialog.preplay();
+        TapHandler{
+            //anchors.fill: parent
+            cursorShape: Qt.PointingHandCursor;
+            onTapped:  {
+                dialogs.fileDialog.preplay();
             }
         }
         width: 25*dp
@@ -53,12 +54,11 @@ Rectangle{
             verticalCenter: parent.verticalCenter
         }
         width: 30*dp
-//        text:"\uf04b"
-//        secondText:"\uf04c"
         text: mdp.mdplayer.playbackState ===  MediaPlayer.PlayingState ? qsTr("\uf04c") : qsTr("\uf04b")
-        MouseArea{
-            anchors.fill: parent
-            onClicked: {
+        TapHandler{
+            //anchors.fill: parent
+            cursorShape: Qt.PointingHandCursor;
+            onTapped:  {
                 switch(mdp.mdplayer.playbackState) {
                     case MediaPlayer.PlayingState: mdp.mdplayer.pause(); break;
                     case MediaPlayer.PausedState: mdp.mdplayer.play(); break;
@@ -74,10 +74,11 @@ Rectangle{
             leftMargin: 10*dp
             verticalCenter: parent.verticalCenter
         }
-        MouseArea{
-            anchors.fill: parent
-            onClicked: {
-                fileDialog.nextplay();
+        TapHandler{
+            //anchors.fill: parent
+            cursorShape: Qt.PointingHandCursor;
+            onTapped:  {
+                dialogs.fileDialog.nextplay();
             }
         }
 
@@ -130,10 +131,11 @@ Rectangle{
         width: height
         text:"\uf0fe"
         color: isLove?"#DC2F2E":"#999999"
-        MouseArea{
-            anchors.fill: parent
-            onClicked:{
-                collectBtn.isLove = !collectBtn.isLove;
+        TapHandler{
+            //anchors.fill: parent
+            cursorShape: Qt.PointingHandCursor;
+            onTapped: {
+                //collectBtn.isLove = !collectBtn.isLove;
             }
         }
     }
@@ -153,9 +155,10 @@ Rectangle{
         }
         width: height
         text:playMode==0?"\uf03a":(playMode==1?"\uf074":playMode==2?"dx":"")
-        MouseArea{
-            anchors.fill: parent
-            onClicked:{
+        TapHandler{
+            //anchors.fill: parent
+            cursorShape: Qt.PointingHandCursor;
+            onTapped: {
                 switch(playModeBtn.playMode)
                 {
                     case 0:playModeBtn.playMode=1;break;
@@ -167,7 +170,6 @@ Rectangle{
         }
 
     }
-
     //当前列表
     MusicControlBtn{
         id:currentListBtn
@@ -181,12 +183,15 @@ Rectangle{
         }
         width: height
         text:"\uf03c"
-        MouseArea{
-            anchors.fill: parent
-            onClicked:{
+        TapHandler{
+            cursorShape: Qt.PointingHandCursor;
+            onTapped: {
                    currentlist.visible=!currentlist.visible
+
             }
         }
+
+
     }
     CurrentList{
         id:currentlist

@@ -3,11 +3,7 @@
 int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
-<<<<<<< HEAD
 
-
-=======
->>>>>>> 206b447981d4bac30f21d93d12a85b4018950c6f
     QQmlApplicationEngine engine;
     const QUrl url(u"qrc:/ccmusic/main.qml"_qs);
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,

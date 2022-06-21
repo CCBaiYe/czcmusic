@@ -105,7 +105,6 @@ Rectangle {
             ScrollBar.vertical: ScrollBar{
 
             }
-
         }
     Component{
         id:sectionHeading

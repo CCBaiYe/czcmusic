@@ -7,8 +7,11 @@ ApplicationWindow {
     visible: true
     width:1020
     height: 650
-    property alias fileDialog: fileDialog
-    property string icon;
+    property alias dialogs: dialogs
+    property alias rootwidth: root.width
+    property alias rootheight: root.height
+    property alias navwidth:nav.width
+    property alias pageLoader: pageLoader
     property real dpScale: 1.5;     //在不同的分辨率屏幕下的窗口伸缩因子
     readonly property real dp: Math.max(Screen.pixelDensity*25.4/160*dpScale);
     header: ToolBar{
@@ -16,7 +19,6 @@ ApplicationWindow {
         height:parent.height*0.07
             Image {
                 id: titleIcon
-                source: icon
                 width: 650*0.07-15*1.5
                 height: 650*0.07-15*1.5
                 anchors{
@@ -31,6 +33,7 @@ ApplicationWindow {
     }
     footer: Footerwindow{
         id:footer
+        anchors.top: splitView.bottom
         height: root.height*0.07
         width: root.width
 
@@ -39,11 +42,12 @@ ApplicationWindow {
         id:mdp
     }
     FileD {
-            id: fileDialog
+            id: dialogs
             }
     SplitView {
         id: splitView
-        height: parent.height*0.86
+        height: root.height-menu.height-footer.height
+        anchors.top: menu.bottom
         anchors.fill: parent
         handle: Rectangle {
             implicitWidth: 4
@@ -59,18 +63,16 @@ ApplicationWindow {
         }
 
         NavigationBar{
-            implicitWidth: 170
+            id:nav
+            width: root.width/3.5
+            implicitWidth: 200
             color: "white"
-            width: parent.width
             height: splitView.height
         }
-
-        Rectangle {
-            implicitWidth: 50
-            color: "white"
-            Loader{id:pageLoader
-
-            }
+        Loader{
+            id:pageLoader
+            width: root.width-nav.width
+            height: splitView.height
         }
     }
 }

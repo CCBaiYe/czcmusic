@@ -10,6 +10,7 @@ DISTFILES += \
     CurrentList.qml \
     CurrentListBtn.qml \
     FileD.qml \
+    FolderListBtn.qml \
     Footerwindow.qml \
     LocaMusicPage.qml \
     Mediaplayer.qml \
@@ -36,7 +37,3 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 HEADERS += \
-<<<<<<< HEAD:ccmusic.pro
-
-=======
->>>>>>> 206b447981d4bac30f21d93d12a85b4018950c6f:untitled17.pro
