@@ -41,6 +41,10 @@ Rectangle{
                 color: "#b82525"
                 radius: 3*dp
             }
+            TapHandler{
+                //anchors.fill: parent
+                cursorShape: Qt.PointingHandCursor;
+            }
         }
 
         //huaqiu
@@ -90,7 +94,7 @@ Rectangle{
         id:songTimeInfo
         visible: nolabel
         width: 60*dp
-        text:qsTr(fileDialog.setTime(mdp.mdplayer.position) + "/" + fileDialog.setTime(mdp.mdplayer.duration))
+        text:qsTr(dialogs.fileDialog.setTime(mdp.mdplayer.position) + "/" + dialogs.fileDialog.setTime(mdp.mdplayer.duration))
         anchors{
             right : sliderControl.right
             rightMargin: 5*dp

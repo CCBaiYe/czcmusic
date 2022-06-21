@@ -5,25 +5,18 @@ Rectangle{
     color: "#dddde1"
     property alias widthw: listv.width
     property alias heighth: listv.height
+
     ListView {
         id:listv
         width: parent.width
         height: parent.height
 
-//        FolderListModel {
-//            id: folderModel
-//            //folder: "file:///root/tmp"
-//            folder: fileDialog.setFile()
-//            nameFilters: ["*.mp3",]
-//        }
         //滚动条
         ScrollBar.vertical: ScrollBar{
             width: 30
             policy: ScrollBar.AlwaysOn
         }
-
-
-        model: fileDialog.listM
+        model: dialogs.listM
 
         delegate: CurrentListBtn{count:Count;filename:fileName}
         }

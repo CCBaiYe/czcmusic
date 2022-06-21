@@ -13,7 +13,7 @@ import QtQuick.Controls 2.15
 
 
      id:navItemBtn;
-     width: parent.width;
+     width: navwidth
      height: 30*dp;
      background: Rectangle{
          id:backgroundRect;
@@ -27,7 +27,6 @@ import QtQuick.Controls 2.15
          anchors.top:parent.top
          height: parent.height
          width: 3*dp
-         //color: titleColor
      }
 
      Label{
@@ -44,7 +43,6 @@ import QtQuick.Controls 2.15
          verticalAlignment:Label.AlignVCenter;
          horizontalAlignment: Label.AlignHCenter;
      }
-
      Label{
          anchors{
              left: symbolText_.right
@@ -58,11 +56,9 @@ import QtQuick.Controls 2.15
          font.pixelSize: 10*dp;
          verticalAlignment:Label.AlignVCenter;
      }
-
-
      MouseArea{
          anchors.fill: parent
-         onClicked: {
+         onClicked :  {
              switch(count){
              case 4:pageLoader.source="LocaMusicPage.qml"
 
@@ -70,11 +66,4 @@ import QtQuick.Controls 2.15
 
          }
      }
-
-
-//     function setCurrentItemState(ok){
-//         currentItem = ok;
-//     }
-
-
 }

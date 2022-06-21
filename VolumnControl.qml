@@ -23,6 +23,7 @@ Item{
             text:"\uf0fe"
             MouseArea{
                 anchors.fill: parent
+                cursorShape: Qt.PointingHandCursor;
                 onClicked:{
                     switch(mdp.audioout.muted){
                     case true:{
@@ -68,6 +69,10 @@ Item{
                     color: "#b82525"
                     radius: 3*dp;
                 }
+                MouseArea{
+                    anchors.fill: parent
+                    cursorShape: Qt.PointingHandCursor;
+                }
             }
             handle: Rectangle {
                 x: sliderControl.leftPadding + sliderControl.visualPosition * (sliderControl.availableWidth - width)
@@ -85,7 +90,6 @@ Item{
                     color: "#b82525";
                     verticalAlignment: Text.AlignVCenter
                     horizontalAlignment: Text.AlignHCenter;
-                    //font.family:regularIcomoonFont.name;
                     font.pixelSize: 10*dp;
                 }
             }

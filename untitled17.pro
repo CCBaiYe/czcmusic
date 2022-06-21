@@ -10,6 +10,7 @@ DISTFILES += \
     CurrentList.qml \
     CurrentListBtn.qml \
     FileD.qml \
+    FolderListBtn.qml \
     Footerwindow.qml \
     LocaMusicPage.qml \
     Mediaplayer.qml \
