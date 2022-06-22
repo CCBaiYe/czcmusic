@@ -1,9 +1,11 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
+#include "getinformation.h"
 int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
 
+    qmlRegisterType<GetInformation,1>("GetInformation",1,0,"GetInformation");
     QQmlApplicationEngine engine;
     const QUrl url(u"qrc:/ccmusic/main.qml"_qs);
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
