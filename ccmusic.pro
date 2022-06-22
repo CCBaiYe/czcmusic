@@ -6,7 +6,8 @@ CONFIG += c++17
 SOURCES += \
         getinformation.cpp \
         main.cpp \
-        
+         \
+        onlinesong.cpp
 DISTFILES += \
     CurrentList.qml \
     CurrentListBtn.qml \
@@ -41,7 +42,8 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 HEADERS += \
-    getinformation.h
+    getinformation.h \
+    onlinesong.h
 
 unix|win32: LIBS += -ltag
 
