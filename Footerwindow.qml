@@ -187,18 +187,15 @@ Rectangle{
             cursorShape: Qt.PointingHandCursor;
             onTapped: {
                    currentlist.visible=!currentlist.visible
-
             }
         }
-
-
     }
     CurrentList{
         id:currentlist
         visible: false
         y:(border__.y-height)
         x:(collectBtn.x+collectBtn.width/2 - width/9*2.5)
-        width: parent.width
+        width: 700*dp
         height: parent.height*dp*8
     }
 

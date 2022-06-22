@@ -30,7 +30,14 @@ import QtQuick.Controls 2.15
          }
          font.pixelSize: 12*dp;
      }
-        TapHandler{
-        }
-
+     MouseArea{
+         anchors.fill: parent
+         onDoubleClicked: {
+             dialogs.addplayerlist();
+             mdp.mdplayer.stop();
+             footer.palyslider.musicName=dialogs.folderlistm.get(index,"fileName");
+             mdp.mdplayer.source="file://"+dialogs.folderlistm.get(index,"filePath");
+             mdp.mdplayer.play();
+         }
+     }
 }

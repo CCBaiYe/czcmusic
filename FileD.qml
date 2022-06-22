@@ -27,12 +27,6 @@ Item{
                 //root.statusBar.text = "Not Supported!";
             }
         }
-        function getFilePath()
-        {
-            console.log(filePath)
-            return filePath;
-        }
-
         function setMusicName(path){
             var newPath;
             //去掉目录
@@ -49,7 +43,6 @@ Item{
         function removeSuffix(newPath){
             for(var j=0;j<newPath.length;j++) {
                 if(newPath[j]===".") {
-                    footer.palyslider.musicName=newPath.slice(0,j);
                     return newPath.slice(0,j);
                 }
             }
@@ -70,15 +63,20 @@ Item{
             if(!(isexist(fileUrl))){
                 listm.append({"Count":listm.count+1,"fileName":setMusicName(str),"filePath":fileUrl});
             }
+            footer.palyslider.musicName=setMusicName(str);
             mdp.mdplayer.play();
         }
         //下一首
         function nextplay()
         {
+            console.log("111")
             if(footer.playmodel===0||footer.playmodel===2){
                 for(var i=0;i<listm.count;i++)
                 {
-                    if(mdp.mdplayer.source===listm.get(i).filePath){
+                    var path=listm.get(i).filePath;
+                    if(mdp.mdplayer.source===path){
+                        console.log(mdp.mdplayer.source);
+                        console.log(listm.get(i).filePath);
                         mdp.mdplayer.source=listm.get((i+1)%listm.count).filePath;
                         footer.palyslider.musicName=listm.get((i+1)%listm.count).fileName;
                         mdp.mdplayer.play();
@@ -156,21 +154,34 @@ Item{
     //选择目录
     function setFolderModel(){
         folderlistm.folder = arguments[0];
-        //listm = folderlistm;
 
     }
     //选择多文件
     function setFilesModel(){
-        listm.clear();
+        //listm.clear();
         for(var i = 0; i < arguments[0].length; i++){
-            var str=fileDialog.currentFiles[i].toString();
-            var data = {"filePath": arguments[0][i],"fileName":fileDialog.setMusicName(str),"Count":listm.count+1};
-            listm.append(data);
+            if(!(fileDialog.isexist(arguments[0][i]))){
+                var str=fileDialog.currentFiles[i].toString();
+                var data = {"filePath": arguments[0][i],"fileName":fileDialog.setMusicName(str),"Count":listm.count+1};
+                listm.append(data);
+            }
         }
     }
+    //目录中所有文件加入到播放列表
+    function addplayerlist(){
+        for(var i=0;i<folderlistm.count;i++){
+            var filename=fileDialog.removeSuffix(folderlistm.get(i,"fileName"));
+            var filepath="file://"+folderlistm.get(i,"filePath");
+            if(!(fileDialog.isexist(filepath))){
+            listm.append({"Count":listm.count+1,"fileName":filename,"filePath":filepath});
+            }
+        }
+    }
+
     FolderListModel{
         id:folderlistm
         nameFilters: ["*.mp3"]
+        showDirs: false
     }
 
     FolderDialog{

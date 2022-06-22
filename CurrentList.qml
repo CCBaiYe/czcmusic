@@ -5,7 +5,8 @@ Rectangle{
     color: "#dddde1"
     property alias widthw: listv.width
     property alias heighth: listv.height
-
+    width: parent.width
+    height: parent.height
     ListView {
         id:listv
         width: parent.width
@@ -18,17 +19,17 @@ Rectangle{
         model: dialogs.listM
 
         delegate: Item {
-            width: parent.width
+            width: 700
             height: 30
             CurrentListBtn{count:Count;filename:fileName}
             MouseArea{
                 anchors.fill: parent
                 onDoubleClicked: {
-                    //console.log(dialogs.listM.get(index).filePath)
                     mdp.mdplayer.stop()
                     footer.palyslider.musicName=dialogs.listM.get(index).fileName
                     mdp.mdplayer.source=dialogs.listM.get(index).filePath
-                    mdp.mdplayer.play()
+                    console.log(dialogs.listM.get(index).filePath)
+                    mdp.mdplayer.play();
 
                 }
             }

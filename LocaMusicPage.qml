@@ -75,7 +75,6 @@ Item{
             verticalAlignment: Text.AlignBottom
             font.pixelSize: 14
             TapHandler {
-                //anchors.fill: newMusic
                 cursorShape: Qt.PointingHandCursor;
                 onTapped:  {dialogs.fileDialog.open();}
             }
@@ -121,6 +120,7 @@ Item{
             id: label
             text: qsTr("请选择本地音乐")
             font.bold: true
+            visible: true
             anchors.bottom: label1.top
             anchors.bottomMargin: 20
             anchors.horizontalCenter: rectangle3.horizontalCenter
@@ -134,6 +134,7 @@ Item{
         Label {
             id: label1
             text: qsTr("升级本地音乐为高品质并和朋友分享！")
+            visible: true
             anchors.bottom: rectangle3.top
             anchors.bottomMargin: 20
             anchors.horizontalCenter: rectangle3.horizontalCenter
@@ -147,13 +148,8 @@ Item{
             id:folderfileslist
             width: rectangle2.width
             height: rectangle2.height
-            model: dialogs.folderlistm
-            Component {
-                    id: fileDelegate
-                    Text { text: fileName }
-                }
-           // delegate: fileDelegate
-            delegate: FolderListBtn{filename:fileName}
+            model: dialogs.folderlistm           
+            delegate: FolderListBtn{filename:dialogs.fileDialog.removeSuffix(fileName)}
         }
     }
 }
