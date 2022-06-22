@@ -20,7 +20,7 @@ Item{
             anchors.left: parent.left
             anchors.leftMargin: 0
             width: height
-            text:"\uf0fe"
+            text:"\uf028"
             MouseArea{
                 anchors.fill: parent
                 cursorShape: Qt.PointingHandCursor;

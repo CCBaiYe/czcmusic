@@ -11,7 +11,7 @@ Rectangle {
             type:"推荐"
             symbolText_:"\uf00e"
             itemText_:"发现音乐"
-            fontfamily_:"Solid"
+            fontfamily_:"FontAwesome"
             count:1
         }
         ListElement{
@@ -39,7 +39,7 @@ Rectangle {
             type:"我的音乐"
             symbolText_:"\uf019"
             itemText_:"下载管理"
-            fontfamily_:"Solid"
+            fontfamily_:"FontAwesome"
             count:5
         }
         ListElement{
@@ -116,6 +116,7 @@ Rectangle {
                 anchors.left: parent.left
                 anchors.leftMargin: 10
                 anchors.top: parent.top
+                font.family: "FontAwesome"
                 anchors.topMargin: 3*dp
                 anchors.bottom: parent.bottom
                 text: section === "top" ? "":section

@@ -18,7 +18,8 @@ Rectangle{
 
     Rectangle{
         id: musicInfoImage
-        color: "#123456"
+        color: "darkcyan"
+        opacity: 0.3
         anchors{
             top:border__.bottom
             topMargin: 1*dp
@@ -26,6 +27,20 @@ Rectangle{
             leftMargin: 1*dp
             bottom: parent.bottom
             bottomMargin: 1*dp
+        }
+        Label{
+            text: "\uf065"
+            font.family: "FontAwesome"
+            font.pixelSize: parent.width/1.5
+            anchors.verticalCenter: musicInfoImage.verticalCenter
+            anchors.horizontalCenter: musicInfoImage.horizontalCenter
+        }
+
+        TapHandler{
+            cursorShape: Qt.PointingHandCursor;
+            onTapped: {
+                   songlist.visible=!songlist.visible
+            }
         }
         width: height
     }
@@ -132,7 +147,6 @@ Rectangle{
         text:"\uf0fe"
         color: isLove?"#DC2F2E":"#999999"
         TapHandler{
-            //anchors.fill: parent
             cursorShape: Qt.PointingHandCursor;
             onTapped: {
                 //collectBtn.isLove = !collectBtn.isLove;
@@ -154,9 +168,8 @@ Rectangle{
             bottomMargin: 5*dp
         }
         width: height
-        text:playMode==0?"\uf03a":(playMode==1?"\uf074":playMode==2?"dx":"")
+        text:playMode==0?"\uf03a":(playMode==1?"\uf074":playMode==2?"\uf0ec":"")
         TapHandler{
-            //anchors.fill: parent
             cursorShape: Qt.PointingHandCursor;
             onTapped: {
                 switch(playModeBtn.playMode)
@@ -198,7 +211,13 @@ Rectangle{
         width: 700*dp
         height: parent.height*dp*8
     }
-
+    SongList{
+        id:songlist
+        visible: false
+        y:(border__.y-height)
+        width: rootwidth
+        height: splitviewheiht
+    }
 
 }
 

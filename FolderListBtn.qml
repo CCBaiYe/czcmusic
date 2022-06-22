@@ -35,7 +35,7 @@ import QtQuick.Controls 2.15
          onDoubleClicked: {
              dialogs.addplayerlist();
              mdp.mdplayer.stop();
-             footer.palyslider.musicName=dialogs.folderlistm.get(index,"fileName");
+             footer.palyslider.musicName=dialogs.fileDialog.removeSuffix(dialogs.folderlistm.get(index,"fileName"));
              mdp.mdplayer.source="file://"+dialogs.folderlistm.get(index,"filePath");
              mdp.mdplayer.play();
          }

@@ -12,6 +12,7 @@ DISTFILES += \
     CurrentListBtn.qml \
     FileD.qml \
     FolderListBtn.qml \
+    Font/fontawesome-webfont.ttf \
     Footerwindow.qml \
     LocaMusicPage.qml \
     Mediaplayer.qml \
@@ -20,11 +21,13 @@ DISTFILES += \
     NavBarBtn.qml \
     NavigationBar.qml \
     PlaySlider.qml \
+    SongList.qml \
     VolumnControl.qml
 
 resources.files = main.qml  $$DISTFILES
 resources.prefix = /$${TARGET}
-RESOURCES += resources
+RESOURCES += resources \
+    images.qrc
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
 QML_IMPORT_PATH =

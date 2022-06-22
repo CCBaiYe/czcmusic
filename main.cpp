@@ -1,9 +1,13 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include "getinformation.h"
+#include<QFontDatabase>
 int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
+    //添加字体文件
+    const int fontId = QFontDatabase::addApplicationFont(":/Font/fontawesome-webfont.ttf");
+    QStringList fontFamilies = QFontDatabase::applicationFontFamilies(fontId);
 
     qmlRegisterType<GetInformation,1>("GetInformation",1,0,"GetInformation");
     QQmlApplicationEngine engine;

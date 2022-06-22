@@ -11,7 +11,7 @@ Rectangle{
     Label{
         id:musicControlBtnText
         anchors.fill: parent
-        //font.family: icomoonFont.name
+        font.family: "FontAwesome"
         font.pixelSize: 15*dp;
         text: "\uf192";
         verticalAlignment:Label.AlignVCenter;

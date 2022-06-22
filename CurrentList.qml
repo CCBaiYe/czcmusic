@@ -28,7 +28,6 @@ Rectangle{
                     mdp.mdplayer.stop()
                     footer.palyslider.musicName=dialogs.listM.get(index).fileName
                     mdp.mdplayer.source=dialogs.listM.get(index).filePath
-                    console.log(dialogs.listM.get(index).filePath)
                     mdp.mdplayer.play();
 
                 }

@@ -12,6 +12,9 @@ ApplicationWindow {
     property alias rootheight: root.height
     property alias navwidth:nav.width
     property alias pageLoader: pageLoader
+    property alias splitviewheiht: splitView.height
+    property alias splitView: splitView
+    property alias footerheight: footer.height
     property real dpScale: 1.5;     //在不同的分辨率屏幕下的窗口伸缩因子
     readonly property real dp: Math.max(Screen.pixelDensity*25.4/160*dpScale);
     header: ToolBar{

@@ -69,14 +69,11 @@ Item{
         //下一首
         function nextplay()
         {
-            console.log("111")
             if(footer.playmodel===0||footer.playmodel===2){
                 for(var i=0;i<listm.count;i++)
                 {
                     var path=listm.get(i).filePath;
                     if(mdp.mdplayer.source===path){
-                        console.log(mdp.mdplayer.source);
-                        console.log(listm.get(i).filePath);
                         mdp.mdplayer.source=listm.get((i+1)%listm.count).filePath;
                         footer.palyslider.musicName=listm.get((i+1)%listm.count).fileName;
                         mdp.mdplayer.play();
@@ -171,9 +168,9 @@ Item{
     function addplayerlist(){
         for(var i=0;i<folderlistm.count;i++){
             var filename=fileDialog.removeSuffix(folderlistm.get(i,"fileName"));
-            var filepath="file://"+folderlistm.get(i,"filePath");
-            if(!(fileDialog.isexist(filepath))){
-            listm.append({"Count":listm.count+1,"fileName":filename,"filePath":filepath});
+            var filepath="file://"+folderlistm.get(i,"filePath");            
+            if(!(fileDialog.isexist(Qt.resolvedUrl(filepath)))){
+            listm.append({"Count":listm.count+1,"fileName":filename,"filePath":Qt.resolvedUrl(filepath)});
             }
         }
     }

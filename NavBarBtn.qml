@@ -36,6 +36,7 @@ import QtQuick.Controls 2.15
              leftMargin: 1*dp
              verticalCenter: parent.verticalCenter;
          }
+         font.family: "FontAwesome"
          width: parent.height - 2*dp
          height: parent.height - 2*dp
          text: symbolText;
