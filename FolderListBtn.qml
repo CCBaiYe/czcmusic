@@ -8,6 +8,9 @@ import QtQuick.Controls 2.15
      property bool currentItem : false;
      property string filename;
      property string count;
+     property string fileartist
+     property string filetime
+     property string filealbum
 
 
      id:navItemBtn;
@@ -19,16 +22,47 @@ import QtQuick.Controls 2.15
      }
      Label{
          id:symbolText_
+         anchors{
+             left: parent.left
+             leftMargin: 1*dp
+         }
          width: parent.height - 2*dp
          height: parent.height - 2*dp
+         anchors.verticalCenter: navItemBtn.verticalCenter
          text: count
-         Text{
-             id:tec
+         Label{
+             id:tec1
              text: filename
-             anchors.left: parent.left
-             anchors.verticalCenter: parent.verticalCenter
+             anchors.left: symbolText_.right
+             width: 200
+             elide: Text.ElideRight
+             font.pixelSize: 13;
          }
-         font.pixelSize: 12*dp;
+         Label{
+             id:tec2
+             text: fileartist
+             width: 300
+             elide: Text.ElideRight
+             anchors.left: symbolText_.right
+             anchors.leftMargin: 200
+             font.pixelSize: 13;
+         }
+         Label{
+             id:tec3
+             text: filealbum
+             elide: Text.ElideRight
+             anchors.left: symbolText_.right
+             anchors.leftMargin: 500
+             font.pixelSize: 13;
+         }
+         Label{
+             id:tec4
+             text: filetime
+             anchors.left: symbolText_.right
+             anchors.leftMargin: 700
+             font.pixelSize: 13;
+         }
+
      }
      MouseArea{
          anchors.fill: parent

@@ -21,7 +21,7 @@ Rectangle{
         delegate: Item {
             width: 700
             height: 30
-            CurrentListBtn{count:Count;filename:fileName}
+            CurrentListBtn{count:Count;filename:fileName;fileartist: fileArtist;filetime: fileTime}
             MouseArea{
                 anchors.fill: parent
                 onDoubleClicked: {
@@ -29,7 +29,6 @@ Rectangle{
                     footer.palyslider.musicName=dialogs.listM.get(index).fileName
                     mdp.mdplayer.source=dialogs.listM.get(index).filePath
                     mdp.mdplayer.play();
-
                 }
             }
 

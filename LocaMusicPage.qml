@@ -6,6 +6,7 @@ import QtMultimedia
 //import Qt.labs.platform
 import Qt.labs.folderlistmodel
 Item{
+    property alias folderfileslistxisible: folderfileslist.visible
     id:pageroot
     width: parent.width
     height: parent.height
@@ -148,8 +149,14 @@ Item{
             id:folderfileslist
             width: rectangle2.width
             height: rectangle2.height
-            model: dialogs.folderlistm           
-            delegate: FolderListBtn{filename:dialogs.fileDialog.removeSuffix(fileName)}
+            model: dialogs.savefoldermodel
+            delegate: FolderListBtn{
+                count:Count;
+                filename:fileName;
+                fileartist: fileArtist;
+                filealbum: fileAlbum
+                filetime: fileTime
+            }
         }
     }
 

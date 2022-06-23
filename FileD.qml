@@ -2,11 +2,13 @@ import QtQuick 2.0
 import QtCore
 import QtQuick.Dialogs
 import Qt.labs.folderlistmodel
+import GetInformation 1.0
 Item{
     property alias listM: listm
     property alias folderDialog: folderDialog
     property alias fileDialog:fileDialog
     property alias folderlistm: folderlistm
+    property alias savefoldermodel: savefoldermodel
     FileDialog {
         id: fileDialog
         title: qsTr("Please choose an image file")
@@ -61,7 +63,11 @@ Item{
             mdp.mdplayer.source=fileUrl;
             var str=fileDialog.currentFile.toString();
             if(!(isexist(fileUrl))){
-                listm.append({"Count":listm.count+1,"fileName":setMusicName(str),"filePath":fileUrl});
+                getinfor.setFileUrl(fileUrl);
+                getinfor.onEndsWith();
+                listm.append({"Count":listm.count+1,"fileName":setMusicName(str),
+                                 "filePath":fileUrl,"fileArtist":getinfor.artist,
+                                 "fileTime":dialogs.fileDialog.setTime(mdp.mdplayer.duration)});
             }
             footer.palyslider.musicName=setMusicName(str);
             mdp.mdplayer.play();
@@ -151,15 +157,36 @@ Item{
     //选择目录
     function setFolderModel(){
         folderlistm.folder = arguments[0];
+        console.log(arguments[0]);
+        //把目录下文件保存到一个model中
+        for(var i=0;i<folderlistm.count;i++)
+        {
+            var filepath="file://"+folderlistm.get(i,"filePath");
+            getinfor.setFileUrl(Qt.resolvedUrl(filepath));
+            getinfor.onEndsWith();
+            if(!(fileDialog.isexist(getinfor.fileUrl))){
+                var str=fileDialog.removeSuffix(folderlistm.get(i,"fileName"));
+                var data={"Count":savefoldermodel.count+1,"fileName":str,
+                "filePath":getinfor.fileUrl,"fileArtist":getinfor.artist,
+                "fileTime":dialogs.fileDialog.setTime(mdp.mdplayer.duration),
+                "fileAlbum":getinfor.album}
+                if(!(folderlistm.isFolder(i))){
+                    savefoldermodel.append(data);
+                }
+            }
+        }
 
     }
     //选择多文件
     function setFilesModel(){
-        //listm.clear();
         for(var i = 0; i < arguments[0].length; i++){
             if(!(fileDialog.isexist(arguments[0][i]))){
+                getinfor.setFileUrl(arguments[0][i]);
+                getinfor.onEndsWith();
                 var str=fileDialog.currentFiles[i].toString();
-                var data = {"filePath": arguments[0][i],"fileName":fileDialog.setMusicName(str),"Count":listm.count+1};
+                var data = {"filePath": arguments[0][i],"fileName":fileDialog.setMusicName(str),
+                    "Count":listm.count+1,"fileArtist":getinfor.artist,
+                    "fileTime":dialogs.fileDialog.setTime(mdp.mdplayer.duration)};
                 listm.append(data);
             }
         }
@@ -170,23 +197,31 @@ Item{
             var filename=fileDialog.removeSuffix(folderlistm.get(i,"fileName"));
             var filepath="file://"+folderlistm.get(i,"filePath");            
             if(!(fileDialog.isexist(Qt.resolvedUrl(filepath)))){
-            listm.append({"Count":listm.count+1,"fileName":filename,"filePath":Qt.resolvedUrl(filepath)});
+                getinfor.setFileUrl(Qt.resolvedUrl(filepath));
+                getinfor.onEndsWith();
+            listm.append({"Count":listm.count+1,"fileName":filename,
+                             "filePath":Qt.resolvedUrl(filepath),"fileArtist":getinfor.artist,
+                             "fileTime":dialogs.fileDialog.setTime(mdp.mdplayer.duration),"fileAlbum":getinfor.album});
             }
         }
     }
 
     FolderListModel{
         id:folderlistm
-        nameFilters: ["*.mp3"]
+        nameFilters: ["*.mp3","*.ogg"]
         showDirs: false
     }
 
     FolderDialog{
         id:folderDialog
-        //currentFolder: StandardPaths.writableLocation(StandardPaths.DocumentsLocation)
         title: "Select an player folder"
         onAccepted: {
             setFolderModel(folderDialog.selectedFolder);
+
         }
+    }
+    //保存目录下的文件
+    ListModel{
+        id:savefoldermodel
     }
 }

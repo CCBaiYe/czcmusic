@@ -1,6 +1,7 @@
 import QtQuick 2.15
 import QtQuick.Window 2.15
 import QtQuick.Controls
+import GetInformation 1.0
 ApplicationWindow {
     id:root
     //flags:Qt.FramelessWindowHint | Qt.Window;
@@ -16,6 +17,8 @@ ApplicationWindow {
     property alias splitviewheiht: splitView.height
     property alias splitView: splitView
     property alias footerheight: footer.height
+    property alias getinfor: getinfor
+    property alias menu: menu
     property real dpScale: 1.5;     //在不同的分辨率屏幕下的窗口伸缩因子
     readonly property real dp: Math.max(Screen.pixelDensity*25.4/160*dpScale);
     header: TitleBar{
@@ -64,6 +67,7 @@ ApplicationWindow {
             id:pageLoader
             width: root.width-nav.width
             height: splitView.height
+            source: "LocaMusicPage.qml"
         }
         SearchPage{
             id:searchPage
@@ -72,7 +76,13 @@ ApplicationWindow {
             height: splitView.height
         }
     }
+<<<<<<< HEAD
+    GetInformation{
+        id:getinfor
+    }
+=======
     Component.onCompleted: {
+>>>>>>> 25640100e366ad5cc1b6efb9902ae8129858e7cc
 
     }
 }
