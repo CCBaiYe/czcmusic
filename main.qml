@@ -3,7 +3,7 @@ import QtQuick.Window 2.15
 import QtQuick.Controls
 ApplicationWindow {
     id:root
-    //flags:Qt.FramelessWindowHint | Qt.Window;
+    flags:Qt.FramelessWindowHint | Qt.Window;
     visible: true
     width:1020
     height: 650
@@ -22,13 +22,30 @@ ApplicationWindow {
         id:menu
         height:parent.height*0.07
         color: "#DC2F2E"
+        //实现窗口无边框的拖拽
+        MouseArea{
+            //防止拖拽事件影响其他鼠标事件
+            z:-1
+            id: dragRegion2
+            anchors.fill: parent
+            property point clickPos:"0,0"
+            onPressed:{
+                clickPos =Qt.point(mouse.x,mouse.y)
+            }
+            onPositionChanged:{
+                //鼠标偏移量
+                var delta =Qt.point(mouse.x-clickPos.x, mouse.y-clickPos.y)
+                //改变窗口位置
+                root.setX(root.x+delta.x)
+                root.setY(root.y+delta.y)
+            }
+        }
     }
     footer: Footerwindow{
         id:footer
         anchors.top: splitView.bottom
         height: root.height*0.07
         width: root.width
-
     }
     Mediaplayer{
         id:mdp

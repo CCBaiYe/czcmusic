@@ -67,5 +67,12 @@ Rectangle{
             }
             onClosed: searchbox.focus=false;
         }
+
+    }
+    FunctionalButton{
+        anchors.right: toolbarroot.right
+        anchors.verticalCenter: toolbarroot.verticalCenter
+        height: 20
+
     }
 }
