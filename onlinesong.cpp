@@ -15,7 +15,7 @@ OnlineSong::OnlineSong(QObject *parent):QObject(parent)
     request2->setRawHeader("Cookie","kg_mid=233");
     request2->setHeader(QNetworkRequest::CookieHeader,2333);
     connect(manager,&QNetworkAccessManager::finished,this,&OnlineSong::replyFinished);
-    connect(manager,&QNetworkAccessManager::finished,this,&OnlineSong::replyFinished2);
+    connect(manager2,&QNetworkAccessManager::finished,this,&OnlineSong::replyFinished2);
 
 
 }
@@ -45,6 +45,9 @@ void OnlineSong::replyFinished2(QNetworkReply *reply)
         //处理错误
         qDebug()<<"error";
     }
+
+    //qDebug()<<m_songName;
+
     emit songNameChanged(m_songName);
     if(!isDownloadSong) {
         emit urlChanged(m_url);
@@ -73,7 +76,7 @@ void OnlineSong::getInformation(int index)
 {
 
         //通过歌曲ID,hash发送请求，得到歌曲详细信息
-        QString KGAPI = QString("http://wwwapi.kugou.com/yy/index.php?r=play/getdata&hash=%1&album_id=%2").arg(fileHash[index]).arg(alumId[index]);
+        QString KGAPI = QString("http://wwwapi.kugou.com/yy/index.php?r=play/getdata&hash=%1&album_id=%2").arg(fileHash[index]).arg(albumId[index]);
 
         request2->setUrl(QUrl(KGAPI));
         manager2->get(*request2);
@@ -105,10 +108,11 @@ void OnlineSong::parsejson_getIdHash(QString json)
                             int size=listsarray.size();
                             for(int i=0;i<size;i++)
                             {
+
                                 QJsonObject obj=listsarray.at(i).toObject();
-                                if(obj.contains("AlumID")&&obj["AlumID"].isString())
+                                if(obj.contains("AlbumID")&&obj["AlbumID"].isString())
                                 {
-                                    alumId.push_back(obj["AlumID"].toString());
+                                    albumId.push_back(obj["AlbumID"].toString());
 
                                 }
                                 if(obj.contains("FileHash")&&obj["FileHash"].isString())
@@ -132,25 +136,28 @@ void OnlineSong::parsejson_getIdHash(QString json)
 }
 
 void OnlineSong::parsejson_getinformation(QString json)
-{
+{//解析json获得歌曲详细信息
+
     QJsonParseError json_error;
     QJsonDocument parse_document=QJsonDocument::fromJson(json.toUtf8(),&json_error);
     if(parse_document.isObject())
     {
         QJsonObject rootobj=parse_document.object();
+
         if(rootobj.contains("data"))
         {
             QJsonValue datavalue=rootobj.value("data");
             if(datavalue.isObject())
             {
                 QJsonObject dataobj=datavalue.toObject();
+
                 if(dataobj.contains("audio_name")&&dataobj["audio_name"].isString())
                 {
                     m_songName.push_back(dataobj["audio_name"].toString());
                 }
-                if(dataobj.contains("alum_name")&&dataobj["alum_name"].isString())
+                if(dataobj.contains("album_name")&&dataobj["album_name"].isString())
                 {
-                    m_alumName.push_back(dataobj["alum_name"].toString());
+                    m_albumName.push_back(dataobj["album_name"].toString());
                 }
                 if(dataobj.contains("timelength")&&dataobj["timelength"].isDouble())
                 {
@@ -181,12 +188,12 @@ void OnlineSong::parsejson_getinformation(QString json)
 
 void OnlineSong::clear()
 {//刷新
-    alumId.clear();
+    albumId.clear();
     fileHash.clear();
     m_songName.clear();
     m_singerName.clear();
     m_duration.clear();
-    m_alumName.clear();
+    m_albumName.clear();
     m_url.clear();
     m_image.clear();
     m_lyrics.clear();

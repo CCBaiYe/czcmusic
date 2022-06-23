@@ -33,7 +33,6 @@ qt_add_qml_module(appccmusic
               CurrentList.qml
               CurrentListBtn.qml
               FileD.qml
-              FolderD.qml
               FolderListBtn.qml
               Footerwindow.qml
               LocaMusicPage.qml
