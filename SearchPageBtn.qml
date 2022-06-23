@@ -19,7 +19,9 @@ import QtQuick.Controls 2.15
      background:Rectangle{
          id:backgroundRect;
          color: currentItem ? clickedColor:(hovered?hoveredColor:normalColor)
+
      }
+
 
      Rectangle{
          id:chooseItem
@@ -39,7 +41,7 @@ import QtQuick.Controls 2.15
          width: parent.height - 2*dp
          height: parent.height - 2*dp
          text: count
-         font.pixelSize: 17
+         font.pixelSize: 15
          Text{
              id:tec1
              text: title
@@ -47,7 +49,7 @@ import QtQuick.Controls 2.15
              anchors.top: symbolText_.top
              anchors.topMargin: 2
              anchors.leftMargin: 20
-             font.pixelSize: 17;
+             font.pixelSize: 15;
          }
          Text{
              id:tec2
@@ -56,7 +58,7 @@ import QtQuick.Controls 2.15
              anchors.top: symbolText_.top
              anchors.topMargin: 2
              anchors.leftMargin: 100
-             font.pixelSize: 17;
+             font.pixelSize: 15;
          }
          Text{
              id:tec3
@@ -65,7 +67,7 @@ import QtQuick.Controls 2.15
              anchors.top: symbolText_.top
              anchors.topMargin: 2
              anchors.leftMargin: 100
-             font.pixelSize: 17;
+             font.pixelSize: 15;
          }
          Text{
              id:tec4
@@ -74,7 +76,7 @@ import QtQuick.Controls 2.15
              anchors.top: symbolText_.top
              anchors.topMargin: 2
              anchors.leftMargin: 100
-             font.pixelSize: 17;
+             font.pixelSize: 15;
          }
      }
 }

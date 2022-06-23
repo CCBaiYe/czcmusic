@@ -17,7 +17,6 @@ OnlineSong::OnlineSong(QObject *parent):QObject(parent)
     connect(manager,&QNetworkAccessManager::finished,this,&OnlineSong::replyFinished);
     connect(manager2,&QNetworkAccessManager::finished,this,&OnlineSong::replyFinished2);
 
-
 }
 
 void OnlineSong::replyFinished(QNetworkReply *reply)
@@ -46,7 +45,7 @@ void OnlineSong::replyFinished2(QNetworkReply *reply)
         qDebug()<<"error";
     }
 
-    //qDebug()<<m_songName;
+//    qDebug()<<m_songName;
 
     emit songNameChanged(m_songName);
     if(!isDownloadSong) {
@@ -119,7 +118,6 @@ void OnlineSong::parsejson_getIdHash(QString json)
                                 {
                                     fileHash.push_back(obj["FileHash"].toString());
                                 }
-
                                 getInformation(i);
 
                             }
@@ -151,9 +149,9 @@ void OnlineSong::parsejson_getinformation(QString json)
             {
                 QJsonObject dataobj=datavalue.toObject();
 
-                if(dataobj.contains("audio_name")&&dataobj["audio_name"].isString())
+                if(dataobj.contains("song_name")&&dataobj["song_name"].isString())
                 {
-                    m_songName.push_back(dataobj["audio_name"].toString());
+                    m_songName.push_back(dataobj["song_name"].toString());
                 }
                 if(dataobj.contains("album_name")&&dataobj["album_name"].isString())
                 {
@@ -163,9 +161,9 @@ void OnlineSong::parsejson_getinformation(QString json)
                 {
                     m_duration.push_back(dataobj["timelength"].toDouble());
                 }
-                if(dataobj.contains("song_name")&&dataobj["song_name"].isString())
+                if(dataobj.contains("author_name")&&dataobj["author_name"].isString())
                 {
-                    m_singerName.push_back(dataobj["song_name"].toString());
+                    m_singerName.push_back(dataobj["author_name"].toString());
                 }
                 if(dataobj.contains("img")&&dataobj["img"].isString()&&!dataobj["img"].isNull())
                 {

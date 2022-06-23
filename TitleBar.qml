@@ -21,14 +21,16 @@ Rectangle{
             anchors.verticalCenter: searchbox.verticalCenter
             verticalAlignment: Text.AlignVCenter
             font.pixelSize: 12
+            selectByMouse: true
             placeholderTextColor: "lightgrey"
             placeholderText: qsTr("搜索音乐，歌手, 用户");
-        }
-        TapHandler{
-            onTapped: {
-                searchdlg.open();
+            TapHandler{
+                onTapped: {
+                    searchdlg.open();
+                }
             }
         }
+
         onActiveFocusChanged: {
             if(activeFocus || searchdlg.activeFocus)
             {
@@ -52,7 +54,8 @@ Rectangle{
             text: "\uf002"
             TapHandler{
                 onTapped: {
-                    pageLoader.source="SearchPage.qml"
+                    searchPage.visible=true
+                    searchPage.online.search(searchtext.text)
                 }
             }
         }

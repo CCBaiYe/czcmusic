@@ -3,6 +3,9 @@ import Qt.labs.folderlistmodel
 import QtQuick.Controls
 import Qt5Compat.GraphicalEffects
 Rectangle{
+    property alias smallimage: photo.source
+    property alias bigimage: background.source
+
     id:songlistroot
     width: parent.width
     height: parent.height

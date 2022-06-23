@@ -65,6 +65,12 @@ ApplicationWindow {
             width: root.width-nav.width
             height: splitView.height
         }
+        SearchPage{
+            id:searchPage
+            visible: false
+            width: root.width-nav.width
+            height: splitView.height
+        }
     }
     Component.onCompleted: {
 
