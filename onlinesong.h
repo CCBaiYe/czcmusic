@@ -12,7 +12,7 @@ class OnlineSong :public QObject
     Q_OBJECT
     Q_PROPERTY(QList<QString> songName READ songName WRITE setSongName NOTIFY songNameChanged)
     Q_PROPERTY(QList<QString> singerName READ singerName WRITE setSingerName NOTIFY singerNameChanged)
-    Q_PROPERTY(QList<QString> alumName READ alumName WRITE setAlumName NOTIFY alumNameChanged)
+    Q_PROPERTY(QList<QString> albumName READ albumName WRITE setAlbumName NOTIFY albumNameChanged)
     Q_PROPERTY(QList<double> duration READ duration WRITE setDuration NOTIFY durationChanged)
     Q_PROPERTY(QString url READ url WRITE setUrl NOTIFY urlChanged)
     Q_PROPERTY(QString image READ image WRITE setImage NOTIFY imageChanged)
@@ -31,10 +31,10 @@ public:
 
     void clear();
 
-    void setAlumId(QList<QString> newAlumId)
+    void setAlbumId(QList<QString> newAlbumId)
     {
-        if(alumId!=newAlumId){
-            alumId=newAlumId;
+        if(albumId!=newAlbumId){
+            albumId=newAlbumId;
         }
     }
     void setFileHash(QList<QString> newFileHash)
@@ -51,9 +51,9 @@ public:
     {
         return m_singerName;
     }
-    QList<QString> alumName() const
+    QList<QString> albumName() const
     {
-        return m_alumName;
+        return m_albumName;
     }
     QList<double> duration()const
     {
@@ -88,11 +88,11 @@ public slots:
             emit singerNameChanged(m_singerName);
         }
     }
-    void setAlumName(QList<QString> alumName)
+    void setAlbumName(QList<QString> albumName)
     {
-        if(m_alumName!=alumName){
-            m_alumName=alumName;
-            emit alumNameChanged(m_alumName);
+        if(m_albumName!=albumName){
+            m_albumName=albumName;
+            emit albumNameChanged(m_albumName);
         }
     }
     void setDuration(QList<double> duration)
@@ -130,7 +130,7 @@ protected slots:
 signals:
     void songNameChanged(QList<QString> songName);
     void singerNameChanged(QList<QString> singerName);
-    void alumNameChanged(QList<QString> alumName);
+    void albumNameChanged(QList<QString> albumName);
     void durationChanged(QList<double> duration);
     void urlChanged(QString url);
     void imageChanged(QString image);
@@ -142,11 +142,11 @@ private:
     QNetworkRequest *request;           //通过该请求获取alumId和fileHash
     QNetworkAccessManager *manager2;
     QNetworkRequest *request2;          //通过该请求获取歌曲url和歌词数据
-    QList<QString> alumId;
+    QList<QString> albumId;
     QList<QString> fileHash;
     QList<QString> m_singerName;
     QList<QString> m_songName;
-    QList<QString> m_alumName;
+    QList<QString> m_albumName;
     QList<double> m_duration;
     QString m_url;
     QString m_image;

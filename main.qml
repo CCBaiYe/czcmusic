@@ -66,5 +66,6 @@ ApplicationWindow {
             height: splitView.height
         }
     }
+
 }
 
