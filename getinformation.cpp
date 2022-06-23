@@ -78,7 +78,7 @@ void GetInformation::analysisMP3(QString fileUrl)
             covPiclist.append(covpic);
             int covCount = covPiclist.length();
             //为图片随机生成姓名
-            QString covpicpath = QDir::tempPath()+ getRandName()+".png";
+            QString covpicpath = QDir::tempPath()+QString("/%1.png").arg(covCount);
             //将解析出的图片保存在本地
             covpic.save(covpicpath);
             //获得本地图片

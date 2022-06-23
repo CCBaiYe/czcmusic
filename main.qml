@@ -66,6 +66,8 @@ ApplicationWindow {
             height: splitView.height
         }
     }
+    Component.onCompleted: {
 
+    }
 }
 

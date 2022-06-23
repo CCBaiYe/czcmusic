@@ -108,18 +108,6 @@ private:
 
     void analysisAPE(QString fileUrl);
 
-    QString getRandName(){
-        int max = 4;
-        QString temp = QString("1234567890");
-        QString str = QString();
-        QTime t = QTime::currentTime();
-        srand(t.msec()+t.second()*1000);
-        for(int i = 0;i<max;i++){
-            int lr = rand()%temp.length();
-            str[i]= temp.at(lr);
-        }
-        return str;
-    }
 private:
     QString m_title = "unknown";//标题
     QString m_artist = "unknown";//作者
