@@ -46,6 +46,12 @@ void OnlineSong::replyFinished2(QNetworkReply *reply)
         qDebug()<<"error";
     }
     emit songNameChanged(m_songName);
+    if(!isDownloadSong) {
+        emit urlChanged(m_url);
+    } else {
+        emit getUrl();
+    }
+    isDownloadSong=false;
 
     reply->deleteLater();//释放reply对象
 

@@ -1,6 +1,7 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include "getinformation.h"
+#include "onlinesong.h"
 #include<QFontDatabase>
 int main(int argc, char *argv[])
 {
@@ -10,6 +11,7 @@ int main(int argc, char *argv[])
     QStringList fontFamilies = QFontDatabase::applicationFontFamilies(fontId);
 
     qmlRegisterType<GetInformation,1>("GetInformation",1,0,"GetInformation");
+    qmlRegisterType<OnlineSong,1>("OnlineSong",1,0,"OnlineSong");
     QQmlApplicationEngine engine;
     const QUrl url(u"qrc:/ccmusic/main.qml"_qs);
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,

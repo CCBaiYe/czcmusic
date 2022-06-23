@@ -135,6 +135,7 @@ signals:
     void urlChanged(QString url);
     void imageChanged(QString image);
     void lyricsChanged(QString lyrics);
+    void getUrl();
 
 private:
     QNetworkAccessManager *manager;
@@ -150,6 +151,9 @@ private:
     QString m_url;
     QString m_image;
     QString m_lyrics;
+    bool isDownloadSong=false;
+    QString m_savePath;
+
 };
 
 #endif // ONLINESONG_H
