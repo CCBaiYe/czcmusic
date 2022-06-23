@@ -20,7 +20,7 @@ Item{
             anchors.left: parent.left
             anchors.leftMargin: 0
             width: height
-            text:"\uf028"
+            text:"\uf027"
             MouseArea{
                 anchors.fill: parent
                 cursorShape: Qt.PointingHandCursor;
@@ -28,12 +28,12 @@ Item{
                     switch(mdp.audioout.muted){
                     case true:{
                         mdp.audioout.muted=false;
-                        console.log("no");
+                        currentListBtn.text="\uf026";
                         break;
                     }
                     case false:{
                         mdp.audioout.muted=true;
-                        console.log("yes")
+                        currentListBtn.text="\uf027"
                         break;
                     }
                     }

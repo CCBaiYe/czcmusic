@@ -158,18 +158,61 @@ Rectangle{
         width: 350
         height:songlistroot.height
         anchors.left: songimage.right
-        anchors.leftMargin: 150
+        anchors.leftMargin: 120
         //透明
         color:"transparent"
-        //歌曲信息
-        Label{
+        //歌曲信息显示
+        Rectangle{
             id:lyricsinformation
-            text: "名字"
-            anchors.left: lyrics.left
-            anchors.leftMargin: 20
-            anchors.top: lyrics.top
-            anchors.topMargin: 2
-            font.pixelSize: 30
+            width: lyrics.width
+            height: 100
+            color:"transparent"
+            //歌曲名字显示
+            Label{
+                id:lyricsname
+                text: "名字"
+                anchors.top: lyricsinformation.top
+                anchors.topMargin: 30
+                anchors.left: lyricsinformation.left
+                anchors.leftMargin: 0
+                font.pixelSize: 25
+                font.family:"Microsoft YaHei"
+            }
+            //歌曲专辑显示
+            Label{
+                id:lyricsalbum
+                text: "专辑："
+                anchors.top: lyricsname.bottom
+                anchors.topMargin: 30
+                anchors.left: lyricsinformation.left
+                anchors.leftMargin: 5
+                font.pixelSize: 12
+                font.family:"Microsoft YaHei"
+            }
+            //歌曲作者显示
+            Label{
+                id:lyricsartist
+                text: "歌手："
+                anchors.top: lyricsname.bottom
+                anchors.topMargin: 30
+                anchors.left: lyricsalbum.right
+                anchors.leftMargin: 80
+                font.pixelSize: 12
+                font.family:"Microsoft YaHei"
+            }
+            //歌曲作者显示
+            Label{
+                id:lyricegenre
+                text: "类型："
+                anchors.top: lyricsname.bottom
+                anchors.topMargin: 30
+                anchors.left: lyricsartist.right
+                anchors.leftMargin: 80
+                font.pixelSize: 12
+                font.family:"Microsoft YaHei"
+            }
         }
-    }
+
+
+  }
 }
