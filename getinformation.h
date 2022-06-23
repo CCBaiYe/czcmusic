@@ -4,8 +4,8 @@
 #include <QObject>
 #include <QtQml/qqmlregistration.h>
 #include <QDebug>
-
-
+#include <QUrl>
+#include <QTime>
 class GetInformation : public QObject
 {
     Q_OBJECT
@@ -14,6 +14,8 @@ class GetInformation : public QObject
     Q_PROPERTY(QString album READ album WRITE setAlbum NOTIFY albumChanged)
     Q_PROPERTY(QString genre READ genre WRITE setGenre NOTIFY genreChanged)
     Q_PROPERTY(QString fileUrl READ fileUrl WRITE setFileUrl NOTIFY fileUrlChanged)
+    Q_PROPERTY(QUrl picture READ picture WRITE setPicture NOTIFY pictureChanged)
+    Q_PROPERTY(int time READ time WRITE setTime NOTIFY timeChanged)
 
 public:
     explicit GetInformation(QObject *parent = nullptr);
@@ -32,6 +34,10 @@ signals:
     void genreChanged();
 
     void fileUrlChanged();
+
+    void pictureChanged();
+
+    void timeChanged();
 public slots:
     void setTitle(QString title){
         m_title = title;
@@ -57,6 +63,14 @@ public slots:
         m_fileUrl = fileUrl;
         emit this->fileUrlChanged();
     }
+    void setPicture(QUrl picture){
+        m_picture = picture;
+        emit this->pictureChanged();
+    }
+    void setTime(int time){
+        m_time = time;
+        emit this->timeChanged();
+    }
     void onEndsWith();
 public:
     QString title(){
@@ -74,7 +88,12 @@ public:
     QString fileUrl(){
         return m_fileUrl;
     }
-
+    QUrl picture(){
+        return m_picture;
+    }
+    int time(){
+        return m_time;
+    }
 private:
 
     void analysisMP3(QString fileUrl);
@@ -90,11 +109,13 @@ private:
     void analysisAPE(QString fileUrl);
 
 private:
-    QString m_title = "";//标题
-    QString m_artist = "";//作者
-    QString m_album = "";//专辑
-    QString m_genre = "";//类型
+    QString m_title = "unknown";//标题
+    QString m_artist = "unknown";//作者
+    QString m_album = "unknown";//专辑
+    QString m_genre = "unknown";//类型
     QString m_fileUrl = "";//歌曲地址
+    QUrl m_picture;//歌曲封面
+    int m_time;//发行时间
 };
 
 #endif // GETINFORMATION_H
