@@ -1,9 +1,10 @@
 #include "getinformation.h"
 #include <QDebug>
 #include <QByteArray>
-
+#include <QImage>
+#include <QDir>
 #include <taglib/tag.h>
-#include <taglib/audioproperties.h>
+
 #include <taglib/wavfile.h>
 #include <taglib/mpegfile.h>
 #include <taglib/flacfile.h>
@@ -11,6 +12,7 @@
 #include <taglib/asffile.h>
 #include <taglib/apefile.h>
 
+#include <taglib/audioproperties.h>
 GetInformation::GetInformation(QObject *parent)
     : QObject{parent}
 {
@@ -19,8 +21,8 @@ GetInformation::GetInformation(QObject *parent)
 
 void GetInformation::onEndsWith()
 {
-//    QString fileUrl = QString("/root/tmp/Justin Timberlake-Five Hundred Miles.mp3");
     QString fileUrl = m_fileUrl;
+    //删除不符合taglib格式的前缀
     if(fileUrl.startsWith("file://")){
         fileUrl=fileUrl.remove("file://");
     }
@@ -52,10 +54,37 @@ void GetInformation::analysisMP3(QString fileUrl)
 
     TagLib::MPEG::File *tmf = new TagLib::MPEG::File(ch);
     if(tmf->isOpen()){
+        //解析数据
         m_title = tmf->tag()->title().toCString();
         m_artist = tmf->tag()->artist().toCString();
         m_album = tmf->tag()->album().toCString();
         m_genre = tmf->tag()->genre().toCString();
+        m_time = tmf->tag()->year();
+        //获取ID3v2中的封面段
+        TagLib::List<TagLib::ID3v2::Frame *> TL  = tmf->ID3v2Tag()->frameListMap()["APIC"];
+        TagLib::ID3v2::Frame *TIF = TL.front();
+        TagLib::ID3v2::AttachedPictureFrame *TIA = reinterpret_cast<TagLib::ID3v2::AttachedPictureFrame *>(TIF);
+        //判断是否存在图片
+        if(!TIA->picture().isNull()){
+            TagLib::ByteVector tb = TIA->picture();
+            QImage cover;
+            QImage covpic;
+            if(cover.loadFromData(QByteArray::fromRawData(tb.data(), tb.size()))) {
+                covpic = cover.scaled(500,500,Qt::IgnoreAspectRatio,Qt::SmoothTransformation);
+                qDebug()<<"读取MP3封面信息成功";
+            }
+            //判断图片数
+            QList<QImage> covPiclist;
+            covPiclist.append(covpic);
+            int covCount = covPiclist.length();
+            //为图片随机生成姓名
+            QString covpicpath = QDir::tempPath()+ getRandName()+".png";
+            //将解析出的图片保存在本地
+            covpic.save(covpicpath);
+            //获得本地图片
+            m_picture = QUrl::fromLocalFile(covpicpath);
+        }
+
     }else {
         emit this->failed();
     }
@@ -68,6 +97,7 @@ void GetInformation::analysisWAV(QString fileUrl)
 
     TagLib::RIFF::WAV::File *trwf = new TagLib::RIFF::WAV::File(ch);
     if(trwf->isOpen()){
+        //解析数据
         m_title = trwf->tag()->title().toCString();
         m_artist = trwf->tag()->artist().toCString();
         m_album = trwf->tag()->album().toCString();
@@ -84,6 +114,7 @@ void GetInformation::analysisFLAC(QString fileUrl)
 
     TagLib::FLAC::File *tff = new TagLib::FLAC::File(ch);
     if(tff->isOpen()){
+        //解析数据
         m_title = tff->tag()->title().toCString();
         m_artist = tff->tag()->artist().toCString();
         m_album = tff->tag()->album().toCString();
@@ -100,6 +131,7 @@ void GetInformation::analysisMP4(QString fileUrl)
 
     TagLib::MP4::File *tmf = new TagLib::MP4::File(ch);
     if(tmf->isOpen()){
+        //解析数据
         m_title = tmf->tag()->title().toCString();
         m_artist = tmf->tag()->artist().toCString();
         m_album = tmf->tag()->album().toCString();
@@ -116,6 +148,7 @@ void GetInformation::analysisASF(QString fileUrl)
 
     TagLib::ASF::File *taf = new TagLib::ASF::File(ch);
     if(taf->isOpen()){
+        //解析数据
         m_title = taf->tag()->title().toCString();
         m_artist = taf->tag()->artist().toCString();
         m_album = taf->tag()->album().toCString();
@@ -132,6 +165,7 @@ void GetInformation::analysisAPE(QString fileUrl)
 
     TagLib::APE::File *taf = new TagLib::APE::File(ch);
     if(taf->isOpen()){
+        //解析数据
         m_title = taf->tag()->title().toCString();
         m_artist = taf->tag()->artist().toCString();
         m_album = taf->tag()->album().toCString();
