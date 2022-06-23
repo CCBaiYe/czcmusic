@@ -11,7 +11,7 @@ Rectangle{
         id: background
         width: rootwidth
         height: splitviewheiht
-        source: "qrc:/images/5.png"
+        source: "./images/5.png"
         fillMode: Image.Stretch
     }
     //虚化效果
@@ -60,7 +60,7 @@ Rectangle{
             id: photo
             width: parent.width
             height: parent.height
-            source: "qrc:/images/5.png"
+            source: "./images/5.png"
             fillMode: Image.Stretch
         }
     }

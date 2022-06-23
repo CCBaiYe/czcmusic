@@ -64,7 +64,6 @@ ApplicationWindow {
                 height: splitView.height
             }
         }
-
         NavigationBar{
             id:nav
             width: root.width/3.5
