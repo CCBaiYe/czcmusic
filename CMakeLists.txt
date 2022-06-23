@@ -44,7 +44,10 @@ qt_add_qml_module(appccmusic
               PlaySlider.qml
               SongList.qml
               VolumnControl.qml
-
+              TitleBar.qml
+              SearchRect.qml
+              SearchPage.qml
+              SearchPageBtn.qml
 
     RESOURCES
             images/5.png

@@ -152,6 +152,7 @@ Item{
             delegate: FolderListBtn{filename:dialogs.fileDialog.removeSuffix(fileName)}
         }
     }
+
 }
 
 
