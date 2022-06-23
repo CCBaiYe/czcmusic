@@ -10,6 +10,8 @@ import QtQuick.Controls 2.15
      property string filename;
      property string count;
      property string type;
+     property string fileartist
+     property string filetime
 
 
      id:navItemBtn;
@@ -38,13 +40,31 @@ import QtQuick.Controls 2.15
          width: parent.height - 2*dp
          height: parent.height - 2*dp
          text: count;
-         Text{id:tec;
+         anchors.verticalCenter: navItemBtn.verticalCenter
+         font.pixelSize: 13;
+         Label{
+             id:tec1;
              text: filename
+             width: 100
+             elide: Text.ElideRight
              anchors.left: parent.right
-             anchors.top: parent.top
-             anchors.topMargin: 2
-             anchors.leftMargin: 18
+             font.pixelSize: 13;
          }
-         font.pixelSize: 12*dp;
+         Label{
+             id:tec2;
+             text: fileartist
+             width: 150
+             elide: Text.ElideRight
+             anchors.left: symbolText_.right
+             anchors.leftMargin: 100
+             font.pixelSize: 13;
+         }
+         Label{
+             id:tec3;
+             text: filetime
+             anchors.left: symbolText_.right
+             anchors.leftMargin: 270
+             font.pixelSize: 13;
+         }
      }
 }
