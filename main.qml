@@ -70,13 +70,10 @@ ApplicationWindow {
             source: "LocaMusicPage.qml"
         }
     }
-<<<<<<< HEAD
     GetInformation{
         id:getinfor
     }
-=======
     Component.onCompleted: {
->>>>>>> 25640100e366ad5cc1b6efb9902ae8129858e7cc
 
     }
 }
