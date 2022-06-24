@@ -4,46 +4,158 @@ import OnlineSong
 
 Rectangle{
     property alias online: online
+    property alias searchmodel: searchmodel
     id:searchpage
     width: parent.width
     height: parent.height
+    Label{
+        id:symbolText_
+        anchors.top: parent.top
+        width: parent.width
+        height: 30
+        text: ""
+        font.pixelSize: 15
+        Label{
+            id:tec1
+            Text{
+                text: "标题"
+                anchors.left: tec1.left
+
+            }
+            anchors.left: symbolText_.left
+            anchors.top: symbolText_.top
+            anchors.topMargin: 2
+            anchors.leftMargin: 60
+            font.pixelSize: 15;
+        }
+        Label{
+            id:tec2
+            Text{
+                text: "歌手"
+                anchors.left: tec2.left
+
+            }
+            anchors.left: tec1.right
+            anchors.top: symbolText_.top
+            anchors.topMargin: 2
+            anchors.leftMargin: 220
+            font.pixelSize: 15;
+        }
+        Label{
+            id:tec3
+            Text{
+                text: "专辑"
+                anchors.left: tec3.left
+
+            }
+            anchors.left: tec2.right
+            anchors.top: symbolText_.top
+            anchors.topMargin: 2
+            anchors.leftMargin: 220
+            font.pixelSize: 15;
+        }
+        Label{
+            id:tec4
+            Text{
+                text: "时长"
+                anchors.left: tec4.left
+            }
+            anchors.left: tec3.right
+            anchors.top: symbolText_.top
+            anchors.topMargin: 2
+            anchors.leftMargin: 220
+            font.pixelSize: 15;
+        }
+    }
+
     //搜索信息显示
     ListView{
         id:searchlist
+        anchors.top: symbolText_.bottom
         width: searchpage.width
-        height: searchpage.height
+        height: searchpage.height-30
         model: searchmodel
-        delegate: SearchPageBtn{count: Count;title: Title;artist: Artist;album: Album;time: Time}
+        delegate: searchDelegate
     }
+    Component{
+        id:searchDelegate
+
+        SearchPageBtn{
+            count: Count;title: Title;artist: Artist;album: Album;time: Time
+            onDoubleClicked: {play1.triggered()}
+            onClicked: {
+                searchlist.currentIndex=index
+//                if(mouse.button===Qt.RightButton)
+//                {
+//                    console.log("0")
+//                }
+            }
+
+            Menu{
+                id:menu1
+                x:mx
+                y:my
+                contentData: [play1,pause1]
+            }
+        }
+
+    }
+    Action{
+        id:pause1
+        text: qsTr("暂停")
+        onTriggered: mdp.mdplayer.pause()
+
+    }
+    Action{
+        id:play1
+        text: qsTr("播放")
+        onTriggered: {
+            online.getInformation(searchlist.currentIndex)
+        }
+    }
+
     ListModel{
         id:searchmodel
-        ListElement{
-            Count:""
-            Title:"标题"
-            Artist:"歌手"
-            Album:"专辑"
-            Time:"时长"
-        }
     }
     OnlineSong{
         id:online
-        property int cnt: 0
         onSongNameChanged: {
-            addsong(cnt);
-            cnt++;
+            addsong()
         }
         onUrlChanged: {
-            //console.log(online.image)
-            //footer.songlist.smallimage=online.image
+
+
+            mdp.mdplayer.stop()
+            mdp.mdplayer.source=online.url
+            mdp.mdplayer.play()
+
+            footer.songlist.smallimage=online.image
+            footer.songlist.bigimage=online.image
+
+            footer.palyslider.musicName=online.songName[searchlist.currentIndex]
+            footer.songlist.name=online.songName[searchlist.currentIndex]
+            footer.songlist.album=online.albumName[searchlist.currentIndex]
+            footer.songlist.artist=online.singerName[searchlist.currentIndex]
 
         }
-        function addsong(num){
-            if(num<10){
-                searchmodel.append({"Count":"0"+num,"Title":online.songName[num],"Artist":online.singerName[num],"Album":online.albumName[num],"Time":dialogs.fileDialog.setTime(online.duration[num])})
-            }else{
-                 searchmodel.append({"Count":""+num,"Title":online.songName[num],"Artist":online.singerName[num],"Album":online.albumName[num],"Time":dialogs.fileDialog.setTime(online.duration[num])})
-                }
-
+        function addsong(){
+            searchmodel.clear()
+            for(var i=0;i<songName.length;i++)
+                searchmodel.append({"Count":searchmodel.count+1,"Title":online.songName[i],"Artist":online.singerName[i],"Album":online.albumName[i],"Time":turnTime(online.duration[i])})
+        }
+        function turnTime(time){
+            var m
+            var s
+            m=(parseInt(time/60))
+            s=parseInt(time%60)
+            if(s<10&&m<10)
+                return "0"+m+":"+"0"+s
+            if(s>10&&m<10)
+                return "0"+m+":"+s
+            if(s<10&&m>10)
+                return m+":"+"0"+s
+            if(s>10&&m>10)
+                return m+":"+s
         }
 
     }

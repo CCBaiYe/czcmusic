@@ -161,6 +161,7 @@ Item{
         //把目录下文件保存到一个model中
         for(var i=0;i<folderlistm.count;i++)
         {
+            if(!(folderlistm.isFolder(i))){
             var filepath="file://"+folderlistm.get(i,"filePath");
             getinfor.setFileUrl(Qt.resolvedUrl(filepath));
             getinfor.onEndsWith();
@@ -170,7 +171,7 @@ Item{
                 "filePath":getinfor.fileUrl,"fileArtist":getinfor.artist,
                 "fileTime":dialogs.fileDialog.setTime(mdp.mdplayer.duration),
                 "fileAlbum":getinfor.album}
-                if(!(folderlistm.isFolder(i))){
+
                     savefoldermodel.append(data);
                 }
             }
@@ -217,7 +218,7 @@ Item{
         title: "Select an player folder"
         onAccepted: {
             setFolderModel(folderDialog.selectedFolder);
-
+            folderfileslist.visible=true;
         }
     }
     //保存目录下的文件

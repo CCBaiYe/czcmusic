@@ -2,7 +2,18 @@ import QtQuick
 import QtQuick.Controls
 
 Rectangle{
+    property bool isfullsceen: false
     id:toolbarroot
+    Keys.onPressed: event=>{
+                        if(event.key===Qt.Key_Return)
+                        {
+
+                            pageLoader.visible=false
+                            searchPage.visible=true
+
+                            searchPage.online.search(searchtext.text)
+                        }
+                    }
     //搜索框
     Rectangle{
         id:searchbox
@@ -24,12 +35,15 @@ Rectangle{
             selectByMouse: true
             placeholderTextColor: "lightgrey"
             placeholderText: qsTr("搜索音乐，歌手, 用户");
+
             TapHandler{
                 onTapped: {
                     searchdlg.open();
                 }
             }
+
         }
+
 
         onActiveFocusChanged: {
             if(activeFocus || searchdlg.activeFocus)
@@ -54,6 +68,8 @@ Rectangle{
             text: "\uf002"
             TapHandler{
                 onTapped: {
+
+                    pageLoader.visible=false
                     searchPage.visible=true
                     searchPage.online.search(searchtext.text)
                 }

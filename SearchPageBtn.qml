@@ -6,6 +6,8 @@ import QtQuick.Controls 2.15
      property color clickedColor: "#dddde1"
      property color normalColor: "white"
      property bool currentItem : false;
+     property real mx:0.0
+     property real my: 0.0
      property string fontfamily;
      property string count  //索引
      property string title; //标题
@@ -19,7 +21,6 @@ import QtQuick.Controls 2.15
      background:Rectangle{
          id:backgroundRect;
          color: currentItem ? clickedColor:(hovered?hoveredColor:normalColor)
-
      }
 
 
@@ -42,41 +43,62 @@ import QtQuick.Controls 2.15
          height: parent.height - 2*dp
          text: count
          font.pixelSize: 15
-         Text{
+         Label{
              id:tec1
-             text: title
+             Text{
+                 text: title
+                 width: 200
+                 anchors.left: tec1.left
+                 elide: Text.ElideRight
+             }
              anchors.left: symbolText_.right
              anchors.top: symbolText_.top
              anchors.topMargin: 2
              anchors.leftMargin: 20
              font.pixelSize: 15;
          }
-         Text{
+         Label{
              id:tec2
-             text: artist
+             Text{
+                 text: artist
+                 width: 200
+                 anchors.left: tec2.left
+                 elide: Text.ElideRight
+             }
              anchors.left: tec1.right
              anchors.top: symbolText_.top
              anchors.topMargin: 2
-             anchors.leftMargin: 100
+             anchors.leftMargin: 220
              font.pixelSize: 15;
          }
-         Text{
+         Label{
              id:tec3
-             text: album
+             Text{
+                 text: album
+                 width: 200
+                 anchors.left: tec3.left
+                 elide: Text.ElideRight
+             }
              anchors.left: tec2.right
              anchors.top: symbolText_.top
              anchors.topMargin: 2
-             anchors.leftMargin: 100
+             anchors.leftMargin: 220
              font.pixelSize: 15;
          }
-         Text{
+         Label{
              id:tec4
-             text: time
+             Text{
+                 text: time
+                 anchors.left: tec4.left
+             }
              anchors.left: tec3.right
              anchors.top: symbolText_.top
              anchors.topMargin: 2
-             anchors.leftMargin: 100
+             anchors.leftMargin: 220
              font.pixelSize: 15;
          }
      }
+
+
+
 }

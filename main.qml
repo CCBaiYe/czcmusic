@@ -32,15 +32,29 @@ ApplicationWindow {
             id: dragRegion2
             anchors.fill: parent
             property point clickPos:"0,0"
-            onPressed:{
-                clickPos =Qt.point(mouse.x,mouse.y)
+            onDoubleClicked: {
+                menu.isfullsceen=!menu.isfullsceen
+                if(menu.isfullsceen){
+                    root.showMaximized();
+                }else{
+                    root.showNormal();
+                }
             }
-            onPositionChanged:{
-                //鼠标偏移量
-                var delta =Qt.point(mouse.x-clickPos.x, mouse.y-clickPos.y)
-                //改变窗口位置
-                root.setX(root.x+delta.x)
-                root.setY(root.y+delta.y)
+
+            onPressed:{
+                (mouse)=>{clickPos =Qt.point(
+                        mouse.x,mouse.y)}
+            }
+            onPositionChanged:mouse=>{
+                    //鼠标偏移量
+                    var delta =Qt.point(mouse.x-clickPos.x, mouse.y-clickPos.y)
+
+                    //改变窗口位置
+                    root.setX(root.x+delta.x)
+                    root.setY(root.y+delta.y)
+
+
+
             }
         }
     }
@@ -80,22 +94,31 @@ ApplicationWindow {
             color: "white"
             height: splitView.height
         }
-        Loader{
-            id:pageLoader
+        Item{
             width: root.width-nav.width
             height: splitView.height
-            source: "LocaMusicPage.qml"
+            Loader{
+                id:pageLoader
+                width: root.width-nav.width
+                height: splitView.height
+
+            }
+            SearchPage{
+                id:searchPage
+                visible: false
+                width: root.width-nav.width
+                height: splitView.height
+            }
         }
-        SearchPage{
-            id:searchPage
-            visible: false
-            width: root.width-nav.width
-            height: splitView.height
-        }
+
+
+
+
     }
     GetInformation{
         id:getinfor
     }
+
 
     Component.onCompleted: {
 
