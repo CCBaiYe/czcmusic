@@ -5,7 +5,6 @@
 #include <QtQml/qqmlregistration.h>
 #include <QDebug>
 #include <QUrl>
-#include <QTime>
 class GetInformation : public QObject
 {
     Q_OBJECT

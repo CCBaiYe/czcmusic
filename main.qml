@@ -119,8 +119,4 @@ ApplicationWindow {
         id:getinfor
     }
 
-
-    Component.onCompleted: {
-
-    }
 }

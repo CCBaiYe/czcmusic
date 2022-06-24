@@ -50,4 +50,19 @@ Rectangle {
             color: "lightgray"
         }
     }
+    Button {
+        id: setupButton
+        icon.name: "document-page-setup"
+        width: 20
+        height: 20
+        anchors.right: minButton.left
+        anchors.top: minButton.top
+        anchors.rightMargin: 15
+        onClicked: {
+
+        }
+        background: Rectangle {
+            color: "lightgray"
+        }
+    }
 }

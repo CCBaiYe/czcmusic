@@ -1,7 +1,7 @@
 import QtQuick
 import QtQuick.Controls
 import QtMultimedia
-
+import DataInitialization 1.0
 Item {
     property alias mdplayer:player
     property alias audioout: audioOutput
@@ -20,8 +20,16 @@ Item {
         id: audioOutput
         muted:false
     }
+    DataInitialization {
+        id: loadFromFile
+    }
     Component.onCompleted: {
+        player.source = loadFromFile.loadPath
+        footer.palyslider.musicName = loadFromFile.musicName
         player.play();
     }
-
+    Component.onDestruction: {
+        loadFromFile.setLoadPath(player.source.toString())
+        loadFromFile.setMusicName(footer.palyslider.musicName)
+    }
 }
