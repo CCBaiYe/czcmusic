@@ -187,7 +187,7 @@ Rectangle{
                 anchors.left: lyricsinformation.left
                 anchors.leftMargin: 5
                 font.pixelSize: 12
-                font.family:"Microsoft YaHei"
+                font.family:"Microsoft YaHei";
             }
             //歌曲作者显示
             Label{
@@ -212,7 +212,66 @@ Rectangle{
                 font.family:"Microsoft YaHei"
             }
         }
-
-
-  }
+        //歌曲歌词显示
+        Rectangle{
+            id:lyricsrect
+            width: parent.width
+            height: 350
+            anchors.top: lyricsinformation.bottom
+            anchors.topMargin: 30
+            color:"transparent"
+            ListView{
+                id:lyricsview
+                anchors.fill: lyricsrect
+                model: lyricsmodel
+                delegate: delegate
+                highlightRangeMode: ListView.StrictlyEnforceRange
+                preferredHighlightBegin: lyricsrect.width/2
+                preferredHighlightEnd: lyricsrect.height/2
+                spacing: 25
+            }
+            ListModel{
+                id:lyricsmodel
+                ListElement {
+                    name: "Bill Jones"
+                }
+                ListElement {
+                    name: "Jane Doe"
+                }
+                ListElement {
+                    name: "John Smith"
+                }
+                ListElement {
+                    name: "Bill Jones"
+                }
+                ListElement {
+                    name: "Jane Doe"
+                }
+                ListElement {
+                    name: "John Smith"
+                }
+                ListElement {
+                    name: "Bill Jones"
+                }
+                ListElement {
+                    name: "Jane Doe"
+                }
+                ListElement {
+                    name: "John Smith"
+                }
+            }
+            Component{
+                id:delegate
+                Text {
+                    opacity: ListView.isCurrentItem ? 1 : 0.5
+                    id: lyricsColumnText
+                    text: name
+                    font.pointSize: 17
+                    horizontalAlignment: Text.AlignHCenter
+                    verticalAlignment: Text.AlignVCenter
+                    anchors.horizontalCenter: parent.horizontalCenter
+                }
+            }
+        }
+    }
 }

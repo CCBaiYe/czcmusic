@@ -84,14 +84,10 @@ ApplicationWindow {
             id:pageLoader
             width: root.width-nav.width
             height: splitView.height
-            source: "LocaMusicPage.qml"
         }
     }
     GetInformation{
         id:getinfor
-    }
-    Component.onCompleted: {
-
     }
 }
 

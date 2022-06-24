@@ -161,16 +161,16 @@ Item{
         //把目录下文件保存到一个model中
         for(var i=0;i<folderlistm.count;i++)
         {
-            var filepath="file://"+folderlistm.get(i,"filePath");
-            getinfor.setFileUrl(Qt.resolvedUrl(filepath));
-            getinfor.onEndsWith();
-            if(!(fileDialog.isexist(getinfor.fileUrl))){
-                var str=fileDialog.removeSuffix(folderlistm.get(i,"fileName"));
-                var data={"Count":savefoldermodel.count+1,"fileName":str,
-                "filePath":getinfor.fileUrl,"fileArtist":getinfor.artist,
-                "fileTime":dialogs.fileDialog.setTime(mdp.mdplayer.duration),
-                "fileAlbum":getinfor.album}
-                if(!(folderlistm.isFolder(i))){
+            if(!(folderlistm.isFolder(i))){
+                var filepath="file://"+folderlistm.get(i,"filePath");
+                getinfor.setFileUrl(Qt.resolvedUrl(filepath));
+                getinfor.onEndsWith();
+                if(!(fileDialog.isexist(getinfor.fileUrl))){
+                    var str=fileDialog.removeSuffix(folderlistm.get(i,"fileName"));
+                    var data={"Count":savefoldermodel.count+1,"fileName":str,
+                        "filePath":getinfor.fileUrl,"fileArtist":getinfor.artist,
+                        "fileTime":dialogs.fileDialog.setTime(mdp.mdplayer.duration),
+                        "fileAlbum":getinfor.album}
                     savefoldermodel.append(data);
                 }
             }
@@ -195,13 +195,13 @@ Item{
     function addplayerlist(){
         for(var i=0;i<folderlistm.count;i++){
             var filename=fileDialog.removeSuffix(folderlistm.get(i,"fileName"));
-            var filepath="file://"+folderlistm.get(i,"filePath");            
+            var filepath="file://"+folderlistm.get(i,"filePath");
             if(!(fileDialog.isexist(Qt.resolvedUrl(filepath)))){
                 getinfor.setFileUrl(Qt.resolvedUrl(filepath));
                 getinfor.onEndsWith();
-            listm.append({"Count":listm.count+1,"fileName":filename,
-                             "filePath":Qt.resolvedUrl(filepath),"fileArtist":getinfor.artist,
-                             "fileTime":dialogs.fileDialog.setTime(mdp.mdplayer.duration),"fileAlbum":getinfor.album});
+                listm.append({"Count":listm.count+1,"fileName":filename,
+                                 "filePath":Qt.resolvedUrl(filepath),"fileArtist":getinfor.artist,
+                                 "fileTime":dialogs.fileDialog.setTime(mdp.mdplayer.duration),"fileAlbum":getinfor.album});
             }
         }
     }
@@ -211,13 +211,11 @@ Item{
         nameFilters: ["*.mp3","*.ogg"]
         showDirs: false
     }
-
     FolderDialog{
         id:folderDialog
         title: "Select an player folder"
         onAccepted: {
             setFolderModel(folderDialog.selectedFolder);
-
         }
     }
     //保存目录下的文件
