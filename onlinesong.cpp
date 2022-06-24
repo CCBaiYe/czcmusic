@@ -17,8 +17,8 @@ OnlineSong::OnlineSong(QObject *parent):QObject(parent)
     connect(manager,&QNetworkAccessManager::finished,this,&OnlineSong::replyFinished);
     connect(manager2,&QNetworkAccessManager::finished,this,&OnlineSong::replyFinished2);
 
-
 }
+
 
 void OnlineSong::replyFinished(QNetworkReply *reply)
 {//响应请求request
@@ -31,6 +31,7 @@ void OnlineSong::replyFinished(QNetworkReply *reply)
         qDebug()<<"error";
     }
 
+    emit songNameChanged(m_songName);
 
     reply->deleteLater();//释放请求对象
 }
@@ -46,14 +47,11 @@ void OnlineSong::replyFinished2(QNetworkReply *reply)
         qDebug()<<"error";
     }
 
-    //qDebug()<<m_songName;
 
-    emit songNameChanged(m_songName);
-    if(!isDownloadSong) {
-        emit urlChanged(m_url);
-    } else {
-        emit getUrl();
-    }
+
+
+    emit urlChanged(m_url);
+
     isDownloadSong=false;
 
     reply->deleteLater();//释放reply对象
@@ -119,10 +117,26 @@ void OnlineSong::parsejson_getIdHash(QString json)
                                 {
                                     fileHash.push_back(obj["FileHash"].toString());
                                 }
+                                if(obj.contains("SingerName")&&obj["SingerName"].isString())
+                                {
+                                    m_singerName.push_back(obj["SingerName"].toString());
+                                }
+                                if(obj.contains("SongName")&&obj["SongName"].isString())
+                                {
+                                    m_songName.push_back(obj["SongName"].toString());
+                                }
+                                if(obj.contains("AlbumName")&&obj["AlbumName"].isString())
+                                {
+                                    m_albumName.push_back(obj["AlbumName"].toString());
+                                }
+                                if(obj.contains("Duration")&&obj["Duration"].isDouble())
+                                {
+                                    m_duration.push_back(obj["Duration"].toDouble());
+                                }
 
-                                getInformation(i);
 
                             }
+
                         }
                     }
                 }
@@ -136,7 +150,7 @@ void OnlineSong::parsejson_getIdHash(QString json)
 }
 
 void OnlineSong::parsejson_getinformation(QString json)
-{//解析json获得歌曲详细信息
+{//解析json获得歌曲url和歌词
 
     QJsonParseError json_error;
     QJsonDocument parse_document=QJsonDocument::fromJson(json.toUtf8(),&json_error);
@@ -151,33 +165,17 @@ void OnlineSong::parsejson_getinformation(QString json)
             {
                 QJsonObject dataobj=datavalue.toObject();
 
-                if(dataobj.contains("audio_name")&&dataobj["audio_name"].isString())
+                if(dataobj.contains("img")&&dataobj["img"].isString())
                 {
-                    m_songName.push_back(dataobj["audio_name"].toString());
+                    m_image=(dataobj["img"].toString());
                 }
-                if(dataobj.contains("album_name")&&dataobj["album_name"].isString())
-                {
-                    m_albumName.push_back(dataobj["album_name"].toString());
-                }
-                if(dataobj.contains("timelength")&&dataobj["timelength"].isDouble())
-                {
-                    m_duration.push_back(dataobj["timelength"].toDouble());
-                }
-                if(dataobj.contains("song_name")&&dataobj["song_name"].isString())
-                {
-                    m_singerName.push_back(dataobj["song_name"].toString());
-                }
-                if(dataobj.contains("img")&&dataobj["img"].isString()&&!dataobj["img"].isNull())
-                {
-                    m_image=dataobj["img"].toString();
-                }
-                if(dataobj.contains("lyrics")&&dataobj["lyrics"].isString()&&!dataobj["lyrics"].isNull())
+                if(dataobj.contains("lyrics")&&dataobj["lyrics"].isString())
                 {
                     m_lyrics=dataobj["lyrics"].toString();
                 }
-                if(dataobj.contains("url")&&dataobj["url"].isString()&&!dataobj["url"].isNull())
+                if(dataobj.contains("play_url")&&dataobj["play_url"].isString())
                 {
-                    m_url=dataobj["url"].toString();
+                    m_url=dataobj["play_url"].toString();
                 }
             }
 

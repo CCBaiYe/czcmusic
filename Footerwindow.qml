@@ -6,6 +6,7 @@ import Qt.labs.folderlistmodel
 Rectangle{
     property alias palyslider: sliderWindow
     property alias playmodel: playModeBtn.playMode
+    property alias songlist: songlist
     id:root
     color: "#ffffff"
     Rectangle{

@@ -13,6 +13,7 @@ int main(int argc, char *argv[])
     const int fontId = QFontDatabase::addApplicationFont(":/Font/fontawesome-webfont.ttf");
     QStringList fontFamilies = QFontDatabase::applicationFontFamilies(fontId);
 
+    //注册c++类
     qmlRegisterType<GetInformation,1>("GetInformation",1,0,"GetInformation");
     qmlRegisterType<OnlineSong,1>("OnlineSong",1,0,"OnlineSong");
     qmlRegisterType<DataInitialization,1>("DataInitialization",1,0,"DataInitialization");

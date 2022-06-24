@@ -61,10 +61,10 @@ import QtQuick.Controls 2.15
          anchors.fill: parent
          onClicked :  {
              switch(count){
-             case 4:pageLoader.source="LocaMusicPage.qml"
+             case 4:{pageLoader.source="LocaMusicPage.qml";pageLoader.visible=true;searchPage.visible=false}
 
              }
-
+            searchPage.visible=false
          }
      }
 }
