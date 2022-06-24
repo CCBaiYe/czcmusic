@@ -48,11 +48,11 @@ qt_add_qml_module(appccmusic
               SearchRect.qml
               SearchPage.qml
               SearchPageBtn.qml
-
+              FunctionalButton.qml
     RESOURCES
-            images/5.png
             Font/font-awesome.css
             Font/fontawesome-webfont.ttf
+            images/5.png
 )
 
 #INCLUDE_DIRECTORIES(${CPPUNIT_INCLUDE_DIR})
