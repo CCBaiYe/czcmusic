@@ -90,8 +90,5 @@ ApplicationWindow {
     GetInformation{
         id:getinfor
     }
-    Component.onCompleted: {
-
-    }
 }
 

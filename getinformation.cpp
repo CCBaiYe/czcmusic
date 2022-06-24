@@ -71,7 +71,6 @@ void GetInformation::analysisMP3(QString fileUrl)
             QImage covpic;
             if(cover.loadFromData(QByteArray::fromRawData(tb.data(), tb.size()))) {
                 covpic = cover.scaled(500,500,Qt::IgnoreAspectRatio,Qt::SmoothTransformation);
-                qDebug()<<"读取MP3封面信息成功";
             }
             //判断图片数
             QList<QImage> covPiclist;

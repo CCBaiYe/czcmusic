@@ -2,7 +2,9 @@
 #include <QQmlApplicationEngine>
 #include "getinformation.h"
 #include "onlinesong.h"
+#include "datainitialization.h"
 #include<QFontDatabase>
+#include <QSettings>
 int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
@@ -12,6 +14,11 @@ int main(int argc, char *argv[])
 
     qmlRegisterType<GetInformation,1>("GetInformation",1,0,"GetInformation");
     qmlRegisterType<OnlineSong,1>("OnlineSong",1,0,"OnlineSong");
+    qmlRegisterType<DataInitialization,1>("DataInitialization",1,0,"DataInitialization");
+
+    QCoreApplication::setOrganizationName("MySoft");
+    QCoreApplication::setOrganizationDomain("mysoft.com");
+    QCoreApplication::setApplicationName("Star Runner");
     QQmlApplicationEngine engine;
     const QUrl url(u"qrc:/ccmusic/main.qml"_qs);
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,

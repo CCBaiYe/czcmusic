@@ -22,7 +22,8 @@ qt_add_executable(appccmusic
     getinformation.cpp
     onlinesong.h
     onlinesong.cpp
-
+    datainitialization.h
+    datainitialization.cpp
 )
 
 qt_add_qml_module(appccmusic
