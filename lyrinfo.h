@@ -3,7 +3,6 @@
 
 #include <QObject>
 #include <QtQml/qqmlregistration.h>
-#include <QMap>
 class LyrInfo : public QObject
 {
     Q_OBJECT
