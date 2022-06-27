@@ -60,7 +60,7 @@ Item{
                     console.log("111");
                     rectangle3.visible=false;
                     label.visible=false;label1.visible=false;
-                    folderfileslist.visible=true;
+
                 }
             }
         }

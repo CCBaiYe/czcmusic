@@ -2,7 +2,11 @@
 #include <QQmlApplicationEngine>
 #include "getinformation.h"
 #include "onlinesong.h"
+#include "datainitialization.h"
+#include "lyrinfo.h"
+#include"songlist.h"
 #include<QFontDatabase>
+#include <QSettings>
 int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
@@ -10,8 +14,16 @@ int main(int argc, char *argv[])
     const int fontId = QFontDatabase::addApplicationFont(":/Font/fontawesome-webfont.ttf");
     QStringList fontFamilies = QFontDatabase::applicationFontFamilies(fontId);
 
+    //注册c++类
     qmlRegisterType<GetInformation,1>("GetInformation",1,0,"GetInformation");
     qmlRegisterType<OnlineSong,1>("OnlineSong",1,0,"OnlineSong");
+    qmlRegisterType<DataInitialization,1>("DataInitialization",1,0,"DataInitialization");
+    qmlRegisterType<LyrInfo,1>("LyrInfo",1,0,"LyrInfo");
+    qmlRegisterType<SongList,1>("SongList",1,0,"SongList");
+
+    QCoreApplication::setOrganizationName("MySoft");
+    QCoreApplication::setOrganizationDomain("mysoft.com");
+    QCoreApplication::setApplicationName("Star Runner");
     QQmlApplicationEngine engine;
     const QUrl url(u"qrc:/ccmusic/main.qml"_qs);
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,

@@ -3,6 +3,7 @@ import QtCore
 import QtQuick.Dialogs
 import Qt.labs.folderlistmodel
 import GetInformation 1.0
+import SongList 1.0
 Item{
     property alias listM: listm
     property alias folderDialog: folderDialog
@@ -205,6 +206,14 @@ Item{
             }
         }
     }
+    //创建歌单
+    function createlist(){
+        songlist.creatList();
+    }
+    //歌曲添加到播放列表
+    function modifiedlist(data){
+        songlist.append(data);
+    }
 
     FolderListModel{
         id:folderlistm
@@ -216,6 +225,7 @@ Item{
         title: "Select an player folder"
         onAccepted: {
             setFolderModel(folderDialog.selectedFolder);
+            folderfileslist.visible=true;
         }
     }
     //保存目录下的文件

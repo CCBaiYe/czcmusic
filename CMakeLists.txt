@@ -22,7 +22,12 @@ qt_add_executable(appccmusic
     getinformation.cpp
     onlinesong.h
     onlinesong.cpp
-
+    datainitialization.h
+    datainitialization.cpp
+    lyrinfo.h
+    lyrinfo.cpp
+    songlist.h
+    songlist.cpp
 )
 
 qt_add_qml_module(appccmusic
@@ -49,6 +54,7 @@ qt_add_qml_module(appccmusic
               SearchPage.qml
               SearchPageBtn.qml
               FunctionalButton.qml
+              MyLikeList.qml
     RESOURCES
             Font/font-awesome.css
             Font/fontawesome-webfont.ttf

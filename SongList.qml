@@ -3,6 +3,12 @@ import Qt.labs.folderlistmodel
 import QtQuick.Controls
 import Qt5Compat.GraphicalEffects
 Rectangle{
+    property alias smallimage: photo.source
+    property alias bigimage: background.source
+    property alias name: name.text
+    property alias album: album.text
+    property alias artist: artist.text
+
     id:songlistroot
     width: parent.width
     height: parent.height
@@ -170,7 +176,14 @@ Rectangle{
             //歌曲名字显示
             Label{
                 id:lyricsname
-                text: "名字"
+                text: "名字:"
+                Text{
+                    id:name
+                    anchors.left: lyricsname.right
+                    font.pixelSize: 25
+                    font.family:"Microsoft YaHei"
+                }
+
                 anchors.top: lyricsinformation.top
                 anchors.topMargin: 30
                 anchors.left: lyricsinformation.left
@@ -182,33 +195,54 @@ Rectangle{
             Label{
                 id:lyricsalbum
                 text: "专辑："
+                Text{
+                    id:album
+                    anchors.left: lyricsalbum.right
+                    font.pixelSize: 13
+
+                    font.family:"Microsoft YaHei"
+                }
                 anchors.top: lyricsname.bottom
                 anchors.topMargin: 30
                 anchors.left: lyricsinformation.left
                 anchors.leftMargin: 5
-                font.pixelSize: 12
-                font.family:"Microsoft YaHei";
+                font.pixelSize: 13
+                font.family:"Microsoft YaHei"
             }
             //歌曲作者显示
             Label{
                 id:lyricsartist
                 text: "歌手："
+                Text{
+                    id:artist
+                    anchors.left: lyricsartist.right
+                    font.pixelSize: 13
+
+                    font.family:"Microsoft YaHei"
+                }
                 anchors.top: lyricsname.bottom
                 anchors.topMargin: 30
                 anchors.left: lyricsalbum.right
                 anchors.leftMargin: 80
-                font.pixelSize: 12
+                font.pixelSize: 13
                 font.family:"Microsoft YaHei"
             }
             //歌曲作者显示
             Label{
                 id:lyricegenre
                 text: "类型："
+                Text{
+                    id:genre
+                    anchors.left: lyricegenre.right
+                    font.pixelSize: 13
+
+                    font.family:"Microsoft YaHei"
+                }
                 anchors.top: lyricsname.bottom
                 anchors.topMargin: 30
                 anchors.left: lyricsartist.right
                 anchors.leftMargin: 80
-                font.pixelSize: 12
+                font.pixelSize: 13
                 font.family:"Microsoft YaHei"
             }
         }
