@@ -3,6 +3,7 @@
 #include <QJSValue>
 #include <QJsonArray>
 #include <QJsonObject>
+#include <QFile>
 
 
 OnlineSong::OnlineSong(QObject *parent):QObject(parent)
@@ -150,7 +151,7 @@ void OnlineSong::parsejson_getIdHash(QString json)
 }
 
 void OnlineSong::parsejson_getinformation(QString json)
-{//解析json获得歌曲url和歌词
+{//解析json获得歌曲url,img和歌词
 
     QJsonParseError json_error;
     QJsonDocument parse_document=QJsonDocument::fromJson(json.toUtf8(),&json_error);
@@ -182,6 +183,27 @@ void OnlineSong::parsejson_getinformation(QString json)
         }
     }
 
+}
+
+void OnlineSong::getPureLyrics(QString lyrics)
+{
+    int index=lyrics.indexOf("[00");
+    m_lyrics=lyrics.mid(index);
+}
+
+void OnlineSong::writeLrc(QString lyrics)
+{
+    //写歌词文件
+    QByteArray content=lyrics.toUtf8();
+    QFile lrcFile("lyrics.lrc");
+    if(lrcFile.open(QIODevice::WriteOnly|QIODevice::Text))
+    {
+        lrcFile.write(content);
+        lrcFile.close();
+        qDebug()<<"finished";
+    }else{
+        qDebug()<<"false";
+    }
 }
 
 void OnlineSong::clear()

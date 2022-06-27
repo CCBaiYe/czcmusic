@@ -82,20 +82,30 @@ Rectangle{
 
         SearchPageBtn{
             count: Count;title: Title;artist: Artist;album: Album;time: Time
-            onDoubleClicked: {play1.triggered()}
-            onClicked: {
-                searchlist.currentIndex=index
-//                if(mouse.button===Qt.RightButton)
-//                {
-//                    console.log("0")
-//                }
+
+            TapHandler{
+                id:tap2
+                acceptedButtons: Qt.LeftButton
+                onTapped: {
+                    searchlist.currentIndex=index
+
+                }
+                onDoubleTapped: {
+                    play1.triggered()
+                }
+            }
+            TapHandler{
+                id:tap1
+                acceptedButtons: Qt.RightButton
+                onTapped:  {
+                    menu1.popup()
+                }
             }
 
             Menu{
                 id:menu1
-                x:mx
-                y:my
-                contentData: [play1,pause1]
+                contentData: [play1,pause1,addlove]
+
             }
         }
 
@@ -103,15 +113,26 @@ Rectangle{
     Action{
         id:pause1
         text: qsTr("暂停")
+        icon.name: "media-playback-pause"
         onTriggered: mdp.mdplayer.pause()
 
     }
     Action{
         id:play1
         text: qsTr("播放")
+
+
+        icon.name: "media-playback-start"
         onTriggered: {
             online.getInformation(searchlist.currentIndex)
         }
+
+    }
+    Action{
+        id:addlove
+        text: qsTr("收藏")
+        icon.name: "list-add"
+
     }
 
     ListModel{
@@ -131,11 +152,14 @@ Rectangle{
 
             footer.songlist.smallimage=online.image
             footer.songlist.bigimage=online.image
+            footer.footimage.source=online.image
 
             footer.palyslider.musicName=online.songName[searchlist.currentIndex]
             footer.songlist.name=online.songName[searchlist.currentIndex]
             footer.songlist.album=online.albumName[searchlist.currentIndex]
             footer.songlist.artist=online.singerName[searchlist.currentIndex]
+
+
 
         }
         function addsong(){
@@ -144,10 +168,9 @@ Rectangle{
                 searchmodel.append({"Count":searchmodel.count+1,"Title":online.songName[i],"Artist":online.singerName[i],"Album":online.albumName[i],"Time":turnTime(online.duration[i])})
         }
         function turnTime(time){
-            var m
-            var s
-            m=(parseInt(time/60))
-            s=parseInt(time%60)
+            //将时间秒转换成分秒
+            var m=(parseInt(time/60))
+            var s=parseInt(time%60)
             if(s<10&&m<10)
                 return "0"+m+":"+"0"+s
             if(s>10&&m<10)

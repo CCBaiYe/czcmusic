@@ -20,12 +20,16 @@ signals:
 
 public slots:
     void setLyr(QMap<int,QString> lyr){
-        m_lyr = lyr;
+        if(m_lyr!=lyr)
+            m_lyr = lyr;
     }
 
     void setUrl(QString url){
-        m_url = url;
-        getLyr(m_url);
+        if(m_url!=url){
+            m_url = url;
+            getLyr(m_url);
+        }
+
     }
 
 public:

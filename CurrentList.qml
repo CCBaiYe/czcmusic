@@ -24,17 +24,57 @@ Rectangle{
             CurrentListBtn{count:Count;filename:fileName;fileartist: fileArtist;filetime: fileTime}
             MouseArea{
                 anchors.fill: parent
+                acceptedButtons:Qt.LeftButton
                 onDoubleClicked: {
-                    mdp.mdplayer.stop()
-                    footer.palyslider.musicName=dialogs.listM.get(index).fileName
-                    mdp.mdplayer.source=dialogs.listM.get(index).filePath
-                    mdp.mdplayer.play();
+                    play1.triggered()
+                }
+                onClicked: {
+                        listv.currentIndex=index
                 }
             }
+            MouseArea{
+                anchors.fill: parent
+                acceptedButtons: Qt.RightButton
+                onClicked: {
+                    menu1.popup()
+                }
+            }
+            Menu{
+                id:menu1
+                contentData: [play1,pause1,addlove]
 
+            }
 
         }
     }
+    Action{
+        id:pause1
+        text: qsTr("暂停")
+        icon.name: "media-playback-pause"
+        onTriggered: mdp.mdplayer.pause()
+
+    }
+    Action{
+        id:play1
+        text: qsTr("播放")
+
+
+        icon.name: "media-playback-start"
+        onTriggered: {
+            mdp.mdplayer.stop()
+            footer.palyslider.musicName=dialogs.listM.get(listv.currentIndex).fileName
+            mdp.mdplayer.source=dialogs.listM.get(listv.currentIndex).filePath
+            mdp.mdplayer.play();
+        }
+
+    }
+    Action{
+        id:addlove
+        text: qsTr("收藏")
+        icon.name: "list-add"
+
+    }
+
 }
 
 

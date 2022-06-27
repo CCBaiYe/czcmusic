@@ -18,7 +18,7 @@ Rectangle{
     Rectangle{
         id:searchbox
         width: 200
-        height: 20
+        height: 25
         anchors.left: toolbarroot.left
         anchors.leftMargin: 200
         anchors.verticalCenter: toolbarroot.verticalCenter
@@ -31,7 +31,7 @@ Rectangle{
             id:searchtext
             anchors.verticalCenter: searchbox.verticalCenter
             verticalAlignment: Text.AlignVCenter
-            font.pixelSize: 12
+            font.pixelSize: 15
             selectByMouse: true
             placeholderTextColor: "lightgrey"
             placeholderText: qsTr("搜索音乐，歌手, 用户");

@@ -29,6 +29,9 @@ public:
     void parsejson_getIdHash(QString json);
     void parsejson_getinformation(QString json);
 
+    void getPureLyrics(QString lyrics);
+    void writeLrc(QString lyrics);
+
     void clear();
 
     void setAlbumId(QList<QString> newAlbumId)
@@ -152,7 +155,9 @@ private:
     QString m_image;
     QString m_lyrics;
     bool isDownloadSong=false;
-    QString m_savePath;
+    bool isDowloadLrc=false;
+    QString m_songSavePath;         //歌曲文件保存路径
+    QString m_lrcSavePath;          //歌词文件保存路径
 
 };
 

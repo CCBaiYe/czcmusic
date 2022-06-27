@@ -15,6 +15,11 @@ Item {
                 fileDialog.nextplay();
             }
         }
+
+//        onSourceChanged: {
+//            if()
+//        }
+
     }
     AudioOutput {
         id: audioOutput
@@ -23,10 +28,12 @@ Item {
     DataInitialization {
         id: loadFromFile
     }
+
     Component.onCompleted: {
+
         player.source = loadFromFile.loadPath
         footer.palyslider.musicName = loadFromFile.musicName
-        player.play();
+//        player.play();
     }
     Component.onDestruction: {
         loadFromFile.setLoadPath(player.source.toString())
