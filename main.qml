@@ -55,8 +55,6 @@ ApplicationWindow {
                     root.setX(root.x+delta.x)
                     root.setY(root.y+delta.y)
 
-
-
             }
         }
     }

@@ -7,6 +7,7 @@ Rectangle{
     property alias palyslider: sliderWindow
     property alias playmodel: playModeBtn.playMode
     property alias songlist: songlist
+    property alias footimage: footimage
     id:root
     color: "#ffffff"
     Rectangle{
@@ -19,7 +20,7 @@ Rectangle{
 
     Rectangle{
         id: musicInfoImage
-        color: "darkcyan"
+        color: "#ffc480"
         opacity: 0.3
         anchors{
             top:border__.bottom
@@ -28,6 +29,11 @@ Rectangle{
             leftMargin: 1*dp
             bottom: parent.bottom
             bottomMargin: 1*dp
+        }
+        Image {
+            id:footimage
+            anchors.fill: parent
+            fillMode: Image.PreserveAspectFit
         }
         Label{
             text: "\uf065"

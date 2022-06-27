@@ -1,7 +1,7 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
 
- Button{
+ Rectangle{
      property color hoveredColor: "#dddde1"
      property color clickedColor: "#dddde1"
      property color normalColor: "white"
@@ -18,9 +18,10 @@ import QtQuick.Controls 2.15
      id:navItemBtn;
      width: pageloaderw
      height: 30*dp;
-     background:Rectangle{
-         id:backgroundRect;
-         color: currentItem ? clickedColor:(hovered?hoveredColor:normalColor)
+
+     color: currentItem ? clickedColor:(hoverHandler.hovered?hoveredColor:normalColor)
+     HoverHandler{
+         id:hoverHandler
      }
 
 

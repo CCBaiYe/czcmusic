@@ -4,6 +4,7 @@ import QtQuick.Dialogs
 import Qt.labs.folderlistmodel
 import GetInformation 1.0
 import SongList 1.0
+
 Item{
     property alias listM: listm
     property alias folderDialog: folderDialog
@@ -29,6 +30,13 @@ Item{
             }else{
                 //root.statusBar.text = "Not Supported!";
             }
+            footer.songlist.smallimage=getinfor.picture
+            footer.songlist.bigimage=getinfor.picture
+
+            footer.songlist.name=setMusicName(filepath)
+            footer.songlist.album=getinfor.album
+            footer.songlist.artist=getinfor.artist
+
         }
         function setMusicName(path){
             var newPath;
@@ -189,6 +197,8 @@ Item{
                     "Count":listm.count+1,"fileArtist":getinfor.artist,
                     "fileTime":dialogs.fileDialog.setTime(mdp.mdplayer.duration)};
                 listm.append(data);
+
+
             }
         }
     }

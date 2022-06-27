@@ -1,23 +1,46 @@
 #include "lyrinfo.h"
 #include <QFile>
 #include <QTextStream>
+#include <QDebug>
 LyrInfo::LyrInfo(QObject *parent)
     : QObject{parent}
 {
 
 }
 
+int LyrInfo::duration()
+{
+    for(int i = 0; i < m_time.length()-1;i++){
+        if(m_duration >= m_time[i]&&m_duration<= m_time[i+1]){
+            emit this->durationChanged(i);
+            return 0;
+        }
+    }
+    emit this->timeOut();
+    return -1;
+}
+
 void LyrInfo::getLyr(QString url)
 {
+    m_lyr.clear();
+    if(url.endsWith(".mp3")){
+        url = url.replace(".mp3",".lrc");
+    }
+    if(url.startsWith("file://")){
+        url=url.remove("file://");
+    }
     QFile *file = new QFile(url);
+
     if(file->open(QIODevice::ReadOnly|QIODevice::Text)){
         QString line;
         QString timePart;
         QTextStream in(file);
         line = in.readLine();
+
         part(line,timePart);
         while(!line.isNull()){
-            m_lyr.insert(getTime(timePart),line);
+            m_time.append(getTime(timePart));
+            m_lyr.append(line);
             line = in.readLine();
             part(line,timePart);
         }

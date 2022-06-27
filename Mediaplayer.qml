@@ -14,7 +14,16 @@ Item {
             if(mdp.mdplayer.position!==0&&mdp.mdplayer.position===mdp.mdplayer.duration&&mdp.mdplayer.mediaStatus===6){
                 fileDialog.nextplay();
             }
+            footer.songlist.fileLyr.setDuration(player.position);
         }
+        onSourceChanged: {
+            footer.songlist.fileLyr.url = player.source
+        }
+
+//        onSourceChanged: {
+//            if()
+//        }
+
     }
     AudioOutput {
         id: audioOutput
@@ -23,10 +32,12 @@ Item {
     DataInitialization {
         id: loadFromFile
     }
+
     Component.onCompleted: {
+
         player.source = loadFromFile.loadPath
         footer.palyslider.musicName = loadFromFile.musicName
-        player.play();
+//        player.play();
     }
     Component.onDestruction: {
         loadFromFile.setLoadPath(player.source.toString())

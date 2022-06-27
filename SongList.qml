@@ -2,16 +2,22 @@ import QtQuick
 import Qt.labs.folderlistmodel
 import QtQuick.Controls
 import Qt5Compat.GraphicalEffects
+import LyrInfo 1.0
 Rectangle{
     property alias smallimage: photo.source
     property alias bigimage: background.source
     property alias name: name.text
     property alias album: album.text
     property alias artist: artist.text
+    property alias fileLyr: fileLyr
+    property alias lyrModel: lyrModel
 
     id:songlistroot
     width: parent.width
     height: parent.height
+
+
+
     //背景图片
     Image {
         id: background
@@ -19,12 +25,13 @@ Rectangle{
         height: splitviewheiht
         source: "./images/5.png"
         fillMode: Image.Stretch
+        //opacity: 0.3
     }
     //虚化效果
     FastBlur{
         anchors.fill: background
         source:background
-        radius: 32
+        radius: 64
     }
     //关闭歌词页面
     Rectangle{
@@ -158,7 +165,7 @@ Rectangle{
             anchors.leftMargin: 10
         }
     }
-    //歌词显示
+    //歌曲基本信息显示
     Rectangle{
         id:lyrics
         width: 350
@@ -223,87 +230,61 @@ Rectangle{
                 anchors.top: lyricsname.bottom
                 anchors.topMargin: 30
                 anchors.left: lyricsalbum.right
-                anchors.leftMargin: 80
-                font.pixelSize: 13
-                font.family:"Microsoft YaHei"
-            }
-            //歌曲作者显示
-            Label{
-                id:lyricegenre
-                text: "类型："
-                Text{
-                    id:genre
-                    anchors.left: lyricegenre.right
-                    font.pixelSize: 13
-
-                    font.family:"Microsoft YaHei"
-                }
-                anchors.top: lyricsname.bottom
-                anchors.topMargin: 30
-                anchors.left: lyricsartist.right
-                anchors.leftMargin: 80
+                anchors.leftMargin: 180
                 font.pixelSize: 13
                 font.family:"Microsoft YaHei"
             }
         }
-        //歌曲歌词显示
-        Rectangle{
-            id:lyricsrect
-            width: parent.width
-            height: 350
+        LyrInfo{
+            id: fileLyr
+            url: footer.palyslider.musicName
+            onUrlChanged:{
+                lyrModel.clear();
+                var taskMap = {},timeMap = {};
+                taskMap = fileLyr.lyr;
+                timeMap = fileLyr.time;
+                for(var key in taskMap){
+                    lyrModel.append({'lyrInformation':taskMap[key],'time':timeMap[key]});
+                }
+            }
+            onDurationChanged: {
+                showLyr.currentIndex = i;
+            }
+        }
+        ListModel {
+            id: lyrModel
+        }
+
+        //歌词显示
+        ListView {
+            z:10
+            id: showLyr
+            width: lyrics.width
+            height: 275
             anchors.top: lyricsinformation.bottom
-            anchors.topMargin: 30
-            color:"transparent"
-            ListView{
-                id:lyricsview
-                anchors.fill: lyricsrect
-                model: lyricsmodel
-                delegate: delegate
-                highlightRangeMode: ListView.StrictlyEnforceRange
-                preferredHighlightBegin: lyricsrect.width/2
-                preferredHighlightEnd: lyricsrect.height/2
-                spacing: 25
-            }
-            ListModel{
-                id:lyricsmodel
-                ListElement {
-                    name: "Bill Jones"
-                }
-                ListElement {
-                    name: "Jane Doe"
-                }
-                ListElement {
-                    name: "John Smith"
-                }
-                ListElement {
-                    name: "Bill Jones"
-                }
-                ListElement {
-                    name: "Jane Doe"
-                }
-                ListElement {
-                    name: "John Smith"
-                }
-                ListElement {
-                    name: "Bill Jones"
-                }
-                ListElement {
-                    name: "Jane Doe"
-                }
-                ListElement {
-                    name: "John Smith"
-                }
-            }
-            Component{
-                id:delegate
-                Text {
-                    opacity: ListView.isCurrentItem ? 1 : 0.5
-                    id: lyricsColumnText
-                    text: name
-                    font.pointSize: 17
-                    horizontalAlignment: Text.AlignHCenter
-                    verticalAlignment: Text.AlignVCenter
-                    anchors.horizontalCenter: parent.horizontalCenter
+            anchors.topMargin: 50
+            anchors.left: lyrics.left
+            anchors.right: lyrics.right
+            model: lyrModel
+            focus: true
+            delegate: Text{
+                width: 350
+                font.pixelSize:ListView.isCurrentItem ? 30 : 20
+                color: ListView.isCurrentItem ? "red" : "black"
+                text: lyrInformation
+                //自动换行
+                wrapMode: Text.WordWrap
+                //行间距
+                lineHeight: 0.7
+                //水平居中
+                horizontalAlignment: Text.AlignHCenter
+                //垂直居中
+                verticalAlignment: Text.AlignVCenter
+                TapHandler{
+                    onTapped: {
+                        showLyr.currentIndex = index
+                        mdp.mdplayer.position = fileLyr.time[index];
+                    }
                 }
             }
         }
