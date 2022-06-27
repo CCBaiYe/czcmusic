@@ -14,6 +14,10 @@ Item {
             if(mdp.mdplayer.position!==0&&mdp.mdplayer.position===mdp.mdplayer.duration&&mdp.mdplayer.mediaStatus===6){
                 fileDialog.nextplay();
             }
+            footer.songlist.fileLyr.setDuration(player.position);
+        }
+        onSourceChanged: {
+            footer.songlist.fileLyr.url = player.source
         }
 
 //        onSourceChanged: {

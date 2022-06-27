@@ -2,12 +2,15 @@ import QtQuick
 import Qt.labs.folderlistmodel
 import QtQuick.Controls
 import Qt5Compat.GraphicalEffects
+import LyrInfo 1.0
 Rectangle{
     property alias smallimage: photo.source
     property alias bigimage: background.source
     property alias name: name.text
     property alias album: album.text
     property alias artist: artist.text
+    property alias fileLyr: fileLyr
+    property alias lyrModel: lyrModel
 
     id:songlistroot
     width: parent.width
@@ -162,7 +165,7 @@ Rectangle{
             anchors.leftMargin: 10
         }
     }
-    //歌词显示
+    //歌曲基本信息显示
     Rectangle{
         id:lyrics
         width: 350
@@ -233,7 +236,58 @@ Rectangle{
                 font.family:"Microsoft YaHei"
             }
         }
+        LyrInfo{
+            id: fileLyr
+            url: footer.palyslider.musicName
+            onUrlChanged:{
+                lyrModel.clear();
+                var taskMap = {},timeMap = {};
+                taskMap = fileLyr.lyr;
+                timeMap = fileLyr.time;
+                for(var key in taskMap){
+                    lyrModel.append({'lyrInformation':taskMap[key],'time':timeMap[key]});
+                }
+            }
+            onDurationChanged: {
+                showLyr.currentIndex = i;
+            }
+        }
+        ListModel {
+            id: lyrModel
+        }
 
-
-  }
+        //歌词显示
+        ListView {
+            z:10
+            id: showLyr
+            width: lyrics.width
+            height: 275
+            anchors.top: lyricsinformation.bottom
+            anchors.topMargin: 50
+            anchors.left: lyrics.left
+            anchors.right: lyrics.right
+            model: lyrModel
+            focus: true
+            delegate: Text{
+                width: 350
+                font.pixelSize:ListView.isCurrentItem ? 30 : 20
+                color: ListView.isCurrentItem ? "red" : "black"
+                text: lyrInformation
+                //自动换行
+                wrapMode: Text.WordWrap
+                //行间距
+                lineHeight: 0.7
+                //水平居中
+                horizontalAlignment: Text.AlignHCenter
+                //垂直居中
+                verticalAlignment: Text.AlignVCenter
+                TapHandler{
+                    onTapped: {
+                        showLyr.currentIndex = index
+                        mdp.mdplayer.position = fileLyr.time[index];
+                    }
+                }
+            }
+        }
+    }
 }
