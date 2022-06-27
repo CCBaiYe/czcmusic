@@ -31,32 +31,48 @@ void LyrInfo::getLyr(QString url)
     }
     QFile *file = new QFile(url);
 
+
     if(file->open(QIODevice::ReadOnly|QIODevice::Text)){
         QString line;
         QString timePart;
         QTextStream in(file);
         line = in.readLine();
 
-        part(line,timePart);
+
+        part(line,timePart);qDebug()<<line.isNull();
         while(!line.isNull()){
             m_time.append(getTime(timePart));
             m_lyr.append(line);
             line = in.readLine();
+qDebug()<<line;
             part(line,timePart);
         }
+
     }
 }
 
 void LyrInfo::part(QString &inforPart, QString &timePart)
 {
-    timePart = inforPart.left(7);
-    inforPart.remove(timePart);
+    if(inforPart.contains('.')){
+        timePart=inforPart.left(10);
+        inforPart.remove(timePart);
+
+    }else{
+        timePart = inforPart.left(7);
+        inforPart.remove(timePart);
+    }
+
+
 }
 
 int LyrInfo::getTime(QString lineInfo)
 {
     qint64 minute =lineInfo.mid(1,2).toLongLong()*60*1000;
     qint64 seconds = lineInfo.mid(4,2).toLongLong()*1000;
-    return minute + seconds;
+    qint64 millseconed=lineInfo.mid(7,2).toLongLong();
+    if(lineInfo.length()!=6)
+        return minute + seconds+millseconed;
+    else return minute + seconds;
+
 }
 

@@ -128,7 +128,7 @@ Rectangle{
         id:vc
         width: 100*dp
         anchors{
-            right: collectBtn.left
+            right: showDesktop.left
             rightMargin:3*dp
             top:root.top
             topMargin: 9*dp
@@ -138,10 +138,12 @@ Rectangle{
 
     }
 
-    //收藏
+    //桌面歌词
     MusicControlBtn{
-        id:collectBtn
+        id:showDesktop
         property bool isLove: false;
+        border.color: "grey"
+        color: "transparent"
         anchors{
             right: playModeBtn.left
             rightMargin:0
@@ -149,17 +151,29 @@ Rectangle{
             topMargin: 5*dp
             bottom:root.bottom
             bottomMargin: 5*dp
-        }
-        width: height
-        text:"\uf0fe"
-        color: isLove?"#DC2F2E":"#999999"
-        TapHandler{
-            cursorShape: Qt.PointingHandCursor;
-            onTapped: {
-                //collectBtn.isLove = !collectBtn.isLove;
+        } 
+        width: 25
+        Text{
+            id:tex
+            text: qsTr("词")
+            anchors.centerIn: parent
+            font.pointSize: 14
+            color: "grey"
+            TapHandler{
+                cursorShape: Qt.PointingHandCursor;
+                onTapped: {
+
+                    if(desktopLrc.visible){
+                        tex.color="grey"
+                        desktopLrc.visible=false
+                    }else {tex.color="lightblue";desktopLrc.visible=true}
+                }
             }
         }
+
+
     }
+
 
 
     //播放模式
@@ -214,7 +228,7 @@ Rectangle{
         id:currentlist
         visible: false
         y:(border__.y-height)
-        x:(collectBtn.x+collectBtn.width/2 - width/9*2.5)
+        x:(showDesktop.x+showDesktop.width/2 - width/9*2.5)
         width: 700*dp
         height: parent.height*dp*8
     }

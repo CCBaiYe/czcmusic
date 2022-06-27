@@ -248,9 +248,15 @@ Rectangle{
                     lyrModel.append({'lyrInformation':taskMap[key],'time':timeMap[key]});
                 }
             }
-            onDurationChanged: {
-                showLyr.currentIndex = i;
-            }
+            onDurationChanged: index=>{
+                                   showLyr.currentIndex = index;
+                                   var taskMap = {};
+                                   taskMap = fileLyr.lyr;
+                                   //desktopLrc.showlyr = taskMap[index]
+
+                                   console.log(taskMap[index])
+
+                               }
         }
         ListModel {
             id: lyrModel
