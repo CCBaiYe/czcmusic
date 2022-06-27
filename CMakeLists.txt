@@ -52,6 +52,7 @@ qt_add_qml_module(appccmusic
               SearchPage.qml
               SearchPageBtn.qml
               FunctionalButton.qml
+              DesktopLrc.qml
     RESOURCES
             Font/font-awesome.css
             Font/fontawesome-webfont.ttf

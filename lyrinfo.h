@@ -25,6 +25,7 @@ signals:
     void timeOut();
 
 public slots:
+
     void setLyr(QList<QString> lyr){
         m_lyr.clear();
         m_lyr = lyr;
@@ -34,6 +35,7 @@ public slots:
         m_url = url;
         getLyr(m_url);
         emit this->urlChanged();
+
     }
 
     void setTime(QList<int> time){

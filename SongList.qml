@@ -15,6 +15,9 @@ Rectangle{
     id:songlistroot
     width: parent.width
     height: parent.height
+
+
+
     //背景图片
     Image {
         id: background
@@ -22,12 +25,13 @@ Rectangle{
         height: splitviewheiht
         source: "./images/5.png"
         fillMode: Image.Stretch
+        //opacity: 0.3
     }
     //虚化效果
     FastBlur{
         anchors.fill: background
         source:background
-        radius: 32
+        radius: 64
     }
     //关闭歌词页面
     Rectangle{
@@ -227,25 +231,7 @@ Rectangle{
                 anchors.top: lyricsname.bottom
                 anchors.topMargin: 30
                 anchors.left: lyricsalbum.right
-                anchors.leftMargin: 80
-                font.pixelSize: 13
-                font.family:"Microsoft YaHei"
-            }
-            //歌曲作者显示
-            Label{
-                id:lyricegenre
-                text: "类型："
-                Text{
-                    id:genre
-                    anchors.left: lyricegenre.right
-                    font.pixelSize: 13
-
-                    font.family:"Microsoft YaHei"
-                }
-                anchors.top: lyricsname.bottom
-                anchors.topMargin: 30
-                anchors.left: lyricsartist.right
-                anchors.leftMargin: 80
+                anchors.leftMargin: 180
                 font.pixelSize: 13
                 font.family:"Microsoft YaHei"
             }
