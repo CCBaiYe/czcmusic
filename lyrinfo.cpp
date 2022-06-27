@@ -44,6 +44,8 @@ void LyrInfo::getLyr(QString url)
             line = in.readLine();
             part(line,timePart);
         }
+    }else{
+        m_lyr.append("暂无歌词");
     }
 }
 

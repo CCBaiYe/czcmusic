@@ -26,6 +26,8 @@ qt_add_executable(appccmusic
     datainitialization.cpp
     lyrinfo.h
     lyrinfo.cpp
+    editlyr.h
+    editlyr.cpp
 )
 
 qt_add_qml_module(appccmusic
@@ -53,6 +55,7 @@ qt_add_qml_module(appccmusic
               SearchPageBtn.qml
               FunctionalButton.qml
               DesktopLrc.qml
+              LyrEditing.qml
     RESOURCES
             Font/font-awesome.css
             Font/fontawesome-webfont.ttf

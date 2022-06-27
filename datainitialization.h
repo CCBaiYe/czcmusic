@@ -45,7 +45,7 @@ public:
 private:
     QString m_loadPath;
     QString m_musicName;
-    QSettings *loadFile = new QSettings("loadFile.ini",QSettings::IniFormat);
+    QSettings *loadFile = new QSettings("/root/.config/loadFile.ini",QSettings::IniFormat);
 };
 
 #endif // DATAINITIALIZATION_H

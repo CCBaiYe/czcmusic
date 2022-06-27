@@ -4,6 +4,7 @@
 #include "onlinesong.h"
 #include "datainitialization.h"
 #include "lyrinfo.h"
+#include "editlyr.h"
 #include<QFontDatabase>
 #include <QSettings>
 int main(int argc, char *argv[])
@@ -18,6 +19,7 @@ int main(int argc, char *argv[])
     qmlRegisterType<OnlineSong,1>("OnlineSong",1,0,"OnlineSong");
     qmlRegisterType<DataInitialization,1>("DataInitialization",1,0,"DataInitialization");
     qmlRegisterType<LyrInfo,1>("LyrInfo",1,0,"LyrInfo");
+    qmlRegisterType<EditLyr,1>("EditLyr",1,0,"EditLyr");
 
     QCoreApplication::setOrganizationName("MySoft");
     QCoreApplication::setOrganizationDomain("mysoft.com");

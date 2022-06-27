@@ -19,11 +19,6 @@ Item {
         onSourceChanged: {
             footer.songlist.fileLyr.url = player.source
         }
-
-//        onSourceChanged: {
-//            if()
-//        }
-
     }
     AudioOutput {
         id: audioOutput
@@ -37,7 +32,6 @@ Item {
 
         player.source = loadFromFile.loadPath
         footer.palyslider.musicName = loadFromFile.musicName
-//        player.play();
     }
     Component.onDestruction: {
         loadFromFile.setLoadPath(player.source.toString())
