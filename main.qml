@@ -50,8 +50,8 @@ ApplicationWindow {
                     var delta =Qt.point(mouse.x-clickPos.x, mouse.y-clickPos.y)
 
                     //改变窗口位置
-                    root.setX(root.x+delta.x)
-                    root.setY(root.y+delta.y)
+                    root.x=(root.x+delta.x)
+                    root.y=(root.y+delta.y)
 
             }
         }
@@ -112,4 +112,10 @@ ApplicationWindow {
     GetInformation{
         id:getinfor
     }
+
+    DesktopLrc{
+        id:desktopLrc
+        visible: false
+    }
+
 }

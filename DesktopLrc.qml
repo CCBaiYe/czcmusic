@@ -5,9 +5,11 @@ import QtQuick.Layouts
 
 ApplicationWindow{
     property point clickpos: "0,0"
+    property alias showlyr: lineLrc.text
     id:desktop
     minimumWidth: 700
     minimumHeight: 200
+    //opacity: 0.5
     flags: Qt.Window|Qt.FramelessWindowHint
     color: Qt.rgba(0,0,0,0)
     MouseArea{
@@ -22,8 +24,8 @@ ApplicationWindow{
             (mouse)=>{
                 //鼠标偏移量
                 var delta=Qt.point(mouse.x-clickpos.x,mouse.y-clickpos.y)
-                desktop.x=ka.x+delta.x
-                desktop.y=ka.y+delta.y
+                desktop.x=desktop.x+delta.x
+                desktop.y=desktop.y+delta.y
             }
     }
 
@@ -34,7 +36,7 @@ ApplicationWindow{
             if(hovered){
                 toolbtn.opacity =1
                 toolbtn.visible=true
-                desktop.color = Qt.rgba(0.5,0.5,0.5,0)
+                desktop.color="lightgrey"
             }
             if(!hovered){
                 toolbtn.opacity =0
@@ -57,6 +59,9 @@ ApplicationWindow{
                 text:"\uf048"
                 font.family: "FontAwesome"
                 font.pixelSize: 20
+                onCanceled: {
+                    dialogs.fileDialog.preplay()
+                }
 
             }
             ToolButton{
@@ -67,6 +72,7 @@ ApplicationWindow{
                 onClicked: {
                     playbtn.visible=true
                     pausebtn.visible=false
+                    mdp.mdplayer.play()
 
                 }
             }
@@ -79,6 +85,7 @@ ApplicationWindow{
                 onClicked: {
                     pausebtn.visible=true
                     playbtn.visible=false
+                    mdp.mdplayer.pause()
                 }
             }
 
@@ -87,6 +94,9 @@ ApplicationWindow{
                 text: "\uf051"
                 font.family: "FontAwesome"
                 font.pixelSize: 20
+                onClicked: {
+                    dialogs.fileDialog.nextplay()
+                }
             }
             ToolButton{
                 id:lockbtn
@@ -94,20 +104,20 @@ ApplicationWindow{
                 font.family: "FontAwesome"
                 font.pixelSize: 20
                 onClicked: {
-//                    unlockbtn.visible=true
-//                    lockbtn.visible=false
-//                    nextbtn.visible=false
-//                    pausebtn.visible=false
-//                    prebtn.visible=false
-//                    closebtn.visible=false
-//                    playbtn.visible=false
-                    hoverHandler.enabled=false
+                    unlockbtn.visible=true
+                    lockbtn.visible=false
+                    nextbtn.visible=false
+                    pausebtn.visible=false
+                    prebtn.visible=false
+                    closebtn.visible=false
+                    playbtn.visible=false
+
 
                 }
             }
                 ToolButton{
                     id:unlockbtn
-                    text: "\uf3c1"
+                    text: "\uf13e"
                     visible: false
                     font.family: "FontAwesome"
                     font.pixelSize: 20
@@ -134,17 +144,19 @@ ApplicationWindow{
                 font.pixelSize: 20
 
                 onClicked: {
-                    ka.close()
+                    desktop.visible=false
                 }
             }
         }
-        Label{
+        Text{
             id:lineLrc
-            text: qsTr("no lyrics")
+            text: qsTr("No Lyrics")
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
-            Layout.alignment: Qt.AlignVCenter
-            font.pixelSize: 30
+            Layout.alignment: Qt.AlignHCenter
+            font.pixelSize: 35
+            wrapMode: Text.WordWrap
+            color: "red"
 
         }
 

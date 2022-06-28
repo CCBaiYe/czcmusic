@@ -22,6 +22,7 @@ int LyrInfo::duration()
 
 void LyrInfo::getLyr(QString url)
 {
+    qDebug()<<" read ";
     m_lyr.clear();
     if(url.endsWith(".mp3")){
         url = url.replace(".mp3",".lrc");
@@ -30,6 +31,7 @@ void LyrInfo::getLyr(QString url)
         url=url.remove("file://");
     }
     QFile *file = new QFile(url);
+
 
     if(file->open(QIODevice::ReadOnly|QIODevice::Text)){
         QString line;
@@ -51,14 +53,26 @@ void LyrInfo::getLyr(QString url)
 
 void LyrInfo::part(QString &inforPart, QString &timePart)
 {
-    timePart = inforPart.left(7);
-    inforPart.remove(timePart);
+    if(inforPart.contains('.')){
+        timePart=inforPart.left(10);
+        inforPart.remove(timePart);
+
+    }else{
+        timePart = inforPart.left(7);
+        inforPart.remove(timePart);
+    }
+
+
 }
 
 int LyrInfo::getTime(QString lineInfo)
 {
     qint64 minute =lineInfo.mid(1,2).toLongLong()*60*1000;
     qint64 seconds = lineInfo.mid(4,2).toLongLong()*1000;
-    return minute + seconds;
+    qint64 millseconed=lineInfo.mid(7,2).toLongLong();
+    if(lineInfo.length()!=6)
+        return minute + seconds+millseconed;
+    else return minute + seconds;
+
 }
 

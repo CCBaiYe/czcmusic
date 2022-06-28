@@ -20,7 +20,7 @@ signals:
 
     void timeChanged();
 
-    void durationChanged(int i);
+    void durationChanged(int index);
 
     void timeOut();
 
@@ -34,7 +34,7 @@ public slots:
     void setUrl(QString url){
         m_url = url;
         getLyr(m_url);
-        emit this->urlChanged();
+        emit urlChanged();
 
     }
 

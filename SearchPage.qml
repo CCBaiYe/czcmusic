@@ -140,6 +140,7 @@ Rectangle{
     }
     OnlineSong{
         id:online
+        property int cnt: 0
         onSongNameChanged: {
             addsong()
         }
@@ -162,6 +163,12 @@ Rectangle{
 
 
         }
+        onLyricsChanged: {
+            cnt++
+//            footer.songlist.fileLyr.setUrl("/root/music/build-czcmusic-Desktop_Qt_6_3_1_GCC_64bit-Debug/lyrics.lrc")
+            console.log(cnt)
+        }
+
         function addsong(){
             searchmodel.clear()
             for(var i=0;i<songName.length;i++)

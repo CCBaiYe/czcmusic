@@ -29,7 +29,6 @@ Item {
     }
 
     Component.onCompleted: {
-
         player.source = loadFromFile.loadPath
         footer.palyslider.musicName = loadFromFile.musicName
     }

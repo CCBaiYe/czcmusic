@@ -39,5 +39,7 @@ void EditLyr::setLyrs(QList<QString> lyrs)
         for(auto m : m_lyrs){
             out << m;
         }
+        emit this->saveSuccess();
     }
 }
+

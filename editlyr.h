@@ -8,14 +8,16 @@ class EditLyr : public QObject
     Q_OBJECT
     Q_PROPERTY(QString url READ url WRITE setUrl NOTIFY urlChanged)
     Q_PROPERTY(QList<QString> lyrs READ lyrs WRITE setLyrs NOTIFY lyrsChanged)
-
 public:
     explicit EditLyr(QObject *parent = nullptr);
 
 signals:
     void urlChanged();
+
     void lyrsChanged();
 
+
+    void saveSuccess();
 public slots:
     void setUrl(QString url);
 
@@ -29,6 +31,7 @@ public:
     QList<QString> lyrs(){
         return m_lyrs;
     }
+
 
 private:
     QString m_url;

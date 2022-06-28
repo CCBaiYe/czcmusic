@@ -24,6 +24,7 @@ int main(int argc, char *argv[])
     QCoreApplication::setOrganizationName("MySoft");
     QCoreApplication::setOrganizationDomain("mysoft.com");
     QCoreApplication::setApplicationName("Star Runner");
+
     QQmlApplicationEngine engine;
     const QUrl url(u"qrc:/ccmusic/main.qml"_qs);
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,

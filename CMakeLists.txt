@@ -9,7 +9,7 @@ find_package(Qt6 6.2 COMPONENTS Quick REQUIRED)
 find_package(Qt6 6.2 REQUIRED COMPONENTS Widgets)
 find_package(Qt6 6.2 REQUIRED COMPONENTS Core)
 find_package(Qt6 REQUIRED COMPONENTS Multimedia)
-
+find_package(Qt6 REQUIRED COMPONENTS Widgets)
 
 
 INCLUDE_DIRECTORIES("/usr/include/taglib")
@@ -64,7 +64,7 @@ qt_add_qml_module(appccmusic
 
 #INCLUDE_DIRECTORIES(${CPPUNIT_INCLUDE_DIR})
 
-target_link_libraries(appccmusic PRIVATE tag Qt6::Quick Qt6::Multimedia)
+target_link_libraries(appccmusic PRIVATE tag Qt6::Quick Qt6::Multimedia Qt6::Widgets)
 
 
 
