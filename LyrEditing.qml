@@ -25,6 +25,9 @@ Rectangle {
             anchors.left: openLyrFIle.right
             anchors.top: parent.top
             anchors.bottom: parent.bottom
+            onClicked: {
+
+            }
         }
         Button {
             id: addLyrFile
