@@ -22,7 +22,6 @@ int LyrInfo::duration()
 
 void LyrInfo::getLyr(QString url)
 {
-    qDebug()<<" read ";
     m_lyr.clear();
     if(url.endsWith(".mp3")){
         url = url.replace(".mp3",".lrc");

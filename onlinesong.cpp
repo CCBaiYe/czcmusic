@@ -50,11 +50,16 @@ void OnlineSong::replyFinished2(QNetworkReply *reply)
 
 
 
-    emit lyricsChanged(m_lyrics);
 
-    emit urlChanged(m_url);
+    if(!isDownloadSong||!isDowloadLrc){
+        emit urlChanged(m_url);
+        emit lyricsChanged(m_lyrics);
+    }else{
+        emit getUrl();
+        emit getlyrics();
+    }
 
-    isDownloadSong=false;
+
 
     reply->deleteLater();//释放reply对象
 
@@ -80,6 +85,18 @@ void OnlineSong::getInformation(int index)
 
         request2->setUrl(QUrl(KGAPI));
         manager2->get(*request2);
+
+}
+
+void OnlineSong::downLoadsong(int index,QString path)
+{
+    QString filePath=m_songName[index];
+
+    getInformation(index);
+}
+
+void OnlineSong::downLoadLyrics(int index,QString path)
+{
 
 }
 
@@ -171,16 +188,17 @@ void OnlineSong::parsejson_getinformation(QString json)
                 {
                     m_image=(dataobj["img"].toString());
                 }
+                if(dataobj.contains("play_url")&&dataobj["play_url"].isString())
+                {
+                    m_url=dataobj["play_url"].toString();
+                }
                 if(dataobj.contains("lyrics")&&dataobj["lyrics"].isString())
                 {
                     getPureLyrics(dataobj["lyrics"].toString());
                     writeLrc(m_lyrics);
 
                 }
-                if(dataobj.contains("play_url")&&dataobj["play_url"].isString())
-                {
-                    m_url=dataobj["play_url"].toString();
-                }
+
             }
 
         }
@@ -198,12 +216,13 @@ void OnlineSong::writeLrc(QString lyrics)
 {
     //写歌词文件
     QByteArray content=lyrics.toUtf8();
-    QFile lrcFile("lyrics.lrc");
+
+
+    QFile lrcFile("/tmp/lyrics.lrc");
     if(lrcFile.open(QIODevice::WriteOnly|QIODevice::Text))
     {
         lrcFile.write(content);
         lrcFile.close();
-        qDebug()<<"finished";
     }else{
         qDebug()<<"false";
     }

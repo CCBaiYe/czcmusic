@@ -6,12 +6,18 @@ import QtQuick.Layouts
 ApplicationWindow{
     property point clickpos: "0,0"
     property alias showlyr: lineLrc.text
+    property alias pausebtn: pausebtn
+    property alias playbtn: playbtn
+    property alias closebtn: closebtn
     id:desktop
     minimumWidth: 700
     minimumHeight: 200
     //opacity: 0.5
     flags: Qt.Window|Qt.FramelessWindowHint
     color: Qt.rgba(0,0,0,0)
+
+
+
     MouseArea{
         anchors.fill: parent
         onPressed:
@@ -70,9 +76,8 @@ ApplicationWindow{
                 font.family: "FontAwesome"
                 font.pixelSize: 20
                 onClicked: {
-                    playbtn.visible=true
-                    pausebtn.visible=false
-                    mdp.mdplayer.play()
+
+                    mdp.desktopbtncontrol()
 
                 }
             }
@@ -83,9 +88,7 @@ ApplicationWindow{
                 font.family: "FontAwesome"
                 font.pixelSize: 20
                 onClicked: {
-                    pausebtn.visible=true
-                    playbtn.visible=false
-                    mdp.mdplayer.pause()
+                    mdp.desktoppausebtn()
                 }
             }
 
@@ -125,12 +128,6 @@ ApplicationWindow{
                         unlockbtn.visible=false
                         lockbtn.visible=true
                         nextbtn.visible=true
-//                        if(pausebtn.visible==true)
-//                            pausebtn.visible=true
-//                        else pausebtn.visible=false
-//                        if(playbtn.visible)
-//                            playbtn.visible=true
-//                        else playbtn.visible=false
                         prebtn.visible=true
                         closebtn.visible=true
                         hoverHandler.enabled=true
@@ -145,6 +142,7 @@ ApplicationWindow{
 
                 onClicked: {
                     desktop.visible=false
+
                 }
             }
         }
