@@ -49,7 +49,7 @@ void GetInformation::onEndsWith()
 
 void GetInformation::analysisMP3(QString fileUrl)
 {
-    QByteArray ba = fileUrl.toUtf8();
+    QByteArray ba = fileUrl.toLatin1();
     const char *ch = ba.data();
 
     TagLib::MPEG::File *tmf = new TagLib::MPEG::File(ch);
