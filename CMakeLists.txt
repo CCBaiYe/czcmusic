@@ -54,11 +54,8 @@ qt_add_qml_module(appccmusic
               SearchPage.qml
               SearchPageBtn.qml
               FunctionalButton.qml
-<<<<<<< HEAD
               MyLikeList.qml
-=======
               DesktopLrc.qml
->>>>>>> 513dde8a92a62bf000420350d724a26c77092952
     RESOURCES
             Font/font-awesome.css
             Font/fontawesome-webfont.ttf

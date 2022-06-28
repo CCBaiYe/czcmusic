@@ -10,7 +10,6 @@ Rectangle{
 
                             pageLoader.visible=false
                             searchPage.visible=true
-
                             searchPage.online.search(searchtext.text)
                         }
                     }

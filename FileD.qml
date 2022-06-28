@@ -197,8 +197,6 @@ Item{
                     "Count":listm.count+1,"fileArtist":getinfor.artist,
                     "fileTime":dialogs.fileDialog.setTime(mdp.mdplayer.duration)};
                 listm.append(data);
-
-
             }
         }
     }

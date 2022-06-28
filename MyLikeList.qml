@@ -15,11 +15,11 @@ Item {
     Component{
         id:dele
         Row{
-//            spacing: 20
-//            Text{text:fileName;font.pixelSize: 13}
-//            Text{text:fileArtist;font.pixelSize: 13}
-//            Text{text:fileAlbum;font.pixelSize: 13}
-//            Text{text:fileTime;font.pixelSize: 13}
+            spacing: 20
+            Text{text:songName;font.pixelSize: 13}
+            Text{text:songArtist;font.pixelSize: 13}
+            Text{text:songAlbum;font.pixelSize: 13}
+            Text{text:songTime;font.pixelSize: 13}
         }
     }
 

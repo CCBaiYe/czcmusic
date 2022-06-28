@@ -135,6 +135,7 @@ Rectangle{
             anchors.left: colecticon.right
             anchors.leftMargin: 10
         }
+
     }
     //下载按钮
     Rectangle{
