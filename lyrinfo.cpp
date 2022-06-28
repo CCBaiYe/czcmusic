@@ -37,17 +37,16 @@ void LyrInfo::getLyr(QString url)
         QString timePart;
         QTextStream in(file);
         line = in.readLine();
-
-
-        part(line,timePart);qDebug()<<line.isNull();
+        part(line,timePart);
         while(!line.isNull()){
             m_time.append(getTime(timePart));
             m_lyr.append(line);
             line = in.readLine();
-qDebug()<<line;
+            //qDebug()<<line;
             part(line,timePart);
-        }
-
+        }       
+    }else{
+        m_lyr.append("暂无歌词");
     }
 }
 

@@ -24,6 +24,8 @@ public:
 
     Q_INVOKABLE void search(QString keyword);
     Q_INVOKABLE void getInformation(int index);
+    Q_INVOKABLE void downLoadsong(int index,QString path);
+    Q_INVOKABLE void downLoadLyrics(int index,QString path);
 
 
     void parsejson_getIdHash(QString json);

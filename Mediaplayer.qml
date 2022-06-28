@@ -17,12 +17,12 @@ Item {
             footer.songlist.fileLyr.setDuration(player.position);
         }
         onSourceChanged: {
-            footer.songlist.fileLyr.url = player.source
+            if(player.source.toString().search("http")!=-1)
+                footer.songlist.fileLyr.url="/tmp/lyrics.lrc"
+
+            else footer.songlist.fileLyr.url = player.source
         }
 
-//        onSourceChanged: {
-//            if()
-//        }
 
     }
     AudioOutput {
@@ -42,5 +42,15 @@ Item {
     Component.onDestruction: {
         loadFromFile.setLoadPath(player.source.toString())
         loadFromFile.setMusicName(footer.palyslider.musicName)
+    }
+    function desktopbtncontrol(){
+        mdp.mdplayer.play();
+        desktopLrc.pausebtn.visible=false
+        desktopLrc.playbtn.visible=true
+    }
+    function desktoppausebtn(){
+        mdp.mdplayer.pause();
+        desktopLrc.pausebtn.visible=true
+        desktopLrc.playbtn.visible=false
     }
 }

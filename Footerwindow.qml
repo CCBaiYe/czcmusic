@@ -8,6 +8,7 @@ Rectangle{
     property alias playmodel: playModeBtn.playMode
     property alias songlist: songlist
     property alias footimage: footimage
+    property alias showDesktop: showDesktop
     id:root
     color: "#ffffff"
     Rectangle{
@@ -82,9 +83,9 @@ Rectangle{
             cursorShape: Qt.PointingHandCursor;
             onTapped:  {
                 switch(mdp.mdplayer.playbackState) {
-                    case MediaPlayer.PlayingState: mdp.mdplayer.pause(); break;
-                    case MediaPlayer.PausedState: mdp.mdplayer.play(); break;
-                    case MediaPlayer.StoppedState: mdp.mdplayer.play(); break;
+                    case MediaPlayer.PlayingState: mdp.desktoppausebtn(); break;
+                    case MediaPlayer.PausedState: mdp.desktopbtncontrol(); break;
+                    case MediaPlayer.StoppedState: mdp.desktopbtncontrol(); break;
                 }
             }
         }
@@ -141,7 +142,6 @@ Rectangle{
     //桌面歌词
     MusicControlBtn{
         id:showDesktop
-        property bool isLove: false;
         border.color: "grey"
         color: "transparent"
         anchors{
@@ -169,6 +169,7 @@ Rectangle{
                     }else {tex.color="lightblue";desktopLrc.visible=true}
                 }
             }
+
         }
 
 

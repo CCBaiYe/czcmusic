@@ -114,7 +114,7 @@ Rectangle{
         id:pause1
         text: qsTr("暂停")
         icon.name: "media-playback-pause"
-        onTriggered: mdp.mdplayer.pause()
+        onTriggered: mdp.desktoppausebtn()
 
     }
     Action{
@@ -140,7 +140,7 @@ Rectangle{
     }
     OnlineSong{
         id:online
-        property int cnt: 0
+        property bool netflag:false
         onSongNameChanged: {
             addsong()
         }
@@ -149,7 +149,7 @@ Rectangle{
 
             mdp.mdplayer.stop()
             mdp.mdplayer.source=online.url
-            mdp.mdplayer.play()
+            mdp.desktopbtncontrol()
 
             footer.songlist.smallimage=online.image
             footer.songlist.bigimage=online.image
@@ -164,9 +164,7 @@ Rectangle{
 
         }
         onLyricsChanged: {
-           cnt++
-            footer.songlist.fileLyr.setUrl("/root/mypro/build-czcmusic-Desktop_Qt_6_3_1_GCC_64bit-Debug/lyrics.lrc")
-             console.log(cnt)
+            netflag=true
         }
 
         function addsong(){
@@ -189,4 +187,5 @@ Rectangle{
         }
 
     }
+
 }
