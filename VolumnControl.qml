@@ -3,6 +3,7 @@ import QtQuick.Controls
 import QtMultimedia
 Item{
     property  alias ul:sliderControl.value
+
     Rectangle{
         id: rectangle1
         anchors{

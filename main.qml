@@ -23,6 +23,7 @@ ApplicationWindow {
     property alias nav: nav
     property alias menu: menu
     property real dpScale: 1.5;     //在不同的分辨率屏幕下的窗口伸缩因子
+    property bool flag:false
     readonly property real dp: Math.max(Screen.pixelDensity*25.4/160*dpScale);
     header: TitleBar{
         id:menu
@@ -135,14 +136,11 @@ ApplicationWindow {
                 var songlistname=songplaylist.tableNames[i];
 
                 nav.navbarListmodel.append({"type":qsTr("List"),"itemText_":songlistname,
-                                           "symbolText_":"\uf0ca","fontfamily_":"Solid","Count":nav.navbarListmodel.count+2})
+                                           "symbolText_":"\uf0ca","fontfamily_":"Solid","Count":nav.navbarListmodel.count+1})
             }
+            flag=true
 
-            songplaylist.querySongDatas(songplaylist.tableNames[0])
 
-            for(var i=0;i<songplaylist.songName.length;i++){
-                songplaylistmodel.append({"Title":songplaylist.songName[i],"Artist":songplaylist.songArtist[i],"Album":songplaylist.songAlbum[i],"Time":songplaylist.songTime[i]})
-            }
 
 
         }

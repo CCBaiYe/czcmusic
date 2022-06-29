@@ -12,7 +12,6 @@ find_package(Qt6 REQUIRED COMPONENTS Multimedia)
 find_package(Qt6 REQUIRED COMPONENTS Widgets)
 find_package(Qt6 REQUIRED COMPONENTS LinguistTools)
 
-find_package(Qt6 REQUIRED COMPONENTS LinguistTools)
 
 INCLUDE_DIRECTORIES("/usr/include/taglib")
 

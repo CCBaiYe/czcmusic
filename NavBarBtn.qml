@@ -69,7 +69,30 @@ import QtQuick.Controls 2.15
              case 9:{searchPage.visible=false;break}
              case 10:{input.open();break;}
              case 11:{currentIndex=Count;pageLoader.source="MyLikeList.qml";pageLoader.visible=true;
+                 if(flag){
+                     songplaylist.querySongDatas(songplaylist.tableNames[0])
+
+                     for(var i=0;i<songplaylist.songName.length;i++){
+                         songplaylistmodel.append({"Title":songplaylist.songName[i],"Artist":songplaylist.songArtist[i],"Album":songplaylist.songAlbum[i],"Time":songplaylist.songTime[i]})
+                     }
+
+                     flag=false
+                 }
+
                  break}
+             case 12:{
+                 pageLoader.source="MyLikeList.qml"
+                 pageLoader.visible=true;
+                 if(flag){
+                     songplaylist.querySongDatas(songplaylist.tableNames[1])
+
+                     for(var i=0;i<songplaylist.songName.length;i++){
+                         songplaylistmodel.append({"Title":songplaylist.songName[i],"Artist":songplaylist.songArtist[i],"Album":songplaylist.songAlbum[i],"Time":songplaylist.songTime[i]})
+                     }
+                     flag=false
+                 }
+
+             }
 
 
 

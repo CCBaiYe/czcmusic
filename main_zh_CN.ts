@@ -49,19 +49,19 @@
     <name>LoadPage</name>
     <message>
         <source>Title</source>
-        <translation type="vanished">标题</translation>
+        <translation>标题</translation>
     </message>
     <message>
         <source>Singer</source>
-        <translation type="vanished">歌手</translation>
+        <translation>歌手</translation>
     </message>
     <message>
         <source>Album</source>
-        <translation type="vanished">专辑</translation>
+        <translation>专辑</translation>
     </message>
     <message>
         <source>Duration</source>
-        <translation type="vanished">时长</translation>
+        <translation>时长</translation>
     </message>
 </context>
 <context>
