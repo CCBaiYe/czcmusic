@@ -4,9 +4,17 @@
 #include "onlinesong.h"
 #include "datainitialization.h"
 #include "lyrinfo.h"
+#include"songlist.h"
 #include "editlyr.h"
 #include<QFontDatabase>
 #include <QSettings>
+#include"sqlite3.h"
+#include<stdio.h>
+#include<QSqlDatabase>
+#include<QSql>
+#include<QSqlQuery>
+#include<QSqlError>
+
 int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
@@ -19,6 +27,7 @@ int main(int argc, char *argv[])
     qmlRegisterType<OnlineSong,1>("OnlineSong",1,0,"OnlineSong");
     qmlRegisterType<DataInitialization,1>("DataInitialization",1,0,"DataInitialization");
     qmlRegisterType<LyrInfo,1>("LyrInfo",1,0,"LyrInfo");
+    qmlRegisterType<SongList,1>("SongList",1,0,"SongList");
     qmlRegisterType<EditLyr,1>("EditLyr",1,0,"EditLyr");
 
     QCoreApplication::setOrganizationName("MySoft");
@@ -33,6 +42,5 @@ int main(int argc, char *argv[])
             QCoreApplication::exit(-1);
     }, Qt::QueuedConnection);
     engine.load(url);
-
     return app.exec();
 }

@@ -2,6 +2,9 @@ import QtQuick
 import QtCore
 import QtQuick.Dialogs
 import Qt.labs.folderlistmodel
+import GetInformation 1.0
+import SongList 1.0
+
 Item{
     property alias listM: listm
     property alias folderDialog: folderDialog
@@ -162,13 +165,8 @@ Item{
     }
     //选择目录
     function setFolderModel(){
-        var stringName = arguments[0];
-        folderlistm.folder = stringName;
-//        folderlistm.folder = "file:///root/tmp"
-//        console.log(folderlistm.folder);
         //把目录下文件保存到一个model中
 
-        console.log(folderlistm.count);
 
 
         for(var i=0;i<folderlistm.count;i++)
@@ -187,13 +185,10 @@ Item{
                 "filePath":getinfor.fileUrl,"fileArtist":getinfor.artist,
                 "fileTime":dialogs.fileDialog.setTime(mdp.mdplayer.duration),
                 "fileAlbum":getinfor.album}
-
                     savefoldermodel.append(data);
                 }
             }
         }
-        console.log(savefoldermodel.count);
-
     }
     //选择多文件
     function setFilesModel(){
@@ -213,35 +208,35 @@ Item{
     function addplayerlist(){
         for(var i=0;i<folderlistm.count;i++){
             var filename=fileDialog.removeSuffix(folderlistm.get(i,"fileName"));
-            var filepath="file://"+folderlistm.get(i,"filePath");            
+            var filepath="file://"+folderlistm.get(i,"filePath");
             if(!(fileDialog.isexist(Qt.resolvedUrl(filepath)))){
                 getinfor.setFileUrl(Qt.resolvedUrl(filepath));
                 getinfor.onEndsWith();
-            listm.append({"Count":listm.count+1,"fileName":filename,
-                             "filePath":Qt.resolvedUrl(filepath),"fileArtist":getinfor.artist,
-                             "fileTime":dialogs.fileDialog.setTime(mdp.mdplayer.duration),"fileAlbum":getinfor.album});
+                listm.append({"Count":listm.count+1,"fileName":filename,
+                                 "filePath":Qt.resolvedUrl(filepath),"fileArtist":getinfor.artist,
+                                 "fileTime":dialogs.fileDialog.setTime(mdp.mdplayer.duration),"fileAlbum":getinfor.album});
             }
         }
     }
+    //创建歌单
 
     FolderListModel{
         id:folderlistm
         nameFilters: ["*.mp3","*.ogg"]
 //        folder: "file:///root/tmp"
         showDirs: false
+        onFolderChanged: {
+            console.log(folder);
+            setFolderModel(folder);
+            folderfileslist.visible=true;
+        }
     }
-
     FolderDialog{
         id:folderDialog
         title: "Select an player folder"
         onAccepted: {
             folderlistm.folder = folderDialog.selectedFolder;
-            console.log(folderDialog.folder);
-            console.log(folderDialog.selectedFolder)
-            console.log(folderlistm.folder);
-            setFolderModel(folderlistm.folder);
-//            setFolderModel(folderDialog.selectedFolder);
-            folderfileslist.visible=true;
+//            folderfileslist.visible=true;
         }
     }
     //保存目录下的文件

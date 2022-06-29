@@ -29,7 +29,7 @@ Rectangle{
                     play1.triggered()
                 }
                 onClicked: {
-                        listv.currentIndex=index
+                    listv.currentIndex=index
                 }
             }
             MouseArea{
@@ -41,7 +41,7 @@ Rectangle{
             }
             Menu{
                 id:menu1
-                contentData: [play1,pause1,addlove]
+                contentData: [play1,pause1,addlove,creatlist]
 
             }
 
@@ -72,9 +72,45 @@ Rectangle{
         id:addlove
         text: qsTr("收藏")
         icon.name: "list-add"
+        onTriggered: {
 
+        }
     }
-
+    Action{
+        id:creatlist
+        text: qsTr("创建歌单")
+        onTriggered: {
+            input.open();
+        }
+    }
+    Popup{
+        id:input
+        x:150
+        y:200
+        width: 150
+        height: 30
+        TextField{
+            id: inputtext
+            anchors.fill: parent
+            width: parent.width
+            height: parent.height
+            font.pixelSize: 13
+            placeholderText: qsTr("歌单名称");
+            selectByMouse: true
+            verticalAlignment: Text.AlignVCenter
+            Keys.onPressed: event=>{
+                if(event.key===Qt.Key_Return)
+                   {
+                      var songlistname=inputtext.text;
+                      nav.navbarListmodel.append({"type":"创建的歌单","itemText_":songlistname,
+                                                 "symbolText_":"\uf03a","fontfamily_":"Solid","Count":nav.navbarListmodel.count+1})
+                      input.close();
+           }
+        }
+        }
+    }
 }
+
+
 
 

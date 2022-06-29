@@ -4,6 +4,7 @@ import QtQuick.Layouts
 
 Rectangle {
     property color backGroundColour: "#f3f3f5";  //边框颜色
+    property alias navbarListmodel: navbarListmodel
     color: backGroundColour
     ListModel{
         id:navbarListmodel
