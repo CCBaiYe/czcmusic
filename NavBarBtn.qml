@@ -62,13 +62,17 @@ import QtQuick.Controls 2.15
          anchors.fill: parent
          onClicked :  {
              switch(Count){
-             case 9:{searchPage.visible=false;break}
+
              case 4:{pageLoader.source="LocaMusicPage.qml";pageLoader.visible=true;searchPage.visible=false; break;}
+             case 5:{pageLoader.source="LoadPage.qml";pageLoader.visible=true;searchPage.visible=false;break;}
              case 8:{pageLoader.source="LyrEditing.qml";pageLoader.visible=true;searchPage.visible=false;break;}
+             case 9:{searchPage.visible=false;break}
              case 10:{input.open();break;}
              case 11:{currentIndex=Count;pageLoader.source="MyLikeList.qml";pageLoader.visible=true;
-
                  break}
+
+
+
              }
 
 

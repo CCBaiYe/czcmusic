@@ -12,6 +12,7 @@ find_package(Qt6 REQUIRED COMPONENTS Multimedia)
 find_package(Qt6 REQUIRED COMPONENTS Widgets)
 find_package(Qt6 REQUIRED COMPONENTS LinguistTools)
 
+find_package(Qt6 REQUIRED COMPONENTS LinguistTools)
 
 INCLUDE_DIRECTORIES("/usr/include/taglib")
 
@@ -60,11 +61,25 @@ qt_add_qml_module(appccmusic
               MyLikeList.qml
               DesktopLrc.qml
               LyrEditing.qml
+              LoadPage.qml
     RESOURCES
             Font/font-awesome.css
             Font/fontawesome-webfont.ttf
             images/5.png
 )
+
+
+
+qt6_add_translations(appccmusic
+#    TS_FILES main_en.ts
+    TS_FILES main_zh_CN.ts
+    QM_FILES_OUTPUT_VARIABLE qm_files)
+
+
+
+
+
+
 
 #INCLUDE_DIRECTORIES(${CPPUNIT_INCLUDE_DIR})
 

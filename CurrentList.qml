@@ -49,14 +49,14 @@ Rectangle{
     }
     Action{
         id:pause1
-        text: qsTr("暂停")
+        text: qsTr("pause")
         icon.name: "media-playback-pause"
         onTriggered:mdp.desktoppausebtn()
 
     }
     Action{
         id:play1
-        text: qsTr("播放")
+        text: qsTr("play")
 
 
         icon.name: "media-playback-start"
@@ -70,7 +70,7 @@ Rectangle{
     }
     Action{
         id:addlove
-        text: qsTr("收藏")
+        text: qsTr("like")
         icon.name: "list-add"
         onTriggered: {
 
@@ -78,11 +78,12 @@ Rectangle{
     }
     Action{
         id:creatlist
-        text: qsTr("添加到歌单")
+        text: qsTr("add list")
         onTriggered: {
 
         }
     }
+
 
 }
 

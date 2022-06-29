@@ -1,4 +1,4 @@
-import QtQuick 2.0
+import QtQuick
 import QtCore
 import QtQuick.Dialogs
 import Qt.labs.folderlistmodel
@@ -164,26 +164,31 @@ Item{
     }
     //选择目录
     function setFolderModel(){
-        folderlistm.folder = arguments[0];
-        console.log(arguments[0]);
         //把目录下文件保存到一个model中
+
+
+
         for(var i=0;i<folderlistm.count;i++)
         {
+//            console.log(folderlistm.folder +  "123");
+//            console.log(folderlistm.get(i,"filePath"));
+//            console.log(!(folderlistm.isFolder(i)));
             if(!(folderlistm.isFolder(i))){
-                var filepath="file://"+folderlistm.get(i,"filePath");
-                getinfor.setFileUrl(Qt.resolvedUrl(filepath));
-                getinfor.onEndsWith();
-                if(!(fileDialog.isexist(getinfor.fileUrl))){
-                    var str=fileDialog.removeSuffix(folderlistm.get(i,"fileName"));
-                    var data={"Count":savefoldermodel.count+1,"fileName":str,
-                        "filePath":getinfor.fileUrl,"fileArtist":getinfor.artist,
-                        "fileTime":dialogs.fileDialog.setTime(mdp.mdplayer.duration),
-                        "fileAlbum":getinfor.album}
+            var filepath="file://"+folderlistm.get(i,"filePath");
+            getinfor.setFileUrl(Qt.resolvedUrl(filepath));
+            getinfor.onEndsWith();
+            if(!(fileDialog.isexist(getinfor.fileUrl))){
+
+                var str=fileDialog.removeSuffix(folderlistm.get(i,"fileName"));
+                var data={"Count":savefoldermodel.count+1,"fileName":str,
+                "filePath":getinfor.fileUrl,"fileArtist":getinfor.artist,
+                "fileTime":dialogs.fileDialog.setTime(mdp.mdplayer.duration),
+                "fileAlbum":getinfor.album}
                     savefoldermodel.append(data);
                 }
+            console.log("there");
             }
         }
-
     }
     //选择多文件
     function setFilesModel(){
@@ -219,13 +224,16 @@ Item{
         id:folderlistm
         nameFilters: ["*.mp3","*.ogg"]
         showDirs: false
+        onFolderChanged: {
+            //console.log(folder);
+            setFolderModel(folder);
+        }
     }
     FolderDialog{
         id:folderDialog
         title: "Select an player folder"
         onAccepted: {
-            setFolderModel(folderDialog.selectedFolder);
-            folderfileslist.visible=true;
+            folderlistm.folder = folderDialog.selectedFolder;
         }
     }
     //保存目录下的文件

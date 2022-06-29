@@ -10,71 +10,77 @@ Rectangle {
     ListModel{
         id:navbarListmodel
         ListElement{
-            type:"推荐"
+            type:qsTr("recommend")
             symbolText_:"\uf00e"
-            itemText_:"发现音乐"
+            itemText_:qsTr("Search New Song")
             fontfamily_:"FontAwesome"
             Count:1
         }
         ListElement{
-            type:"推荐"
+            type:qsTr("recommend")
             symbolText_:"\uf26c"
-            itemText_:"MV"
+            itemText_:qsTr("MV")
             fontfamily_:"Solid"
             Count:2
         }
         ListElement{
-            type:"推荐"
+            type:qsTr("recommend")
             symbolText_:"\uf0c0"
-            itemText_:"朋友"
+            itemText_:qsTr("Friend")
             fontfamily_:"Solid"
             Count:3
         }
         ListElement{
-            type:"我的音乐"
+            type:qsTr("MySong")
             symbolText_:"\uf192"
-            itemText_:"本地音乐"
+            itemText_:qsTr("Local Music")
             fontfamily_:"Solid"
             Count:4
         }
         ListElement{
-            type:"我的音乐"
+            type:qsTr("MySong")
             symbolText_:"\uf019"
-            itemText_:"下载管理"
+            itemText_:qsTr("Download Manage")
             fontfamily_:"FontAwesome"
             Count:5
         }
         ListElement{
-            type:"我的音乐"
+            type:qsTr("MySong")
             symbolText_:"\uf017"
-            itemText_:"最近播放"
+            itemText_:qsTr("Recents")
             fontfamily_:"Regular"
             Count:6
         }
+        ListElement{
+            type:qsTr("MySong")
+            symbolText_:"\uf0c2"
+            itemText_:qsTr("MySongCloud")
+            fontfamily_:"Solid"
+            Count:7
+        }
 
         ListElement{
-            type:"我的音乐"
+            type:qsTr("MySong")
             symbolText_:"\uf2ce"
-            itemText_:"歌词编辑"
+            itemText_:qsTr("EditLyr")
             fontfamily_:"Solid"
             Count:8
         }
         ListElement{
-            type:"我的音乐"
-            symbolText_:"\uf004"
-            itemText_:"我喜欢的音乐"
+
+            type:qsTr("MySong")
+            symbolText_:"\uf0fe"
+            itemText_:qsTr("MyCollection")
             fontfamily_:"Solid"
             Count:9
         }
         ListElement{
-            type:"创建的歌单"
+            type:qsTr("List")
             symbolText_:"\uf055"
-            itemText_:"创建歌单"
-            fontfamily_:"Solid"
+            itemText_:qsTr("Create List")
+            fontfamily_:"Regular"
             Count:10
         }
-
-
     }
 
 
@@ -127,7 +133,7 @@ Rectangle {
             width: parent.width
             height: parent.height
             font.pixelSize: 13
-            placeholderText: qsTr("歌单名称");
+            placeholderText: qsTr("list name");
             selectByMouse: true
             verticalAlignment: Text.AlignVCenter
             Keys.onPressed: event=>{
@@ -135,11 +141,12 @@ Rectangle {
                    {
                       var songlistname=inputtext.text;
                       songplaylist.createlist(songlistname);//创建歌单
-                      navbarListmodel.append({"type":"创建的歌单","itemText_":songlistname,
+                      navbarListmodel.append({"type":qsTr("List"),"itemText_":songlistname,
                                                  "symbolText_":"\uf0ca","fontfamily_":"Solid","Count":navbarListmodel.count+1})
                       input.close();
                    }
             }
         }
     }
+
 }

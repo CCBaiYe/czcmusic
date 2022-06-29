@@ -12,13 +12,15 @@ Item{
     height: parent.height
     Rectangle{
         id: rectangle1
+        anchors.right: parent.right
         width: pageroot.width
         height: pageroot.height/15
+
         Label {
             id: title
             width: 79
             height: 30
-            text: qsTr("本地音乐")
+            text: qsTr("Local music")
             font.pixelSize: 20
             font.bold: true
             anchors.verticalCenter: rectangle1.verticalCenter
@@ -31,14 +33,15 @@ Item{
             id: musicNum
             width: 66
             height: 20
-            text: dialogs.folderlistm.count+qsTr("首音乐");
+            text: qsTr("Song Number:")+dialogs.folderlistm.count;
             font.pixelSize: 14
             anchors.verticalCenter: rectangle1.verticalCenter
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignBottom
             color: "#0C9DDA"
-            anchors.left: title.right
+            anchors.right: chooseDir.left
             anchors.leftMargin: 10
+            anchors.rightMargin: 20
         }
 
         Label{
@@ -46,9 +49,9 @@ Item{
             width: 66
             height: 20
             anchors.verticalCenter: rectangle1.verticalCenter
-            anchors.left: musicNum.right
+            anchors.right: newMusic.left
             anchors.leftMargin: 10
-            text: qsTr("选择目录")
+            text: qsTr("directory")
             color: "#0C9DDA"
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignBottom
@@ -57,7 +60,6 @@ Item{
                 cursorShape: Qt.PointingHandCursor;
                 onTapped: {
                     dialogs.folderDialog.open();
-                    console.log("111");
                     rectangle3.visible=false;
                     label.visible=false;label1.visible=false;
 
@@ -69,9 +71,9 @@ Item{
             width: 66
             height: 20
             anchors.verticalCenter: rectangle1.verticalCenter
-            anchors.left: chooseDir.right
+            anchors.right: parent.right
             anchors.leftMargin: 10
-            text: qsTr("选择音乐")
+            text: qsTr("music")
             color: "#0C9DDA"
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignBottom
@@ -90,17 +92,17 @@ Item{
         width: pageroot.width
         height:pageroot.height-rectangle1.height
         Rectangle {
+            visible: folderfileslist.count ? false : true
             id: rectangle3
             width: 240
             height: 75
             anchors.horizontalCenter: rectangle2.horizontalCenter
             anchors.verticalCenter: rectangle2.verticalCenter
             radius: 5
-            visible: true
             color:"#1167A8"
             Label{
                 anchors.centerIn: rectangle3
-                text: qsTr("选择本地文件夹")
+                text: qsTr("folder")
                 color: "#ffffff"
                 font{
                     family: "Microsoft YaHei";
@@ -114,15 +116,16 @@ Item{
                     rectangle3.visible=false;
                     label.visible=false;label1.visible=false;
                     folderfileslist.visible=true;
+                    console.log("153215")
                 }
 
             }
         }
         Label {
+            visible: folderfileslist.count ? false : true
             id: label
-            text: qsTr("请选择本地音乐")
+            text: qsTr("local music")
             font.bold: true
-            visible: true
             anchors.bottom: label1.top
             anchors.bottomMargin: 20
             anchors.horizontalCenter: rectangle3.horizontalCenter
@@ -134,9 +137,9 @@ Item{
 
         }
         Label {
+            visible: folderfileslist.count ? false : true
             id: label1
-            text: qsTr("升级本地音乐为高品质并和朋友分享！")
-            visible: true
+            text: qsTr("level up")
             anchors.bottom: rectangle3.top
             anchors.bottomMargin: 20
             anchors.horizontalCenter: rectangle3.horizontalCenter
@@ -146,7 +149,7 @@ Item{
             }
         }
         ListView{
-            visible: false
+            z:1
             id:folderfileslist
             width: rectangle2.width
             height: rectangle2.height
@@ -158,6 +161,7 @@ Item{
                 filealbum: fileAlbum
                 filetime: fileTime
             }
+
         }
     }
 

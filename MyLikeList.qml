@@ -15,7 +15,7 @@ Item {
         Label{
             id:tec1
             Text{
-                text: qsTr("标题")
+                text: qsTr("title")
                 anchors.left: tec1.left
 
             }
@@ -28,7 +28,7 @@ Item {
         Label{
             id:tec2
             Text{
-                text: qsTr("歌手")
+                text: qsTr("singer")
                 anchors.left: tec2.left
 
             }
@@ -41,7 +41,7 @@ Item {
         Label{
             id:tec3
             Text{
-                text: qsTr("专辑")
+                text: qsTr("album")
                 anchors.left: tec3.left
 
             }
@@ -54,7 +54,7 @@ Item {
         Label{
             id:tec4
             Text{
-                text: qsTr("时长")
+                text: qsTr("time")
                 anchors.left: tec4.left
             }
             anchors.left: tec3.right

@@ -134,7 +134,7 @@ ApplicationWindow {
             for(var i=0;i<songplaylist.tableNames.length;i++){
                 var songlistname=songplaylist.tableNames[i];
 
-                nav.navbarListmodel.append({"type":"创建的歌单","itemText_":songlistname,
+                nav.navbarListmodel.append({"type":qsTr("List"),"itemText_":songlistname,
                                            "symbolText_":"\uf0ca","fontfamily_":"Solid","Count":nav.navbarListmodel.count+2})
             }
 

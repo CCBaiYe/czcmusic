@@ -52,7 +52,7 @@ import QtQuick.Controls 2.15
              text: filealbum
              elide: Text.ElideRight
              anchors.left: symbolText_.right
-             anchors.leftMargin: 500
+             anchors.leftMargin: 450
              font.pixelSize: 13;
          }
          Label{
