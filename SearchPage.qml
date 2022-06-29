@@ -92,6 +92,7 @@ Rectangle{
                 }
                 onDoubleTapped: {
                     play1.triggered()
+
                 }
             }
             TapHandler{
@@ -104,36 +105,59 @@ Rectangle{
 
             Menu{
                 id:menu1
-                contentData: [play1,pause1,addlove]
+                Action{
+                    id:pause1
+                    text: qsTr("暂停")
+                    icon.name: "media-playback-pause"
+                    onTriggered: mdp.desktoppausebtn()
 
+                }
+                Action{
+                    id:play1
+                    text: qsTr("播放")
+
+
+                    icon.name: "media-playback-start"
+                    onTriggered: {
+                        online.getInformation(searchlist.currentIndex)
+                    }
+
+                }
+                Action{
+                    id:addlove
+                    text: qsTr("收藏")
+                    icon.name: "list-add"
+                    onTriggered: {
+
+                    }
+                }
+                Menu{
+                    id:down
+                    title: qsTr("下载")
+                    Action{
+                        id:downsong
+                        text: qsTr("歌曲")
+                        onTriggered: {
+                            online.downLoadsong(searchlist.currentIndex);
+                        }
+                    }
+                    Action{
+                        id:downlrc
+                        text: qsTr("歌词")
+                        onTriggered: {
+                            online.downLoadLyrics(searchlist.currentIndex);
+                        }
+                    }
+                }
             }
         }
 
     }
-    Action{
-        id:pause1
-        text: qsTr("暂停")
-        icon.name: "media-playback-pause"
-        onTriggered: mdp.desktoppausebtn()
-
-    }
-    Action{
-        id:play1
-        text: qsTr("播放")
 
 
-        icon.name: "media-playback-start"
-        onTriggered: {
-            online.getInformation(searchlist.currentIndex)
-        }
 
-    }
-    Action{
-        id:addlove
-        text: qsTr("收藏")
-        icon.name: "list-add"
 
-    }
+
 
     ListModel{
         id:searchmodel
