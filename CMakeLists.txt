@@ -73,7 +73,7 @@ target_link_libraries(appccmusic PRIVATE tag Qt6::Quick Qt6::Multimedia Qt6::Wid
 
 
 find_package(Qt6 REQUIRED COMPONENTS Sql)
-target_link_libraries(appccmusic PRIVATE Qt6::Sql)
+target_link_libraries(appccmusic PRIVATE Qt6::Sql )
 
 
 set_target_properties(appccmusic PROPERTIES

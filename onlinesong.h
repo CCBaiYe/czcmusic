@@ -133,7 +133,6 @@ protected slots:
     void replyFinished(QNetworkReply *reply);
     void replyFinished2(QNetworkReply *reply);
     void replyFinished3(QNetworkReply *reply);
-    void writeurl();
 
 signals:
     void songNameChanged(QList<QString> songName);

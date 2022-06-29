@@ -129,6 +129,10 @@ Rectangle{
                     icon.name: "list-add"
                     onTriggered: {
 
+
+                        songplaylist.inSert(songplaylist.tableNames[0],online.songName[searchlist.currentIndex],"online.url",online.singerName[searchlist.currentIndex],online.albumName[searchlist.currentIndex],online.turnTime(online.duration[searchlist.currentIndex]));
+                        songplaylistmodel.append({"Title":online.songName[searchlist.currentIndex],"Artist":online.singerName[searchlist.currentIndex],"Album":online.albumName[searchlist.currentIndex],"Time":online.turnTime(online.duration[searchlist.currentIndex])})
+
                     }
                 }
                 Menu{

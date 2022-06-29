@@ -13,11 +13,13 @@
 class SongList:public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(QString songName READ songName WRITE setName NOTIFY songNameChanged)
-    Q_PROPERTY(QString songArtist READ songArtist WRITE setArtist NOTIFY songArtistChanged)
-    Q_PROPERTY(QString songAlbum READ songAlbum WRITE setAlbum NOTIFY songAlbumChanged)
-    Q_PROPERTY(QString songTime READ songTime WRITE setTime NOTIFY songTimeChanged)
-    Q_PROPERTY(QString songPath READ songPath WRITE setPath NOTIFY songPathChanged)
+    Q_PROPERTY(QList<QString> songName READ songName WRITE setName NOTIFY songNameChanged)
+    Q_PROPERTY(QList<QString> songArtist READ songArtist WRITE setArtist NOTIFY songArtistChanged)
+    Q_PROPERTY(QList<QString> songAlbum READ songAlbum WRITE setAlbum NOTIFY songAlbumChanged)
+    Q_PROPERTY(QList<QString> songTime READ songTime WRITE setTime NOTIFY songTimeChanged)
+    Q_PROPERTY(QList<QString> songPath READ songPath WRITE setPath NOTIFY songPathChanged)
+    Q_PROPERTY(QString songListName READ songListName WRITE setSongListName NOTIFY songListNameChanged)
+    Q_PROPERTY(QList<QString> tableNames READ tableNames WRITE setTableNames NOTIFY tableNamesChanged)
     //Q_PROPERTY(QString data READ data WRITE setData NOTIFY dataChanged)
 public:
     explicit SongList(QObject *parent=nullptr);
@@ -28,74 +30,95 @@ signals:
     void songAlbumChanged();
     void songTimeChanged();
     void songPathChanged();
+    void songListNameChanged(QString songlistname);
+    void tableNamesChanged();
 
 public slots:
 
-    void deleteTable(QString tableName);
+    Q_INVOKABLE void deleteTable(QString tableName);
 
-    void inSert(QString tableName,QStringList data);
+    Q_INVOKABLE void inSert(QString tableName,QString songname,QString songpath,QString songartist,QString album,QString time);
 
-    void deleteData(QString tableName,QString songName);
+    Q_INVOKABLE void deleteData(QString tableName,QString songName);
 
-    QList<songinfo> querySongDatas(QString tableName);
+    Q_INVOKABLE void querySongDatas(QString tableName);
 
-    int rowCount(){
-        return m_data.count();
-    }
+    Q_INVOKABLE void createlist(QString tableName);
 
-    void createlist(QString tableName);
+    void readSongListTables();
 
-    void setName(QString songName){
+
+
+    void setName(QList<QString> songName){
         m_songName=songName;
         emit this->songNameChanged();
     }
 
-    void setArtist(QString songArtist){
+    void setSongListName(QString songListName){
+        m_songListName=songListName;
+        emit songListNameChanged(m_songListName);
+    }
+
+    void setArtist(QList<QString> songArtist){
         m_songArtist=songArtist;
         emit this->songArtistChanged();
     }
 
-    void setAlbum(QString songAlbum){
+    void setAlbum(QList<QString> songAlbum){
         m_songAlbum=songAlbum;
         emit this->songAlbumChanged();
     }
 
-    void setTime(QString songTime){
+    void setTime(QList<QString> songTime){
         m_songTime=songTime;
         emit this->songTimeChanged();
     }
 
-    void setPath(QString songPath){
+    void setPath(QList<QString> songPath){
         m_songPath=songPath;
         emit this->songPathChanged();
+    }
+    void setTableNames(QList<QString> tableNames){
+        m_tableNames=tableNames;
+        emit tableNamesChanged();
     }
 
 
 public:
-    QString songName(){
+    QList<QString> songName(){
         return m_songName;
     }
-    QString songArtist(){
+    QList<QString> songArtist(){
         return m_songArtist;
     }
-    QString songAlbum(){
+    QList<QString> songAlbum(){
         return m_songAlbum;
     }
-    QString songTime(){
+    QList<QString> songTime(){
         return m_songTime;
     }
-    QString songPath(){
+    QList<QString> songPath(){
         return m_songPath;
+    }
+    QString songListName()
+    {
+        return m_songListName;
+    }
+    QList<QString> tableNames(){
+        return m_tableNames;
     }
 
 
 private:
+    DataBase *songDB;
+    QString m_songListName;//歌单名
+    QList<QString> m_tableNames;
     QList<songinfo> m_data;//模型
-    QString m_songName="undefined";//歌曲名字
-    QString m_songArtist="undefined";//歌曲作者
-    QString m_songAlbum="undefined";//歌曲专辑
-    QString m_songTime="undefined";//歌曲时间
-    QString m_songPath="undefined";//歌曲路径
+    QList<QString> m_songName;//歌曲名字
+    QList<QString> m_songArtist;//歌曲作者
+    QList<QString> m_songAlbum;//歌曲专辑
+    QList<QString> m_songTime;//歌曲时间
+    QList<QString> m_songPath;//歌曲路径
 };
 
 #endif // SONGLIST_H

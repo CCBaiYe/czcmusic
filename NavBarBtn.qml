@@ -10,6 +10,7 @@ import QtQuick.Controls 2.15
      property string symbolText;                     //符号名称
      property string itemText;                       //按钮名称
      property string type;
+     property int currentIndex:0
 
 
      id:navItemBtn;
@@ -60,14 +61,19 @@ import QtQuick.Controls 2.15
      MouseArea{
          anchors.fill: parent
          onClicked :  {
-             switch(count){
-             case 10:{pageLoader.source="MyLikeList.qml";pageLoader.visible=true;searchPage.visible=false;break}
+             switch(Count){
+             case 9:{searchPage.visible=false;break}
              case 4:{pageLoader.source="LocaMusicPage.qml";pageLoader.visible=true;searchPage.visible=false; break;}
              case 8:{pageLoader.source="LyrEditing.qml";pageLoader.visible=true;searchPage.visible=false;break;}
+             case 10:{input.open();break;}
+             case 11:{currentIndex=Count;pageLoader.source="MyLikeList.qml";pageLoader.visible=true;
 
-
+                 break}
              }
+
+
             searchPage.visible=false
          }
      }
+
 }

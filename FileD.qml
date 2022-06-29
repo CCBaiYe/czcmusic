@@ -3,7 +3,6 @@ import QtCore
 import QtQuick.Dialogs
 import Qt.labs.folderlistmodel
 import GetInformation 1.0
-import SongList 1.0
 
 Item{
     property alias listM: listm

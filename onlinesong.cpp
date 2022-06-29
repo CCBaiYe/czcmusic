@@ -100,12 +100,6 @@ void OnlineSong::replyFinished3(QNetworkReply *reply)
 
 }
 
-void OnlineSong::writeurl()
-{
-    request3->setUrl(m_url);
-    manager3->get(*request3);
-}
-
 
 void OnlineSong::search(QString keyword)
 {
@@ -137,7 +131,10 @@ void OnlineSong::downLoadsong(int index)
     getInformation(index);
 
     qDebug()<<m_lyrics;
-    connect(this,&OnlineSong::getUrl,this,&OnlineSong::writeurl);
+    connect(this,&OnlineSong::getUrl,this,[&](){
+        request3->setUrl(m_url);
+        manager3->get(*request3);
+    });
 
 }
 

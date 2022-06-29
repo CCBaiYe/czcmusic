@@ -2,7 +2,7 @@ import QtQuick 2.15
 import QtQuick.Window 2.15
 import QtQuick.Controls
 import GetInformation 1.0
-import SongList 1.0
+import SongPlayList 1.0
 ApplicationWindow {
     id:root
     flags:Qt.FramelessWindowHint | Qt.Window;
@@ -19,7 +19,7 @@ ApplicationWindow {
     property alias splitView: splitView
     property alias footerheight: footer.height
     property alias getinfor: getinfor
-    property alias songlist: songlist
+    property alias songplaylist: songplaylist
     property alias nav: nav
     property alias menu: menu
     property real dpScale: 1.5;     //在不同的分辨率屏幕下的窗口伸缩因子
@@ -115,12 +115,38 @@ ApplicationWindow {
     GetInformation{
         id:getinfor
     }
-    SongList{
-        id:songlist
+    SongPlayList{
+        id:songplaylist
+    }
+    ListModel{
+        id:songplaylistmodel
     }
 
     DesktopLrc{
         id:desktopLrc
         visible: false
     }
+    Component.onCompleted: {
+        //console.log(songplaylist.tableNames.length)
+        if(songplaylist.tableNames.length!==0){
+
+            songplaylist.readSongListTables()
+            for(var i=0;i<songplaylist.tableNames.length;i++){
+                var songlistname=songplaylist.tableNames[i];
+
+                nav.navbarListmodel.append({"type":"创建的歌单","itemText_":songlistname,
+                                           "symbolText_":"\uf0ca","fontfamily_":"Solid","Count":nav.navbarListmodel.count+2})
+            }
+
+            songplaylist.querySongDatas(songplaylist.tableNames[0])
+
+            for(var i=0;i<songplaylist.songName.length;i++){
+                songplaylistmodel.append({"Title":songplaylist.songName[i],"Artist":songplaylist.songArtist[i],"Album":songplaylist.songAlbum[i],"Time":songplaylist.songTime[i]})
+            }
+
+
+        }
+
+    }
+
 }

@@ -27,13 +27,13 @@ bool DataBase::openDb()//打开数据库
 void DataBase::createTable(QString& tableName)//创建数据表
 {
     QSqlQuery sqlQuery;
-    QString createSql=QString ("CREATE TABLE tableName(\
+    QString createSql=QString ("CREATE TABLE %1(\
                                   songName TEXT KEY NOT NULL,\
                                   songArtist TEXT,\
                                   songAlbum TEXT,\
                                   songTime TEXT,\
                                   songPath TEXT)"
-                              );
+                              ).arg(tableName);
     sqlQuery.prepare(createSql);
     if(!sqlQuery.exec()){
         qDebug()<<"Error:Fail to create table."<<sqlQuery.lastError();
@@ -54,11 +54,10 @@ bool DataBase::isTableExist(QString& tableName)// 判断数据库中某个数据
     return false;
 }
 
-QList<songinfo> DataBase::queryTable()// 查询全部数据
+void DataBase::queryTable(QString tableName, QList<QString> &songname, QList<QString> &songart, QList<QString> &songalbum, QList<QString> &songtime, QList<QString> &path)
 {
     QSqlQuery sqlQuery;
-    sqlQuery.exec("SELECT * FROM song");
-    QList<songinfo> list;
+    sqlQuery.exec(QString("SELECT * FROM %1").arg(tableName));
     if(!sqlQuery.exec())
     {
         qDebug() << "Error: Fail to query table. " << sqlQuery.lastError();
@@ -67,22 +66,21 @@ QList<songinfo> DataBase::queryTable()// 查询全部数据
     {
         while(sqlQuery.next())
         {
-            QString songName = sqlQuery.value(0).toString();
-            QString songArtist = sqlQuery.value(1).toString();
-            QString songAlbum = sqlQuery.value(2).toString();
-            QString songTime = sqlQuery.value(3).toString();
-            QString songPath = sqlQuery.value(4).toString();
-            songinfo data={songName,songArtist,songAlbum,songTime,songPath};
-            list.append(data);
+            songname.push_back(sqlQuery.value(0).toString());
+            songart.push_back(sqlQuery.value(1).toString()) ;
+            songalbum.push_back(sqlQuery.value(2).toString()) ;
+            songtime.push_back(sqlQuery.value(3).toString()) ;
+            path.push_back(sqlQuery.value(4).toString()) ;
+
         }
     }
-    return list;
 }
 
-void DataBase::singleInsertData(songinfo &singleData)//插入单条数据
+
+void DataBase::singleInsertData(songinfo &singleData,QString tableName)//插入单条数据
 {
     QSqlQuery sqlQuery;
-        sqlQuery.prepare("INSERT INTO song VALUES(:songName,:songArtist,:songAlbum,:songTime,:songPath)");
+        sqlQuery.prepare(QString("INSERT INTO %1 VALUES(:songName,:songArtist,:songAlbum,:songTime,:songPath)").arg(tableName));
         sqlQuery.bindValue(":songName", singleData.songName);
         sqlQuery.bindValue(":songArtist", singleData.songArtist);
         sqlQuery.bindValue(":songAlbum", singleData.songAlbum);
@@ -101,7 +99,7 @@ void DataBase::singleInsertData(songinfo &singleData)//插入单条数据
 void DataBase::moreInsertData(QList<songinfo>& moredb)// 插入多条数据
 {
     QSqlQuery sqlQuery;
-    sqlQuery.prepare("INSERT INTO song VALUES(?,?,?,?,?)");
+    sqlQuery.prepare(QString("INSERT INTO %1 VALUES(?,?,?,?,?)").arg(""));
     QVariantList songNameList,songArtistList,songAlbumList,songTimeList,songPathList;
     for(int i=0; i< moredb.size(); i++)
     {
@@ -121,6 +119,24 @@ void DataBase::moreInsertData(QList<songinfo>& moredb)// 插入多条数据
     {
         qDebug() << sqlQuery.lastError();
     }
+}
+
+QList<QString> DataBase::readTables()
+{
+    QList<QString> tables;
+    QSqlQuery sqlQuery;
+    for (const auto& tableName : database.tables())
+        {
+            QString selectSql = QString("select * from %1;").arg(tableName);
+            if (!sqlQuery.exec(selectSql))
+            {
+                qDebug() << sqlQuery.lastError().text();
+                continue;
+            }
+            selectSql.remove("select * from ").remove(";");
+            tables.push_back(selectSql);
+    }
+    return tables;
 }
 
 void DataBase::deleteData(QString songName)// 删除数据
