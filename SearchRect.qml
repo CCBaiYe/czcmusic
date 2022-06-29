@@ -11,7 +11,7 @@ Rectangle{
         width: searchrect.width
         height: 30
         Label{
-            text: qsTr("热门搜索");
+            text: qsTr("Popular");
             anchors.verticalCenter: rect1.verticalCenter
             anchors.left: rect1.left
             anchors.leftMargin: 5
@@ -28,11 +28,11 @@ Rectangle{
             delegate: hotsearchtextviewdelegate
             ListModel{
                 id:hotsearchtextlist
-                ListElement { text_: qsTr("许嵩") }
-                ListElement { text_: qsTr("没有理由") }
-                ListElement { text_: qsTr("林宥嘉") }
-                ListElement { text_: qsTr("侧田") }
-                ListElement { text_: qsTr("周杰伦") }
+                ListElement { text_: qsTr("xusong") }
+                ListElement { text_: qsTr("NoReason") }
+                ListElement { text_: qsTr("CaiXuKun") }
+                ListElement { text_: qsTr("LuoZiXian") }
+                ListElement { text_: qsTr("JayChou") }
             }
             Component{
                 id:hotsearchtextviewdelegate

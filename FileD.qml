@@ -187,6 +187,7 @@ Item{
                 "fileAlbum":getinfor.album}
                     savefoldermodel.append(data);
                 }
+            console.log("there");
             }
         }
     }

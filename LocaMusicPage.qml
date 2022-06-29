@@ -12,13 +12,14 @@ Item{
     height: parent.height
     Rectangle{
         id: rectangle1
+        anchors.right: parent.right
         width: pageroot.width
         height: pageroot.height/15
         Label {
             id: title
             width: 79
             height: 30
-            text: qsTr("本地音乐")
+            text: qsTr("Local music")
             font.pixelSize: 20
             font.bold: true
             anchors.verticalCenter: rectangle1.verticalCenter
@@ -31,14 +32,15 @@ Item{
             id: musicNum
             width: 66
             height: 20
-            text: dialogs.folderlistm.count+qsTr("首音乐");
+            text: qsTr("Song Number:")+dialogs.folderlistm.count;
             font.pixelSize: 14
             anchors.verticalCenter: rectangle1.verticalCenter
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignBottom
             color: "#0C9DDA"
-            anchors.left: title.right
+            anchors.right: chooseDir.left
             anchors.leftMargin: 10
+            anchors.rightMargin: 20
         }
 
         Label{
@@ -46,9 +48,9 @@ Item{
             width: 66
             height: 20
             anchors.verticalCenter: rectangle1.verticalCenter
-            anchors.left: musicNum.right
+            anchors.right: newMusic.left
             anchors.leftMargin: 10
-            text: qsTr("选择目录")
+            text: qsTr("directory")
             color: "#0C9DDA"
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignBottom
@@ -68,9 +70,9 @@ Item{
             width: 66
             height: 20
             anchors.verticalCenter: rectangle1.verticalCenter
-            anchors.left: chooseDir.right
+            anchors.right: parent.right
             anchors.leftMargin: 10
-            text: qsTr("选择音乐")
+            text: qsTr("music")
             color: "#0C9DDA"
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignBottom
@@ -99,7 +101,7 @@ Item{
             color:"#1167A8"
             Label{
                 anchors.centerIn: rectangle3
-                text: qsTr("选择本地文件夹")
+                text: qsTr("folder")
                 color: "#ffffff"
                 font{
                     family: "Microsoft YaHei";
@@ -119,7 +121,7 @@ Item{
         }
         Label {
             id: label
-            text: qsTr("请选择本地音乐")
+            text: qsTr("local music")
             font.bold: true
             visible: true
             anchors.bottom: label1.top
@@ -134,7 +136,7 @@ Item{
         }
         Label {
             id: label1
-            text: qsTr("升级本地音乐为高品质并和朋友分享！")
+            text: qsTr("level up")
             visible: true
             anchors.bottom: rectangle3.top
             anchors.bottomMargin: 20

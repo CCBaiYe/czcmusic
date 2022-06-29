@@ -18,7 +18,7 @@ Rectangle{
         Label{
             id:tec1
             Text{
-                text: "标题"
+                text: qsTr("Title")
                 anchors.left: tec1.left
 
             }
@@ -31,7 +31,7 @@ Rectangle{
         Label{
             id:tec2
             Text{
-                text: "歌手"
+                text: qsTr("Singer")
                 anchors.left: tec2.left
 
             }
@@ -44,7 +44,7 @@ Rectangle{
         Label{
             id:tec3
             Text{
-                text: "专辑"
+                text: qsTr("Album")
                 anchors.left: tec3.left
 
             }
@@ -57,7 +57,7 @@ Rectangle{
         Label{
             id:tec4
             Text{
-                text: "时长"
+                text: qsTr("Duration")
                 anchors.left: tec4.left
             }
             anchors.left: tec3.right
@@ -107,14 +107,14 @@ Rectangle{
                 id:menu1
                 Action{
                     id:pause1
-                    text: qsTr("暂停")
+                    text: qsTr("Pause")
                     icon.name: "media-playback-pause"
                     onTriggered: mdp.desktoppausebtn()
 
                 }
                 Action{
                     id:play1
-                    text: qsTr("播放")
+                    text: qsTr("Play")
 
 
                     icon.name: "media-playback-start"
@@ -125,7 +125,7 @@ Rectangle{
                 }
                 Action{
                     id:addlove
-                    text: qsTr("收藏")
+                    text: qsTr("Like")
                     icon.name: "list-add"
                     onTriggered: {
 
@@ -133,17 +133,17 @@ Rectangle{
                 }
                 Menu{
                     id:down
-                    title: qsTr("下载")
+                    title: qsTr("Download")
                     Action{
                         id:downsong
-                        text: qsTr("歌曲")
+                        text: qsTr("song")
                         onTriggered: {
                             online.downLoadsong(searchlist.currentIndex);
                         }
                     }
                     Action{
                         id:downlrc
-                        text: qsTr("歌词")
+                        text: qsTr("lyr")
                         onTriggered: {
                             online.downLoadLyrics(searchlist.currentIndex);
                         }

@@ -33,7 +33,7 @@ Rectangle{
             font.pixelSize: 15
             selectByMouse: true
             placeholderTextColor: "lightgrey"
-            placeholderText: qsTr("搜索音乐，歌手, 用户");
+            placeholderText: qsTr("Search");
 
             TapHandler{
                 onTapped: {
@@ -49,12 +49,10 @@ Rectangle{
             {
                 if(text.length===0){
                     searchdlg.open();
-                    console.log("open")
                 }
             }
             else{
                 searchdlg.close();
-                console.log("close")
             }
         }
         Label{

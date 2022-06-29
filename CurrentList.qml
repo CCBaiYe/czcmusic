@@ -49,14 +49,14 @@ Rectangle{
     }
     Action{
         id:pause1
-        text: qsTr("暂停")
+        text: qsTr("pause")
         icon.name: "media-playback-pause"
         onTriggered:mdp.desktoppausebtn()
 
     }
     Action{
         id:play1
-        text: qsTr("播放")
+        text: qsTr("play")
 
 
         icon.name: "media-playback-start"
@@ -70,7 +70,7 @@ Rectangle{
     }
     Action{
         id:addlove
-        text: qsTr("收藏")
+        text: qsTr("like")
         icon.name: "list-add"
         onTriggered: {
 
@@ -78,7 +78,7 @@ Rectangle{
     }
     Action{
         id:creatlist
-        text: qsTr("创建歌单")
+        text: qsTr("Create List")
         onTriggered: {
             input.open();
         }
@@ -95,7 +95,7 @@ Rectangle{
             width: parent.width
             height: parent.height
             font.pixelSize: 13
-            placeholderText: qsTr("歌单名称");
+            placeholderText: qsTr("List Name");
             selectByMouse: true
             verticalAlignment: Text.AlignVCenter
             Keys.onPressed: event=>{

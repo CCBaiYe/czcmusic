@@ -15,6 +15,8 @@
 #include<QSqlQuery>
 #include<QSqlError>
 
+#include <QTranslator>
+
 int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
@@ -33,6 +35,12 @@ int main(int argc, char *argv[])
     QCoreApplication::setOrganizationName("MySoft");
     QCoreApplication::setOrganizationDomain("mysoft.com");
     QCoreApplication::setApplicationName("Star Runner");
+
+    QTranslator translator;
+    if(!translator.load("main_zh_CN"));
+    app.installTranslator(&translator);
+
+
 
     QQmlApplicationEngine engine;
     const QUrl url(u"qrc:/ccmusic/main.qml"_qs);
