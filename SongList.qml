@@ -97,7 +97,7 @@ Rectangle{
 
         }
         Label{
-            text: "喜欢"
+            text: qsTr("Like")
             id:liketext
             font.pixelSize: 13
             anchors.verticalCenter: likeBtn.verticalCenter
@@ -127,7 +127,7 @@ Rectangle{
         }
 
         Label{
-            text: "收藏"
+            text: qsTr("Collect")
             id:colecttext
             font.pixelSize: 13
             anchors.verticalCenter: colectBtn.verticalCenter
@@ -157,7 +157,7 @@ Rectangle{
             anchors.leftMargin: 5
         }
         Label{
-            text: "下载"
+            text: qsTr("Download")
             id:loadtext
             font.pixelSize: 13
             anchors.verticalCenter: loadBtn.verticalCenter
@@ -183,7 +183,7 @@ Rectangle{
             //歌曲名字显示
             Label{
                 id:lyricsname
-                text: "名字:"
+                text: qsTr("Name:")
                 Text{
                     id:name
                     anchors.left: lyricsname.right
@@ -201,7 +201,7 @@ Rectangle{
             //歌曲专辑显示
             Label{
                 id:lyricsalbum
-                text: "专辑："
+                text: qsTr("Album")
                 Text{
                     id:album
                     anchors.left: lyricsalbum.right
@@ -219,7 +219,7 @@ Rectangle{
             //歌曲作者显示
             Label{
                 id:lyricsartist
-                text: "歌手："
+                text: qsTr("Singer")
                 Text{
                     id:artist
                     anchors.left: lyricsartist.right

@@ -9,78 +9,75 @@ Rectangle {
     ListModel{
         id:navbarListmodel
         ListElement{
-            type:"推荐"
+            type:qsTr("recommend")
             symbolText_:"\uf00e"
-            itemText_:"发现音乐"
+            itemText_:qsTr("Search New Song")
             fontfamily_:"FontAwesome"
             count:1
         }
         ListElement{
-            type:"推荐"
+            type:qsTr("recommend")
             symbolText_:"\uf26c"
-            itemText_:"MV"
+            itemText_:qsTr("MV")
             fontfamily_:"Solid"
             count:2
         }
         ListElement{
-            type:"推荐"
+            type:qsTr("recommend")
             symbolText_:"\uf0c0"
-            itemText_:"朋友"
+            itemText_:qsTr("Friend")
             fontfamily_:"Solid"
             count:3
         }
         ListElement{
-            type:"我的音乐"
+            type:qsTr("MySong")
             symbolText_:"\uf192"
-            itemText_:"本地音乐"
+            itemText_:qsTr("Local Music")
             fontfamily_:"Solid"
             count:4
         }
         ListElement{
-            type:"我的音乐"
+            type:qsTr("MySong")
             symbolText_:"\uf019"
-            itemText_:"下载管理"
+            itemText_:qsTr("Download Manage")
             fontfamily_:"FontAwesome"
             count:5
         }
         ListElement{
-            type:"我的音乐"
+            type:qsTr("MySong")
             symbolText_:"\uf017"
-            itemText_:"最近播放"
+            itemText_:qsTr("Recents")
             fontfamily_:"Regular"
             count:6
         }
         ListElement{
-            type:"我的音乐"
+            type:qsTr("MySong")
             symbolText_:"\uf0c2"
-            itemText_:"我的音乐云盘"
+            itemText_:qsTr("MySongCloud")
             fontfamily_:"Solid"
             count:7
         }
         ListElement{
-            type:"我的音乐"
+            type:qsTr("MySong")
             symbolText_:"\uf2ce"
-            itemText_:"歌词编辑"
+            itemText_:qsTr("EditLyr")
             fontfamily_:"Solid"
             count:8
         }
         ListElement{
-            type:"我的音乐"
+            type:qsTr("MySong")
             symbolText_:"\uf0fe"
-            itemText_:"我喜欢的音乐"
+            itemText_:qsTr("MyCollection")
             fontfamily_:"Solid"
             count:9
         }
         ListElement{
-            type:"创建的歌单"
+            type:qsTr("List")
             symbolText_:"\uf004"
-            itemText_:"创建歌单"
+            itemText_:qsTr("LikeMusic")
             fontfamily_:"Regular"
             count:10
         }
-
-
-
     }
 
 
