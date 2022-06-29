@@ -57,7 +57,6 @@ Item{
                 cursorShape: Qt.PointingHandCursor;
                 onTapped: {
                     dialogs.folderDialog.open();
-                    console.log("111");
                     rectangle3.visible=false;
                     label.visible=false;label1.visible=false;
 
