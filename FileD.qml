@@ -171,9 +171,9 @@ Item{
 
         for(var i=0;i<folderlistm.count;i++)
         {
-            console.log(folderlistm.folder +  "123");
-            console.log(folderlistm.get(i,"filePath"));
-            console.log(!(folderlistm.isFolder(i)));
+//            console.log(folderlistm.folder +  "123");
+//            console.log(folderlistm.get(i,"filePath"));
+//            console.log(!(folderlistm.isFolder(i)));
             if(!(folderlistm.isFolder(i))){
             var filepath="file://"+folderlistm.get(i,"filePath");
             getinfor.setFileUrl(Qt.resolvedUrl(filepath));
@@ -223,12 +223,10 @@ Item{
     FolderListModel{
         id:folderlistm
         nameFilters: ["*.mp3","*.ogg"]
-//        folder: "file:///root/tmp"
         showDirs: false
         onFolderChanged: {
-            console.log(folder);
+            //console.log(folder);
             setFolderModel(folder);
-            folderfileslist.visible=true;
         }
     }
     FolderDialog{
@@ -236,7 +234,6 @@ Item{
         title: "Select an player folder"
         onAccepted: {
             folderlistm.folder = folderDialog.selectedFolder;
-//            folderfileslist.visible=true;
         }
     }
     //保存目录下的文件

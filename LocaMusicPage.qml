@@ -113,6 +113,7 @@ Item{
                     rectangle3.visible=false;
                     label.visible=false;label1.visible=false;
                     folderfileslist.visible=true;
+                    console.log("153215")
                 }
 
             }
@@ -145,7 +146,8 @@ Item{
             }
         }
         ListView{
-            visible: false
+            //visible: false
+            z:1
             id:folderfileslist
             width: rectangle2.width
             height: rectangle2.height
