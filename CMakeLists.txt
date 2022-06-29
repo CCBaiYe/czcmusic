@@ -10,11 +10,10 @@ find_package(Qt6 6.2 REQUIRED COMPONENTS Widgets)
 find_package(Qt6 6.2 REQUIRED COMPONENTS Core)
 find_package(Qt6 REQUIRED COMPONENTS Multimedia)
 find_package(Qt6 REQUIRED COMPONENTS Widgets)
+find_package(Qt6 REQUIRED COMPONENTS LinguistTools)
 
 
 INCLUDE_DIRECTORIES("/usr/include/taglib")
-
-
 
 qt_add_executable(appccmusic
     main.cpp
