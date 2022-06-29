@@ -1,5 +1,5 @@
-#ifndef GETINFORMATION_H
-#define GETINFORMATION_H
+#ifndef SONGLIST_H
+#define SONGLIST_H
 
 #include <QObject>
 #include <QtQml/qqmlregistration.h>
@@ -8,14 +8,7 @@
 #include<QStringListModel>
 #include<QAbstractListModel>
 #include<QList>
-//struct songInFo
-//{
-//    QString songName="undefined";
-//    QString songArtist="undefined";
-//    QString songAlbum="undefined";
-//    QString songTime="undefined";
-//    QString songPath="undefined";
-//};
+#include"database.h"
 
 class SongList:public QObject
 {
@@ -25,21 +18,32 @@ class SongList:public QObject
     Q_PROPERTY(QString songAlbum READ songAlbum WRITE setAlbum NOTIFY songAlbumChanged)
     Q_PROPERTY(QString songTime READ songTime WRITE setTime NOTIFY songTimeChanged)
     Q_PROPERTY(QString songPath READ songPath WRITE setPath NOTIFY songPathChanged)
-    Q_PROPERTY(QString data READ data WRITE setData NOTIFY dataChanged)
+    //Q_PROPERTY(QString data READ data WRITE setData NOTIFY dataChanged)
 public:
     explicit SongList(QObject *parent=nullptr);
+
 signals:
     void songNameChanged();
     void songArtistChanged();
     void songAlbumChanged();
     void songTimeChanged();
     void songPathChanged();
-    void dataChanged();
+
 public slots:
 
-    void inSert(QStringList data);
-    void deleteData(qsizetype i);
-    void creatList();
+    void deleteTable(QString tableName);
+
+    void inSert(QString tableName,QStringList data);
+
+    void deleteData(QString tableName,QString songName);
+
+    QList<songinfo> querySongDatas(QString tableName);
+
+    int rowCount(){
+        return m_data.count();
+    }
+
+    void createlist(QString tableName);
 
     void setName(QString songName){
         m_songName=songName;
@@ -66,10 +70,6 @@ public slots:
         emit this->songPathChanged();
     }
 
-    void setData(QList<QString> data){
-        m_data=data;
-        emit this->dataChanged();
-    }
 
 public:
     QString songName(){
@@ -87,12 +87,10 @@ public:
     QString songPath(){
         return m_songPath;
     }
-    QList<QString> data(){
-        return m_data;
-    }
+
 
 private:
-    QList<QString> m_data;
+    QList<songinfo> m_data;//模型
     QString m_songName="undefined";//歌曲名字
     QString m_songArtist="undefined";//歌曲作者
     QString m_songAlbum="undefined";//歌曲专辑
@@ -100,4 +98,4 @@ private:
     QString m_songPath="undefined";//歌曲路径
 };
 
-#endif // GETINFORMATION_H
+#endif // SONGLIST_H

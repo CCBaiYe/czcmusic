@@ -7,6 +7,13 @@
 #include"songlist.h"
 #include<QFontDatabase>
 #include <QSettings>
+#include"sqlite3.h"
+#include<stdio.h>
+#include<QSqlDatabase>
+#include<QSql>
+#include<QSqlQuery>
+#include<QSqlError>
+
 int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
@@ -32,6 +39,5 @@ int main(int argc, char *argv[])
             QCoreApplication::exit(-1);
     }, Qt::QueuedConnection);
     engine.load(url);
-
     return app.exec();
 }

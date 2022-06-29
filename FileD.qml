@@ -215,13 +215,6 @@ Item{
         }
     }
     //创建歌单
-    function createlist(){
-        songlist.creatList();
-    }
-    //歌曲添加到播放列表
-    function modifiedlist(data){
-        songlist.append(data);
-    }
 
     FolderListModel{
         id:folderlistm

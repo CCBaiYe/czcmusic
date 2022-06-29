@@ -139,6 +139,7 @@ signals:
     void imageChanged(QString image);
     void lyricsChanged(QString lyrics);
     void getUrl();
+    void getlyrics();
 
 private:
     QNetworkAccessManager *manager;

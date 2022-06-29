@@ -28,6 +28,8 @@ qt_add_executable(appccmusic
     lyrinfo.cpp
     songlist.h
     songlist.cpp
+    database.cpp
+    database.h
 )
 
 qt_add_qml_module(appccmusic
@@ -64,8 +66,10 @@ qt_add_qml_module(appccmusic
 
 #INCLUDE_DIRECTORIES(${CPPUNIT_INCLUDE_DIR})
 
-target_link_libraries(appccmusic PRIVATE tag Qt6::Quick Qt6::Multimedia)
+target_link_libraries(appccmusic PRIVATE tag Qt6::Quick Qt6::Multimedia )
 
+find_package(Qt6 REQUIRED COMPONENTS Sql)
+target_link_libraries(appccmusic PRIVATE Qt6::Sql)
 
 
 set_target_properties(appccmusic PROPERTIES

@@ -50,6 +50,7 @@ void OnlineSong::replyFinished2(QNetworkReply *reply)
 
 
 
+    emit lyricsChanged(m_lyrics);
 
     emit urlChanged(m_url);
 
@@ -172,7 +173,9 @@ void OnlineSong::parsejson_getinformation(QString json)
                 }
                 if(dataobj.contains("lyrics")&&dataobj["lyrics"].isString())
                 {
-                    m_lyrics=dataobj["lyrics"].toString();
+                    getPureLyrics(dataobj["lyrics"].toString());
+                    writeLrc(m_lyrics);
+
                 }
                 if(dataobj.contains("play_url")&&dataobj["play_url"].isString())
                 {
