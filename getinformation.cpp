@@ -3,6 +3,7 @@
 #include <QByteArray>
 #include <QImage>
 #include <QDir>
+#include <QByteArray>
 #include <taglib/tag.h>
 
 #include <taglib/wavfile.h>
@@ -83,7 +84,6 @@ void GetInformation::analysisMP3(QString fileUrl)
             //获得本地图片
             m_picture = QUrl::fromLocalFile(covpicpath);
         }
-
     }else {
         emit this->failed();
     }

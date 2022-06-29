@@ -1,4 +1,4 @@
-import QtQuick 2.0
+import QtQuick
 import QtCore
 import QtQuick.Dialogs
 import Qt.labs.folderlistmodel
@@ -162,16 +162,26 @@ Item{
     }
     //选择目录
     function setFolderModel(){
-        folderlistm.folder = arguments[0];
-        console.log(arguments[0]);
+        var stringName = arguments[0];
+        folderlistm.folder = stringName;
+//        folderlistm.folder = "file:///root/tmp"
+//        console.log(folderlistm.folder);
         //把目录下文件保存到一个model中
+
+        console.log(folderlistm.count);
+
+
         for(var i=0;i<folderlistm.count;i++)
         {
+            console.log(folderlistm.folder +  "123");
+            console.log(folderlistm.get(i,"filePath"));
+            console.log(!(folderlistm.isFolder(i)));
             if(!(folderlistm.isFolder(i))){
             var filepath="file://"+folderlistm.get(i,"filePath");
             getinfor.setFileUrl(Qt.resolvedUrl(filepath));
             getinfor.onEndsWith();
             if(!(fileDialog.isexist(getinfor.fileUrl))){
+
                 var str=fileDialog.removeSuffix(folderlistm.get(i,"fileName"));
                 var data={"Count":savefoldermodel.count+1,"fileName":str,
                 "filePath":getinfor.fileUrl,"fileArtist":getinfor.artist,
@@ -182,6 +192,7 @@ Item{
                 }
             }
         }
+        console.log(savefoldermodel.count);
 
     }
     //选择多文件
@@ -195,8 +206,6 @@ Item{
                     "Count":listm.count+1,"fileArtist":getinfor.artist,
                     "fileTime":dialogs.fileDialog.setTime(mdp.mdplayer.duration)};
                 listm.append(data);
-
-
             }
         }
     }
@@ -218,6 +227,7 @@ Item{
     FolderListModel{
         id:folderlistm
         nameFilters: ["*.mp3","*.ogg"]
+//        folder: "file:///root/tmp"
         showDirs: false
     }
 
@@ -225,7 +235,12 @@ Item{
         id:folderDialog
         title: "Select an player folder"
         onAccepted: {
-            setFolderModel(folderDialog.selectedFolder);
+            folderlistm.folder = folderDialog.selectedFolder;
+            console.log(folderDialog.folder);
+            console.log(folderDialog.selectedFolder)
+            console.log(folderlistm.folder);
+            setFolderModel(folderlistm.folder);
+//            setFolderModel(folderDialog.selectedFolder);
             folderfileslist.visible=true;
         }
     }
