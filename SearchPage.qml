@@ -5,6 +5,7 @@ import OnlineSong
 Rectangle{
     property alias online: online
     property alias searchmodel: searchmodel
+    property alias loadmodel: loadmodel
     id:searchpage
     width: parent.width
     height: parent.height
@@ -139,6 +140,12 @@ Rectangle{
                         text: qsTr("歌曲")
                         onTriggered: {
                             online.downLoadsong(searchlist.currentIndex);
+                            var data={"songName":online.songName[searchlist.currentIndex],
+                                "songArtist":online.singerName[searchlist.currentIndex],
+                            "songAlbum":online.albumName[searchlist.currentIndex],
+                            "songTime":online.turnTime(online.duration[searchlist.currentIndex]),
+                            "Count":loadmodel.count+1}
+                            loadmodel.append(data);
                         }
                     }
                     Action{
@@ -154,6 +161,9 @@ Rectangle{
 
     }
 
+    ListModel{
+        id:loadmodel
+    }
 
 
 

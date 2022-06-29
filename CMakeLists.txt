@@ -61,6 +61,7 @@ qt_add_qml_module(appccmusic
               MyLikeList.qml
               DesktopLrc.qml
               LyrEditing.qml
+              LoadPage.qml
     RESOURCES
             Font/font-awesome.css
             Font/fontawesome-webfont.ttf

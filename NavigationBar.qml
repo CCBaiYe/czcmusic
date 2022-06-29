@@ -67,24 +67,18 @@ Rectangle {
         ListElement{
             type:"我的音乐"
             symbolText_:"\uf0fe"
-            itemText_:"我的收藏"
+            itemText_:"我喜欢的音乐"
             fontfamily_:"Solid"
             count:9
         }
         ListElement{
             type:"创建的歌单"
             symbolText_:"\uf004"
-            itemText_:"我喜欢的音乐"
+            itemText_:"创建歌单"
             fontfamily_:"Regular"
             count:10
         }
-        ListElement{
-            type:"创建的歌单"
-            symbolText_:"\uf03a"
-            itemText_:"RAiNBOW计划 热门50单曲"
-            fontfamily_:"Solid"
-            count:11
-        }
+
 
 
     }
@@ -127,4 +121,30 @@ Rectangle {
 
         }
     }
+//    Popup{
+//        id:input
+//        x:150
+//        y:450
+//        width: 150
+//        height: 30
+//        TextField{
+//            id: inputtext
+//            anchors.fill: parent
+//            width: parent.width
+//            height: parent.height
+//            font.pixelSize: 13
+//            placeholderText: qsTr("歌单名称");
+//            selectByMouse: true
+//            verticalAlignment: Text.AlignVCenter
+//            Keys.onPressed: event=>{
+//                if(event.key===Qt.Key_Return)
+//                   {
+//                      var songlistname=inputtext.text;
+//                      nav.navbarListmodel.append({"type":"创建的歌单","itemText_":songlistname,
+//                                                 "symbolText_":"\uf03a","fontfamily_":"Solid","Count":nav.navbarListmodel.count+1})
+//                      input.close();
+//           }
+//        }
+//        }
+//    }
 }

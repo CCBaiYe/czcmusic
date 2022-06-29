@@ -64,7 +64,7 @@ import QtQuick.Controls 2.15
              case 10:{pageLoader.source="MyLikeList.qml";pageLoader.visible=true;searchPage.visible=false;break}
              case 4:{pageLoader.source="LocaMusicPage.qml";pageLoader.visible=true;searchPage.visible=false; break;}
              case 8:{pageLoader.source="LyrEditing.qml";pageLoader.visible=true;searchPage.visible=false;break;}
-
+             case 5:{pageLoader.source="LoadPage.qml";pageLoader.visible=true;searchPage.visible=false;break;}
 
              }
             searchPage.visible=false
