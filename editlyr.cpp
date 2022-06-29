@@ -2,6 +2,7 @@
 #include <QFile>
 #include <QIODevice>
 #include <QTextStream>
+#include <QMessageBox>
 EditLyr::EditLyr(QObject *parent)
     : QObject{parent}
 {
@@ -32,6 +33,9 @@ void EditLyr::setUrl(QString url)
 void EditLyr::setLyrs(QList<QString> lyrs)
 {
     m_lyrs = lyrs;
+    if(m_url.startsWith("file://")){
+        m_url.remove("file://");
+    }
     QFile *fileName = new QFile(m_url);
 
     if(fileName->open(QIODevice::WriteOnly|QIODevice::Truncate)){
@@ -41,5 +45,10 @@ void EditLyr::setLyrs(QList<QString> lyrs)
         }
         emit this->saveSuccess();
     }
+}
+
+void EditLyr::setSaveAsUrl(QString saveAsUrl)
+{
+    m_url = saveAsUrl;
 }
 

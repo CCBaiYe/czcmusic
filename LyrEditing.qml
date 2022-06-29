@@ -34,6 +34,17 @@ Rectangle {
                 editlyr.setLyrs(textarea.text)
             }
         }
+        Button {
+            id: saveAsLyrFile
+            text: qsTr("SaveAs")
+            anchors.left: saveLyrFile.right
+            anchors.top: parent.top
+            anchors.bottom: parent.bottom
+            anchors.leftMargin: 10
+            onClicked: {
+                saveAsLyr.open()
+            }
+        }
     }
     EditLyr {
         id: editlyr
@@ -45,6 +56,7 @@ Rectangle {
             }
         }
         onSaveSuccess: {
+            popup.open()
         }
     }
     ScrollView {
@@ -57,11 +69,12 @@ Rectangle {
         }
     }
     FileDialog {
-        id: saveLyr
+        id: saveAsLyr
         fileMode: FileDialog.SaveFile
         nameFilters: ["Text files (*.lrc)"]
         onAccepted: {
-            console.log("save")
+            editlyr.setSaveAsUrl(currentFile)
+            editlyr.setLyrs(textarea.text)
         }
     }
 
@@ -72,5 +85,28 @@ Rectangle {
         onAccepted: {
             editlyr.setUrl(currentFile)
         }
+    }
+    Popup {
+        id: popup
+        x: 200
+        y: 200
+        width: 300
+        height: 300
+        contentItem: Text {
+            width: 300
+            text: "Save Successfully!\nPlease press esc\nto close message"
+            color: "red"
+            font.pixelSize: 40
+            //自动换行
+            wrapMode: Text.WordWrap
+            //行间距
+            lineHeight: 0.7
+            //水平居中
+            horizontalAlignment: Text.AlignHCenter
+            //垂直居中
+            verticalAlignment: Text.AlignVCenter
+        }
+
+        closePolicy: Popup.CloseOnEscape
     }
 }
