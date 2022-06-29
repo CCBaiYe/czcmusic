@@ -22,7 +22,7 @@ Item {
             font.pixelSize: 15;
             Label{
                 id:tec1;
-                text: "音乐标题"
+                text: qsTr("Title")
                 width: 100
                 elide: Text.ElideRight
                 anchors.left: parent.right
@@ -31,7 +31,7 @@ Item {
             }
             Label{
                 id:tec2;
-                text: "歌手"
+                text: qsTr("Singer")
                 width: 150
                 elide: Text.ElideRight
                 anchors.left: symbolText_.right
@@ -40,14 +40,14 @@ Item {
             }
             Label{
                 id:tec3;
-                text: "专辑"
+                text: qsTr("Album")
                 anchors.left: symbolText_.right
                 anchors.leftMargin: 450
                 font.pixelSize: 15;
             }
             Label{
                 id:tec4;
-                text: "时间"
+                text: qsTr("Duration")
                 anchors.left: symbolText_.right
                 anchors.leftMargin: 700
                 font.pixelSize: 15;

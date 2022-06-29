@@ -15,6 +15,7 @@ Item{
         anchors.right: parent.right
         width: pageroot.width
         height: pageroot.height/15
+
         Label {
             id: title
             width: 79
@@ -91,13 +92,13 @@ Item{
         width: pageroot.width
         height:pageroot.height-rectangle1.height
         Rectangle {
+            visible: folderfileslist.count ? false : true
             id: rectangle3
             width: 240
             height: 75
             anchors.horizontalCenter: rectangle2.horizontalCenter
             anchors.verticalCenter: rectangle2.verticalCenter
             radius: 5
-            visible: true
             color:"#1167A8"
             Label{
                 anchors.centerIn: rectangle3
@@ -121,10 +122,10 @@ Item{
             }
         }
         Label {
+            visible: folderfileslist.count ? false : true
             id: label
             text: qsTr("local music")
             font.bold: true
-            visible: true
             anchors.bottom: label1.top
             anchors.bottomMargin: 20
             anchors.horizontalCenter: rectangle3.horizontalCenter
@@ -136,9 +137,9 @@ Item{
 
         }
         Label {
+            visible: folderfileslist.count ? false : true
             id: label1
             text: qsTr("level up")
-            visible: true
             anchors.bottom: rectangle3.top
             anchors.bottomMargin: 20
             anchors.horizontalCenter: rectangle3.horizontalCenter
@@ -148,7 +149,6 @@ Item{
             }
         }
         ListView{
-            //visible: false
             z:1
             id:folderfileslist
             width: rectangle2.width
@@ -161,6 +161,7 @@ Item{
                 filealbum: fileAlbum
                 filetime: fileTime
             }
+
         }
     }
 

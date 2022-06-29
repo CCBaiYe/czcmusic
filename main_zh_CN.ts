@@ -64,39 +64,62 @@
     </message>
 </context>
 <context>
+    <name>LoadPage</name>
+    <message>
+        <location filename="LoadPage.qml" line="25"/>
+        <source>Title</source>
+        <translation>标题</translation>
+    </message>
+    <message>
+        <location filename="LoadPage.qml" line="34"/>
+        <source>Singer</source>
+        <translation>歌手</translation>
+    </message>
+    <message>
+        <location filename="LoadPage.qml" line="43"/>
+        <source>Album</source>
+        <translation>专辑</translation>
+    </message>
+    <message>
+        <location filename="LoadPage.qml" line="50"/>
+        <source>Duration</source>
+        <translation>时长</translation>
+    </message>
+</context>
+<context>
     <name>LocaMusicPage</name>
     <message>
-        <location filename="LocaMusicPage.qml" line="22"/>
+        <location filename="LocaMusicPage.qml" line="23"/>
         <source>Local music</source>
         <translation>本地音乐</translation>
     </message>
     <message>
-        <location filename="LocaMusicPage.qml" line="35"/>
+        <location filename="LocaMusicPage.qml" line="36"/>
         <source>Song Number:</source>
         <translation>音乐数：</translation>
     </message>
     <message>
-        <location filename="LocaMusicPage.qml" line="53"/>
+        <location filename="LocaMusicPage.qml" line="54"/>
         <source>directory</source>
         <translation>选择目录</translation>
     </message>
     <message>
-        <location filename="LocaMusicPage.qml" line="75"/>
+        <location filename="LocaMusicPage.qml" line="76"/>
         <source>music</source>
         <translation>音乐</translation>
     </message>
     <message>
-        <location filename="LocaMusicPage.qml" line="104"/>
+        <location filename="LocaMusicPage.qml" line="105"/>
         <source>folder</source>
         <translation>选择文件夹</translation>
     </message>
     <message>
-        <location filename="LocaMusicPage.qml" line="124"/>
+        <location filename="LocaMusicPage.qml" line="127"/>
         <source>local music</source>
         <translation>本地音乐</translation>
     </message>
     <message>
-        <location filename="LocaMusicPage.qml" line="139"/>
+        <location filename="LocaMusicPage.qml" line="142"/>
         <source>level up</source>
         <translation>音质升级</translation>
     </message>
@@ -202,52 +225,52 @@
 <context>
     <name>SearchPage</name>
     <message>
-        <location filename="SearchPage.qml" line="21"/>
+        <location filename="SearchPage.qml" line="22"/>
         <source>Title</source>
         <translation>标题</translation>
     </message>
     <message>
-        <location filename="SearchPage.qml" line="34"/>
+        <location filename="SearchPage.qml" line="35"/>
         <source>Singer</source>
         <translation>歌手</translation>
     </message>
     <message>
-        <location filename="SearchPage.qml" line="47"/>
+        <location filename="SearchPage.qml" line="48"/>
         <source>Album</source>
         <translation>专辑</translation>
     </message>
     <message>
-        <location filename="SearchPage.qml" line="60"/>
+        <location filename="SearchPage.qml" line="61"/>
         <source>Duration</source>
         <translation>时长</translation>
     </message>
     <message>
-        <location filename="SearchPage.qml" line="110"/>
+        <location filename="SearchPage.qml" line="111"/>
         <source>Pause</source>
         <translation>暂停</translation>
     </message>
     <message>
-        <location filename="SearchPage.qml" line="117"/>
+        <location filename="SearchPage.qml" line="118"/>
         <source>Play</source>
         <translation>播放</translation>
     </message>
     <message>
-        <location filename="SearchPage.qml" line="128"/>
+        <location filename="SearchPage.qml" line="129"/>
         <source>Like</source>
         <translation>喜欢</translation>
     </message>
     <message>
-        <location filename="SearchPage.qml" line="136"/>
+        <location filename="SearchPage.qml" line="137"/>
         <source>Download</source>
         <translation>下载</translation>
     </message>
     <message>
-        <location filename="SearchPage.qml" line="139"/>
+        <location filename="SearchPage.qml" line="140"/>
         <source>song</source>
         <translation>歌曲</translation>
     </message>
     <message>
-        <location filename="SearchPage.qml" line="146"/>
+        <location filename="SearchPage.qml" line="153"/>
         <source>lyr</source>
         <translation>歌单</translation>
     </message>
