@@ -11,6 +11,7 @@ class DataInitialization : public QObject
     Q_OBJECT
     Q_PROPERTY(QString loadPath READ loadPath WRITE setLoadPath NOTIFY loadPathChanged)
     Q_PROPERTY(QString musicName READ musicName WRITE setMusicName NOTIFY musicNameChanged)
+    Q_PROPERTY(bool netFlag READ netFlag WRITE setNetFlag NOTIFY netFlagChanged)
 public:
     explicit DataInitialization(QObject *parent = nullptr);
 
@@ -20,6 +21,8 @@ signals:
     void loadPathChanged();
 
     void musicNameChanged();
+
+    void netFlagChanged();
 public slots:
     void setLoadPath(QString loadPath){
         m_loadPath = loadPath;
@@ -32,6 +35,12 @@ public slots:
         loadFile->setValue("musicName",m_musicName);
         loadFile->sync();
     }
+
+    void setNetFlag(bool netFlag){
+        m_netFlag=netFlag;
+        loadFile->setValue("netFlag",m_netFlag);
+        loadFile->sync();
+    }
 public:
     QString loadPath(){
         m_loadPath = loadFile->value("loadFile").toString();
@@ -42,10 +51,15 @@ public:
         m_musicName = loadFile->value("musicName").toString();
         return m_musicName;
     }
+    bool netFlag(){
+        return m_netFlag;
+    }
 private:
     QString m_loadPath;
     QString m_musicName;
-    QSettings *loadFile = new QSettings("loadFile.ini",QSettings::IniFormat);
+
+    QSettings *loadFile = new QSettings("/root/.config/loadFile.ini",QSettings::IniFormat);
+    bool m_netFlag;
 };
 
 #endif // DATAINITIALIZATION_H

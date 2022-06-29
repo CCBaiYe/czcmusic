@@ -5,6 +5,7 @@
 #include "datainitialization.h"
 #include "lyrinfo.h"
 #include"songlist.h"
+#include "editlyr.h"
 #include<QFontDatabase>
 #include <QSettings>
 #include"sqlite3.h"
@@ -27,10 +28,12 @@ int main(int argc, char *argv[])
     qmlRegisterType<DataInitialization,1>("DataInitialization",1,0,"DataInitialization");
     qmlRegisterType<LyrInfo,1>("LyrInfo",1,0,"LyrInfo");
     qmlRegisterType<SongList,1>("SongList",1,0,"SongList");
+    qmlRegisterType<EditLyr,1>("EditLyr",1,0,"EditLyr");
 
     QCoreApplication::setOrganizationName("MySoft");
     QCoreApplication::setOrganizationDomain("mysoft.com");
     QCoreApplication::setApplicationName("Star Runner");
+
     QQmlApplicationEngine engine;
     const QUrl url(u"qrc:/ccmusic/main.qml"_qs);
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,

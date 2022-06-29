@@ -4,19 +4,24 @@
 #include <QJsonArray>
 #include <QJsonObject>
 #include <QFile>
+#include <QThread>
 
 
 OnlineSong::OnlineSong(QObject *parent):QObject(parent)
 {
     manager=new QNetworkAccessManager;
     manager2=new QNetworkAccessManager;
+    manager3=new QNetworkAccessManager;
     request=new QNetworkRequest;
     request2=new QNetworkRequest;
+    request3=new QNetworkRequest;
+
 
     request2->setRawHeader("Cookie","kg_mid=233");
     request2->setHeader(QNetworkRequest::CookieHeader,2333);
     connect(manager,&QNetworkAccessManager::finished,this,&OnlineSong::replyFinished);
     connect(manager2,&QNetworkAccessManager::finished,this,&OnlineSong::replyFinished2);
+    connect(manager3,&QNetworkAccessManager::finished,this,&OnlineSong::replyFinished3);
 
 }
 
@@ -48,17 +53,59 @@ void OnlineSong::replyFinished2(QNetworkReply *reply)
         qDebug()<<"error";
     }
 
+    if(!isDownloadSong&&!isDowloadLrc){
+        emit urlChanged(m_url);
+        qDebug()<<"m_url";
+        emit lyricsChanged(m_lyrics);
+        qDebug()<<"m_lyrics";
+    }else if(isDownloadSong&&!isDowloadLrc){
+        emit getUrl();
+        qDebug()<<"getUrl";
+    }
+    else  if(!isDownloadSong&&isDowloadLrc){
+        emit getlyrics();
+        qDebug()<<"getlyrics";
+    }
 
-
-    emit lyricsChanged(m_lyrics);
-
-    emit urlChanged(m_url);
 
     isDownloadSong=false;
+    isDowloadLrc=false;
+
 
     reply->deleteLater();//释放reply对象
 
 }
+
+void OnlineSong::replyFinished3(QNetworkReply *reply)
+{//响应请求request3
+
+    QFile songFile(m_songSavePath);
+    if(reply->error()==QNetworkReply::NoError){
+        QByteArray bytes=reply->readAll();//获取字节
+        if(songFile.open(QIODevice::WriteOnly|QIODevice::Truncate))
+        {
+            qDebug()<<"正在下载...";
+            songFile.write(bytes);
+            songFile.close();
+        }
+        qDebug()<<"下载成功";
+
+
+    }
+    else{
+            qDebug()<<"error";
+        }
+
+       reply->deleteLater();
+
+}
+
+void OnlineSong::writeurl()
+{
+    request3->setUrl(m_url);
+    manager3->get(*request3);
+}
+
 
 void OnlineSong::search(QString keyword)
 {
@@ -80,6 +127,40 @@ void OnlineSong::getInformation(int index)
 
         request2->setUrl(QUrl(KGAPI));
         manager2->get(*request2);
+
+}
+
+void OnlineSong::downLoadsong(int index)
+{
+    m_songSavePath="/root/.config/"+m_songName[index]+".mp3";
+    isDownloadSong=true;
+    getInformation(index);
+
+    qDebug()<<m_lyrics;
+    connect(this,&OnlineSong::getUrl,this,&OnlineSong::writeurl);
+
+}
+
+void OnlineSong::downLoadLyrics(int index)
+{
+    m_lrcSavePath="/root/.config/"+m_songName[index]+".lrc";
+
+    isDowloadLrc=true;
+
+
+    getInformation(index);
+
+    connect(this,&OnlineSong::getlyrics,this,[&](){
+        QFile lrcFile(m_lrcSavePath);
+        QByteArray content=m_lyrics.toUtf8();
+        if(lrcFile.open(QIODevice::WriteOnly|QIODevice::Text))
+        {
+            lrcFile.write(content);
+            lrcFile.close();
+        }else{
+            qDebug()<<"false";
+        }
+    });
 
 }
 
@@ -171,16 +252,21 @@ void OnlineSong::parsejson_getinformation(QString json)
                 {
                     m_image=(dataobj["img"].toString());
                 }
-                if(dataobj.contains("lyrics")&&dataobj["lyrics"].isString())
-                {
-                    getPureLyrics(dataobj["lyrics"].toString());
-                    writeLrc(m_lyrics);
-
-                }
                 if(dataobj.contains("play_url")&&dataobj["play_url"].isString())
                 {
                     m_url=dataobj["play_url"].toString();
                 }
+                if(dataobj.contains("lyrics")&&dataobj["lyrics"].isString())
+                {
+                    getPureLyrics(dataobj["lyrics"].toString());
+                    if(!isDowloadLrc)
+                    {
+                        //qDebug()<<isDowloadLrc;
+                        writeLrc(m_lyrics);
+                    }
+
+                }
+
             }
 
         }
@@ -198,12 +284,13 @@ void OnlineSong::writeLrc(QString lyrics)
 {
     //写歌词文件
     QByteArray content=lyrics.toUtf8();
-    QFile lrcFile("lyrics.lrc");
+
+
+    QFile lrcFile("/tmp/lyrics.lrc");
     if(lrcFile.open(QIODevice::WriteOnly|QIODevice::Text))
     {
         lrcFile.write(content);
         lrcFile.close();
-        qDebug()<<"finished";
     }else{
         qDebug()<<"false";
     }

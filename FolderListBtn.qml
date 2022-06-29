@@ -71,7 +71,7 @@ import QtQuick.Controls 2.15
              mdp.mdplayer.stop();
              footer.palyslider.musicName=dialogs.fileDialog.removeSuffix(dialogs.folderlistm.get(index,"fileName"));
              mdp.mdplayer.source="file://"+dialogs.folderlistm.get(index,"filePath");
-             mdp.mdplayer.play();
+             mdp.desktopbtncontrol();
          }
      }
 }

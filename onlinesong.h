@@ -24,6 +24,8 @@ public:
 
     Q_INVOKABLE void search(QString keyword);
     Q_INVOKABLE void getInformation(int index);
+    Q_INVOKABLE void downLoadsong(int index);
+    Q_INVOKABLE void downLoadLyrics(int index);
 
 
     void parsejson_getIdHash(QString json);
@@ -31,6 +33,7 @@ public:
 
     void getPureLyrics(QString lyrics);
     void writeLrc(QString lyrics);
+
 
     void clear();
 
@@ -129,6 +132,8 @@ public slots:
 protected slots:
     void replyFinished(QNetworkReply *reply);
     void replyFinished2(QNetworkReply *reply);
+    void replyFinished3(QNetworkReply *reply);
+    void writeurl();
 
 signals:
     void songNameChanged(QList<QString> songName);
@@ -146,6 +151,8 @@ private:
     QNetworkRequest *request;           //通过该请求获取alumId和fileHash
     QNetworkAccessManager *manager2;
     QNetworkRequest *request2;          //通过该请求获取歌曲url和歌词数据
+    QNetworkAccessManager *manager3;
+    QNetworkRequest *request3;          //通过该请求下载歌曲
     QList<QString> albumId;
     QList<QString> fileHash;
     QList<QString> m_singerName;

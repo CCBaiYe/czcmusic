@@ -3,7 +3,6 @@
 
 #include <QObject>
 #include <QtQml/qqmlregistration.h>
-#include <QMap>
 class LyrInfo : public QObject
 {
     Q_OBJECT
@@ -63,7 +62,6 @@ public:
 
 private:
     void getLyr(QString url);
-
 
     void part(QString &inforPart,QString &timePart);
 

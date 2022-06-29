@@ -25,6 +25,7 @@ Rectangle{
             mdp.mdplayer.position = mdp.mdplayer.duration * sliderControl.position
         }
 
+
         //jindutiao
         background: Rectangle {
             x: sliderControl.leftPadding

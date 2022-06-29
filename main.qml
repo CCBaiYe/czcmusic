@@ -111,10 +111,6 @@ ApplicationWindow {
                 height: splitView.height
             }
         }
-
-
-
-
     }
     GetInformation{
         id:getinfor

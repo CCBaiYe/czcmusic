@@ -79,7 +79,7 @@ Item{
                                  "fileTime":dialogs.fileDialog.setTime(mdp.mdplayer.duration)});
             }
             footer.palyslider.musicName=setMusicName(str);
-            mdp.mdplayer.play();
+            mdp.desktopbtncontrol()
         }
         //下一首
         function nextplay()
@@ -91,7 +91,7 @@ Item{
                     if(mdp.mdplayer.source===path){
                         mdp.mdplayer.source=listm.get((i+1)%listm.count).filePath;
                         footer.palyslider.musicName=listm.get((i+1)%listm.count).fileName;
-                        mdp.mdplayer.play();
+                        mdp.desktopbtncontrol()
                         break;
                     }
                 }
@@ -101,7 +101,7 @@ Item{
                 var j=Math.round(x);
                 mdp.mdplayer.source=listm.get(j).filePath;
                 footer.palyslider.musicName=listm.get(j).fileName;
-                mdp.mdplayer.play();
+                mdp.desktopbtncontrol()
             }
         }
         //上一首
@@ -112,13 +112,13 @@ Item{
                     if(mdp.mdplayer.source===listm.get(i).filePath&&i!=0){
                         mdp.mdplayer.source=listm.get(i-1).filePath;
                         footer.palyslider.musicName=listm.get(i-1).fileName;
-                        mdp.mdplayer.play();
+                        mdp.desktopbtncontrol()
                         break;
                     }
                     else if(mdp.mdplayer.source===listm.get(i).filePath&&i==0){
                         mdp.mdplayer.source=listm.get(listm.count-1).filePath;
                         footer.palyslider.musicName=listm.get(listm.count-1).fileName;
-                        mdp.mdplayer.play();
+                        mdp.desktopbtncontrol()
                         break;
                     }
                 }
@@ -128,7 +128,7 @@ Item{
                 var j=Math.round(x);
                 mdp.mdplayer.source=listm.get(j).filePath;
                 footer.palyslider.musicName=listm.get(j).fileName;
-                mdp.mdplayer.play();
+                mdp.desktopbtncontrol()
             }
         }
         //时间转化   [00:00]

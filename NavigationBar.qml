@@ -60,7 +60,7 @@ Rectangle {
         ListElement{
             type:"我的音乐"
             symbolText_:"\uf2ce"
-            itemText_:"我的电台"
+            itemText_:"歌词编辑"
             fontfamily_:"Solid"
             count:8
         }
@@ -71,7 +71,6 @@ Rectangle {
             fontfamily_:"Solid"
             count:9
         }
-
         ListElement{
             type:"创建的歌单"
             symbolText_:"\uf004"

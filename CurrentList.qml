@@ -51,7 +51,7 @@ Rectangle{
         id:pause1
         text: qsTr("暂停")
         icon.name: "media-playback-pause"
-        onTriggered: mdp.mdplayer.pause()
+        onTriggered:mdp.desktoppausebtn()
 
     }
     Action{
@@ -64,7 +64,7 @@ Rectangle{
             mdp.mdplayer.stop()
             footer.palyslider.musicName=dialogs.listM.get(listv.currentIndex).fileName
             mdp.mdplayer.source=dialogs.listM.get(listv.currentIndex).filePath
-            mdp.mdplayer.play();
+            mdp.desktopbtncontrol()
         }
 
     }

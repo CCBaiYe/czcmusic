@@ -25,12 +25,16 @@ void LyrInfo::getLyr(QString url)
     m_lyr.clear();
     if(url.endsWith(".mp3")){
         url = url.replace(".mp3",".lrc");
+    }else if(url.endsWith(".lrc")){
+
+    }else {
+        m_lyr.append("暂无歌词");
+        return;
     }
     if(url.startsWith("file://")){
         url=url.remove("file://");
     }
     QFile *file = new QFile(url);
-
 
     if(file->open(QIODevice::ReadOnly|QIODevice::Text)){
         QString line;
@@ -38,16 +42,15 @@ void LyrInfo::getLyr(QString url)
         QTextStream in(file);
         line = in.readLine();
 
-
-        part(line,timePart);qDebug()<<line.isNull();
+        part(line,timePart);
         while(!line.isNull()){
             m_time.append(getTime(timePart));
             m_lyr.append(line);
             line = in.readLine();
-qDebug()<<line;
             part(line,timePart);
         }
-
+    }else{
+        m_lyr.append("暂无歌词");
     }
 }
 

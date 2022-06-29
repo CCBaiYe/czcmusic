@@ -25,7 +25,6 @@ Rectangle{
         height: splitviewheiht
         source: "./images/5.png"
         fillMode: Image.Stretch
-        //opacity: 0.3
     }
     //虚化效果
     FastBlur{
@@ -249,14 +248,9 @@ Rectangle{
                 }
             }
             onDurationChanged: index=>{
-                                   showLyr.currentIndex = index;
-                                   var taskMap = {};
-                                   taskMap = fileLyr.lyr;
-                                   //desktopLrc.showlyr = taskMap[index]
-
-                                   console.log(taskMap[index])
-
-                               }
+                showLyr.currentIndex = index;
+                desktopLrc.showlyr = lyrModel.get(showLyr.currentIndex).lyrInformation
+                }
         }
         ListModel {
             id: lyrModel
