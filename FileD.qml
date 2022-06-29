@@ -2,6 +2,9 @@ import QtQuick 2.0
 import QtCore
 import QtQuick.Dialogs
 import Qt.labs.folderlistmodel
+import GetInformation 1.0
+import SongList 1.0
+
 Item{
     property alias listM: listm
     property alias folderDialog: folderDialog
@@ -168,16 +171,15 @@ Item{
         for(var i=0;i<folderlistm.count;i++)
         {
             if(!(folderlistm.isFolder(i))){
-            var filepath="file://"+folderlistm.get(i,"filePath");
-            getinfor.setFileUrl(Qt.resolvedUrl(filepath));
-            getinfor.onEndsWith();
-            if(!(fileDialog.isexist(getinfor.fileUrl))){
-                var str=fileDialog.removeSuffix(folderlistm.get(i,"fileName"));
-                var data={"Count":savefoldermodel.count+1,"fileName":str,
-                "filePath":getinfor.fileUrl,"fileArtist":getinfor.artist,
-                "fileTime":dialogs.fileDialog.setTime(mdp.mdplayer.duration),
-                "fileAlbum":getinfor.album}
-
+                var filepath="file://"+folderlistm.get(i,"filePath");
+                getinfor.setFileUrl(Qt.resolvedUrl(filepath));
+                getinfor.onEndsWith();
+                if(!(fileDialog.isexist(getinfor.fileUrl))){
+                    var str=fileDialog.removeSuffix(folderlistm.get(i,"fileName"));
+                    var data={"Count":savefoldermodel.count+1,"fileName":str,
+                        "filePath":getinfor.fileUrl,"fileArtist":getinfor.artist,
+                        "fileTime":dialogs.fileDialog.setTime(mdp.mdplayer.duration),
+                        "fileAlbum":getinfor.album}
                     savefoldermodel.append(data);
                 }
             }
@@ -195,8 +197,6 @@ Item{
                     "Count":listm.count+1,"fileArtist":getinfor.artist,
                     "fileTime":dialogs.fileDialog.setTime(mdp.mdplayer.duration)};
                 listm.append(data);
-
-
             }
         }
     }
@@ -204,23 +204,23 @@ Item{
     function addplayerlist(){
         for(var i=0;i<folderlistm.count;i++){
             var filename=fileDialog.removeSuffix(folderlistm.get(i,"fileName"));
-            var filepath="file://"+folderlistm.get(i,"filePath");            
+            var filepath="file://"+folderlistm.get(i,"filePath");
             if(!(fileDialog.isexist(Qt.resolvedUrl(filepath)))){
                 getinfor.setFileUrl(Qt.resolvedUrl(filepath));
                 getinfor.onEndsWith();
-            listm.append({"Count":listm.count+1,"fileName":filename,
-                             "filePath":Qt.resolvedUrl(filepath),"fileArtist":getinfor.artist,
-                             "fileTime":dialogs.fileDialog.setTime(mdp.mdplayer.duration),"fileAlbum":getinfor.album});
+                listm.append({"Count":listm.count+1,"fileName":filename,
+                                 "filePath":Qt.resolvedUrl(filepath),"fileArtist":getinfor.artist,
+                                 "fileTime":dialogs.fileDialog.setTime(mdp.mdplayer.duration),"fileAlbum":getinfor.album});
             }
         }
     }
+    //创建歌单
 
     FolderListModel{
         id:folderlistm
         nameFilters: ["*.mp3","*.ogg"]
         showDirs: false
     }
-
     FolderDialog{
         id:folderDialog
         title: "Select an player folder"

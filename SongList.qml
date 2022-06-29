@@ -134,6 +134,7 @@ Rectangle{
             anchors.left: colecticon.right
             anchors.leftMargin: 10
         }
+
     }
     //下载按钮
     Rectangle{
@@ -187,7 +188,6 @@ Rectangle{
                     id:name
                     anchors.left: lyricsname.right
                     font.pixelSize: 25
-
                     font.family:"Microsoft YaHei"
                 }
 

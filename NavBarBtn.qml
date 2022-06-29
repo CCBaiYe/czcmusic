@@ -61,11 +61,11 @@ import QtQuick.Controls 2.15
          anchors.fill: parent
          onClicked :  {
              switch(count){
-             case 4:{pageLoader.source="LocaMusicPage.qml";pageLoader.visible=true;searchPage.visible=false}
-                break;
-             case 8:{pageLoader.source="LyrEditing.qml";pageLoader.visible=true;searchPage.visible=false}
+             case 10:{pageLoader.source="MyLikeList.qml";pageLoader.visible=true;searchPage.visible=false;break}
+             case 4:{pageLoader.source="LocaMusicPage.qml";pageLoader.visible=true;searchPage.visible=false; break;}
+             case 8:{pageLoader.source="LyrEditing.qml";pageLoader.visible=true;searchPage.visible=false;break;}
 
-             break;
+
              }
             searchPage.visible=false
          }

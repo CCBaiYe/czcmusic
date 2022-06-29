@@ -25,6 +25,10 @@ qt_add_executable(appccmusic
     datainitialization.cpp
     lyrinfo.h
     lyrinfo.cpp
+    songlist.h
+    songlist.cpp
+    database.cpp
+    database.h
     editlyr.h
     editlyr.cpp
 )
@@ -53,6 +57,7 @@ qt_add_qml_module(appccmusic
               SearchPage.qml
               SearchPageBtn.qml
               FunctionalButton.qml
+              MyLikeList.qml
               DesktopLrc.qml
               LyrEditing.qml
     RESOURCES
@@ -63,8 +68,12 @@ qt_add_qml_module(appccmusic
 
 #INCLUDE_DIRECTORIES(${CPPUNIT_INCLUDE_DIR})
 
+
 target_link_libraries(appccmusic PRIVATE tag Qt6::Quick Qt6::Multimedia Qt6::Widgets)
 
+
+find_package(Qt6 REQUIRED COMPONENTS Sql)
+target_link_libraries(appccmusic PRIVATE Qt6::Sql)
 
 
 set_target_properties(appccmusic PROPERTIES

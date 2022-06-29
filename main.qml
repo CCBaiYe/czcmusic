@@ -2,6 +2,7 @@ import QtQuick 2.15
 import QtQuick.Window 2.15
 import QtQuick.Controls
 import GetInformation 1.0
+import SongList 1.0
 ApplicationWindow {
     id:root
     flags:Qt.FramelessWindowHint | Qt.Window;
@@ -18,6 +19,8 @@ ApplicationWindow {
     property alias splitView: splitView
     property alias footerheight: footer.height
     property alias getinfor: getinfor
+    property alias songlist: songlist
+    property alias nav: nav
     property alias menu: menu
     property real dpScale: 1.5;     //在不同的分辨率屏幕下的窗口伸缩因子
     readonly property real dp: Math.max(Screen.pixelDensity*25.4/160*dpScale);
@@ -112,10 +115,12 @@ ApplicationWindow {
     GetInformation{
         id:getinfor
     }
+    SongList{
+        id:songlist
+    }
 
     DesktopLrc{
         id:desktopLrc
         visible: false
     }
-
 }
