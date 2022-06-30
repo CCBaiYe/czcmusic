@@ -1,88 +1,70 @@
 import QtQuick
 import QtQuick.Controls
-Item {
+Rectangle {
     id:likelistroot
     width: parent.width
     height: parent.height
-
-    Label{
-        id:likeTitle
-        anchors.top: parent.top
-        width: parent.width
-        height: 30
-        text: ""
-        font.pixelSize: 15
+    color: "white"
+    Rectangle{
+        id:songtitle
+        width: likelistroot.width
+        height: 35
         Label{
-            id:tec1
-            Text{
-                text: qsTr("title")
-                anchors.left: tec1.left
-
+            id:symbolText_
+            anchors{
+                left: parent.left
+                leftMargin: 1*dp
             }
-            anchors.left: likeTitle.left
-            anchors.top: likeTitle.top
-            anchors.topMargin: 2
-            anchors.leftMargin: 60
+            width: parent.height - 2*dp
+            height: parent.height - 2*dp
+            text: "  "
+            anchors.verticalCenter: songtitle.verticalCenter
             font.pixelSize: 15;
-        }
-        Label{
-            id:tec2
-            Text{
-                text: qsTr("singer")
-                anchors.left: tec2.left
-
+            Label{
+                id:tec1;
+                text: qsTr("Title")
+                width: 100
+                elide: Text.ElideRight
+                anchors.left: parent.right
+                anchors.leftMargin: 0
+                font.pixelSize: 15;
             }
-            anchors.left: tec1.right
-            anchors.top: likeTitle.top
-            anchors.topMargin: 2
-            anchors.leftMargin: 220
-            font.pixelSize: 15;
-        }
-        Label{
-            id:tec3
-            Text{
-                text: qsTr("album")
-                anchors.left: tec3.left
-
+            Label{
+                id:tec2;
+                text: qsTr("Singer")
+                width: 150
+                elide: Text.ElideRight
+                anchors.left: symbolText_.right
+                anchors.leftMargin: 200
+                font.pixelSize: 15;
             }
-            anchors.left: tec2.right
-            anchors.top: likeTitle.top
-            anchors.topMargin: 2
-            anchors.leftMargin: 220
-            font.pixelSize: 15;
-        }
-        Label{
-            id:tec4
-            Text{
-                text: qsTr("time")
-                anchors.left: tec4.left
+            Label{
+                id:tec3;
+                text: qsTr("Album")
+                anchors.left: symbolText_.right
+                anchors.leftMargin: 450
+                font.pixelSize: 15;
             }
-            anchors.left: tec3.right
-            anchors.top: likeTitle.top
-            anchors.topMargin: 2
-            anchors.leftMargin: 220
-            font.pixelSize: 15;
+            Label{
+                id:tec4;
+                text: qsTr("Duration")
+                anchors.left: symbolText_.right
+                anchors.leftMargin: 700
+                font.pixelSize: 15;
+            }
         }
     }
     ListView{
         id:likelist
-        anchors.top: likeTitle.bottom
+        anchors.top: songtitle.bottom
         width: parent.width
         height: parent.height-30
         model: songplaylistmodel
-        delegate: dele
-    }
-    Component{
-        id:dele
-        Row{
-            spacing: 150
-
-            Text{text:Title;font.pixelSize: 13}
-            Text{text:Artist;font.pixelSize: 13}
-            Text{text:Album;font.pixelSize: 13}
-            Text{text:Time;font.pixelSize: 13}
+        delegate: FolderListBtn{
+            filename:Title;
+            fileartist: Artist;
+            filealbum: Album;
+            filetime: Time;
         }
     }
-
-
 }
