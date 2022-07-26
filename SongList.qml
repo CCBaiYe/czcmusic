@@ -201,7 +201,7 @@ Rectangle{
             //歌曲专辑显示
             Label{
                 id:lyricsalbum
-                text: qsTr("Album")
+                text: qsTr("Album:")
                 Text{
                     id:album
                     anchors.left: lyricsalbum.right
@@ -219,7 +219,7 @@ Rectangle{
             //歌曲作者显示
             Label{
                 id:lyricsartist
-                text: qsTr("Singer")
+                text: qsTr("Singer:")
                 Text{
                     id:artist
                     anchors.left: lyricsartist.right

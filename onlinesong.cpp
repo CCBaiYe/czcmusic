@@ -55,16 +55,16 @@ void OnlineSong::replyFinished2(QNetworkReply *reply)
 
     if(!isDownloadSong&&!isDowloadLrc){
         emit urlChanged(m_url);
-        qDebug()<<"m_url";
+//        qDebug()<<"m_url";
         emit lyricsChanged(m_lyrics);
-        qDebug()<<"m_lyrics";
+//        qDebug()<<"m_lyrics";
     }else if(isDownloadSong&&!isDowloadLrc){
         emit getUrl();
-        qDebug()<<"getUrl";
+//        qDebug()<<"getUrl";
     }
     else  if(!isDownloadSong&&isDowloadLrc){
         emit getlyrics();
-        qDebug()<<"getlyrics";
+//        qDebug()<<"getlyrics";
     }
 
 

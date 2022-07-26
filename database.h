@@ -8,7 +8,6 @@
 #include<QList>
 typedef struct
 {
-
     QString songName;
     QString songArtist;
     QString songAlbum;

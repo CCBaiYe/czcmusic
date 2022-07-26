@@ -122,6 +122,7 @@ Rectangle{
             right: vc.left
             rightMargin: 10*dp
         }
+
     }
 
     //yingliang

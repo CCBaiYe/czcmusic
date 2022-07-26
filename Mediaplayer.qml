@@ -11,8 +11,8 @@ Item {
         id: player
         audioOutput: audioOutput
         onPositionChanged:{
-            if(mdp.mdplayer.position!==0&&mdp.mdplayer.position===mdp.mdplayer.duration&&mdp.mdplayer.mediaStatus===6){
-                fileDialog.nextplay();
+            if(mdp.mdplayer.position!==0&&mdp.mdplayer.position===mdp.mdplayer.duration){
+                dialogs.fileDialog.nextplay();
             }
             footer.songlist.fileLyr.setDuration(player.position);
         }

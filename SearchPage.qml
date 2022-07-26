@@ -100,6 +100,7 @@ Rectangle{
                 id:tap1
                 acceptedButtons: Qt.RightButton
                 onTapped:  {
+                    searchlist.currentIndex=index
                     menu1.popup()
                 }
             }

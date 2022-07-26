@@ -130,19 +130,35 @@
     <name>MyLikeList</name>
     <message>
         <source>title</source>
-        <translation type="unfinished">标题</translation>
+        <translation type="obsolete">标题</translation>
     </message>
     <message>
         <source>singer</source>
-        <translation type="unfinished">歌手</translation>
+        <translation type="obsolete">歌手</translation>
     </message>
     <message>
         <source>album</source>
-        <translation type="unfinished">专辑</translation>
+        <translation type="obsolete">专辑</translation>
     </message>
     <message>
         <source>time</source>
-        <translation>时间</translation>
+        <translation type="vanished">时间</translation>
+    </message>
+    <message>
+        <source>Title</source>
+        <translation type="unfinished">标题</translation>
+    </message>
+    <message>
+        <source>Singer</source>
+        <translation type="unfinished">歌手</translation>
+    </message>
+    <message>
+        <source>Album</source>
+        <translation type="unfinished">专辑</translation>
+    </message>
+    <message>
+        <source>Duration</source>
+        <translation type="unfinished">时长</translation>
     </message>
 </context>
 <context>
@@ -248,7 +264,7 @@
     </message>
     <message>
         <source>lyr</source>
-        <translation>歌单</translation>
+        <translation>歌词</translation>
     </message>
 </context>
 <context>
@@ -298,11 +314,19 @@
     </message>
     <message>
         <source>Album</source>
-        <translation>专辑</translation>
+        <translation type="vanished">专辑</translation>
     </message>
     <message>
         <source>Singer</source>
-        <translation>歌手</translation>
+        <translation type="vanished">歌手</translation>
+    </message>
+    <message>
+        <source>Album:</source>
+        <translation>专辑：</translation>
+    </message>
+    <message>
+        <source>Singer:</source>
+        <translation>歌手：</translation>
     </message>
 </context>
 <context>
