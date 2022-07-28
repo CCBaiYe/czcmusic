@@ -60,7 +60,6 @@ Rectangle{
             verticalCenter: parent.verticalCenter
         }
         TapHandler{
-            //anchors.fill: parent
             cursorShape: Qt.PointingHandCursor;
             onTapped:  {
                 dialogs.fileDialog.preplay();
@@ -79,7 +78,7 @@ Rectangle{
         width: 30*dp
         text: mdp.mdplayer.playbackState ===  MediaPlayer.PlayingState ? qsTr("\uf04c") : qsTr("\uf04b")
         TapHandler{
-            //anchors.fill: parent
+
             cursorShape: Qt.PointingHandCursor;
             onTapped:  {
                 switch(mdp.mdplayer.playbackState) {
@@ -98,7 +97,7 @@ Rectangle{
             verticalCenter: parent.verticalCenter
         }
         TapHandler{
-            //anchors.fill: parent
+
             cursorShape: Qt.PointingHandCursor;
             onTapped:  {
                 dialogs.fileDialog.nextplay();

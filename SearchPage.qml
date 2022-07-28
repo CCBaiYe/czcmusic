@@ -1,5 +1,6 @@
 import QtQuick
 import QtQuick.Controls
+import QtQuick.Dialogs
 import OnlineSong
 
 Rectangle{
@@ -131,12 +132,14 @@ Rectangle{
                     icon.name: "list-add"
                     onTriggered: {
 
+                        input.open()
 
-                        songplaylist.inSert(songplaylist.tableNames[0],online.songName[searchlist.currentIndex],"online.url",online.singerName[searchlist.currentIndex],online.albumName[searchlist.currentIndex],online.turnTime(online.duration[searchlist.currentIndex]));
-                        songplaylistmodel.append({"Title":online.songName[searchlist.currentIndex],"Artist":online.singerName[searchlist.currentIndex],"Album":online.albumName[searchlist.currentIndex],"Time":online.turnTime(online.duration[searchlist.currentIndex])})
+
 
                     }
                 }
+
+
                 Menu{
                     id:down
                     title: qsTr("Download")
@@ -170,7 +173,45 @@ Rectangle{
         id:loadmodel
     }
 
+    Popup{
+        id:input
+        x:150
+        y:200
+        width: 200
+        height: 30
+        TextField{
+            id: inputtext
+            anchors.fill: parent
+            width: parent.width
+            height: parent.height
+            font.pixelSize: 13
+            placeholderText: qsTr("please input playlist name");
+            selectByMouse: true
+            verticalAlignment: Text.AlignVCenter
+            Keys.onPressed: event=>{
+                                if(event.key===Qt.Key_Return)
+                                {
+                                    var songlistname=inputtext.text;
+                                    if(db.isTableExist(songlistname)){
+                                        db.insert(songlistname,online.songName[searchlist.currentIndex],online.url,online.singerName[searchlist.currentIndex],online.albumName[searchlist.currentIndex],online.turnTime(online.duration[searchlist.currentIndex]))
+                                        songplaylistmodel.append({"Title":online.songName[searchlist.currentIndex],"Artist":online.singerName[searchlist.currentIndex],"Album":online.albumName[searchlist.currentIndex],"Time":online.turnTime(online.duration[searchlist.currentIndex])})
+                                    }else{
+                                        messageDialog.open()
+                                        console.log("don't have this songlist")
+                                    }
+                                    input.close();
+                                }
+            }
+        }
+    }
 
+    MessageDialog{
+        id:messageDialog
+        title: qsTr("error input")
+        buttons: MessageDialog.Ok
+        text: qsTr("Please choose already exist songlist.")
+
+    }
 
 
 

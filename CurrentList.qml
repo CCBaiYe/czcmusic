@@ -1,6 +1,7 @@
 import QtQuick 2.15
 import Qt.labs.folderlistmodel
 import QtQuick.Controls
+import QtQuick.Dialogs
 Rectangle{
     color: "#dddde1"
     property alias widthw: listv.width
@@ -73,17 +74,55 @@ Rectangle{
         text: qsTr("like")
         icon.name: "list-add"
         onTriggered: {
-
+            input.open()
         }
     }
     Action{
         id:creatlist
         text: qsTr("add list")
         onTriggered: {
-
+            input.open()
+        }
+    }
+    Popup{
+        id:input
+        x:150
+        y:200
+        width: 200
+        height: 30
+        TextField{
+            id: inputtext
+            anchors.fill: parent
+            width: parent.width
+            height: parent.height
+            font.pixelSize: 13
+            placeholderText: qsTr("please input playlist name");
+            selectByMouse: true
+            verticalAlignment: Text.AlignVCenter
+            Keys.onPressed: event=>{
+                                if(event.key===Qt.Key_Return)
+                                {
+                                    var songlistname=inputtext.text;
+                                    if(db.isTableExist(songlistname)){
+                                        db.insert(songlistname,dialogs.listM.get(listv.currentIndex).fileName,dialogs.listM.get(listv.currentIndex).filePath,dialogs.listM.get(listv.currentIndex).fileArtist,dialogs.listM.get(listv.currentIndex).fileAlbum,dialogs.listM.get(listv.currentIndex).fileTime)
+                                        songplaylistmodel.append({"Title":dialogs.listM.get(listv.currentIndex).fileName,"Artist":dialogs.listM.get(listv.currentIndex).fileArtist,"Album":dialogs.listM.get(listv.currentIndex).fileAlbum,"Time":dialogs.listM.get(listv.currentIndex).fileTime})
+                                    }else{
+                                        messageDialog.open()
+                                        console.log("don't have this songlist")
+                                    }
+                                    input.close();
+                                }
+            }
         }
     }
 
+    MessageDialog{
+        id:messageDialog
+        title: qsTr("error input")
+        buttons: MessageDialog.Ok
+        text: qsTr("Please choose already exist songlist.")
+
+    }
 
 }
 

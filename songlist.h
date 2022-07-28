@@ -5,10 +5,7 @@
 #include <QtQml/qqmlregistration.h>
 #include <QDebug>
 #include <QUrl>
-#include<QStringListModel>
-#include<QAbstractListModel>
 #include<QList>
-#include"database.h"
 
 class SongList:public QObject
 {
@@ -19,10 +16,9 @@ class SongList:public QObject
     Q_PROPERTY(QList<QString> songTime READ songTime WRITE setTime NOTIFY songTimeChanged)
     Q_PROPERTY(QList<QString> songPath READ songPath WRITE setPath NOTIFY songPathChanged)
     Q_PROPERTY(QString songListName READ songListName WRITE setSongListName NOTIFY songListNameChanged)
-    Q_PROPERTY(QList<QString> tableNames READ tableNames WRITE setTableNames NOTIFY tableNamesChanged)
-    //Q_PROPERTY(QString data READ data WRITE setData NOTIFY dataChanged)
+
 public:
-    explicit SongList(QObject *parent=nullptr);
+     SongList(QObject *parent=nullptr);
 
 signals:
     void songNameChanged();
@@ -31,23 +27,11 @@ signals:
     void songTimeChanged();
     void songPathChanged();
     void songListNameChanged(QString songlistname);
-    void tableNamesChanged();
 
 public slots:
 
-    Q_INVOKABLE void deleteTable(QString tableName);
 
-    Q_INVOKABLE void inSert(QString tableName,QString songname,QString songpath,QString songartist,QString album,QString time);
-
-    Q_INVOKABLE void deleteData(QString tableName,QString songName);
-
-    Q_INVOKABLE void querySongDatas(QString tableName);
-
-    Q_INVOKABLE void createlist(QString tableName);
-
-    void readSongListTables();
-
-
+    Q_INVOKABLE void addSong(QString songname,QString songpath,QString songartist,QString album,QString time);
 
     void setName(QList<QString> songName){
         m_songName=songName;
@@ -78,11 +62,6 @@ public slots:
         m_songPath=songPath;
         emit this->songPathChanged();
     }
-    void setTableNames(QList<QString> tableNames){
-        m_tableNames=tableNames;
-        emit tableNamesChanged();
-    }
-
 
 public:
     QList<QString> songName(){
@@ -104,21 +83,24 @@ public:
     {
         return m_songListName;
     }
-    QList<QString> tableNames(){
-        return m_tableNames;
-    }
 
-
-private:
-    DataBase *songDB;
-    QString m_songListName;//歌单名
-    QList<QString> m_tableNames;
-    QList<songinfo> m_data;//模型
+    QString m_songname;
+    QString m_songartist;
+    QString m_songalbum;
+    QString m_songtime;
+    QString m_songpath;
     QList<QString> m_songName;//歌曲名字
     QList<QString> m_songArtist;//歌曲作者
     QList<QString> m_songAlbum;//歌曲专辑
     QList<QString> m_songTime;//歌曲时间
     QList<QString> m_songPath;//歌曲路径
+
+
+private:
+    QString m_songListName;//歌单名
+
+
+
 };
 
 #endif // SONGLIST_H

@@ -27,6 +27,18 @@
         <source>add list</source>
         <translation>添加歌单</translation>
     </message>
+    <message>
+        <source>please input playlist name</source>
+        <translation>请输入歌单名</translation>
+    </message>
+    <message>
+        <source>error input</source>
+        <translation>输入错误</translation>
+    </message>
+    <message>
+        <source>Please choose already exist songlist.</source>
+        <translation>请选择正确的歌单名！</translation>
+    </message>
 </context>
 <context>
     <name>DesktopLrc</name>
@@ -265,6 +277,18 @@
     <message>
         <source>lyr</source>
         <translation>歌词</translation>
+    </message>
+    <message>
+        <source>please input playlist name</source>
+        <translation>请输入歌单名</translation>
+    </message>
+    <message>
+        <source>error input</source>
+        <translation>输入错误</translation>
+    </message>
+    <message>
+        <source>Please choose already exist songlist.</source>
+        <translation>请选择正确的歌单名</translation>
     </message>
 </context>
 <context>
