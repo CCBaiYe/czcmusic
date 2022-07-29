@@ -131,7 +131,7 @@ Rectangle{
                     text: qsTr("Like")
                     icon.name: "list-add"
                     onTriggered: {
-
+                        online.kpSong(searchlist.currentIndex)
                         input.open()
 
 
@@ -178,7 +178,7 @@ Rectangle{
         x:150
         y:200
         width: 200
-        height: 30
+        height: 40
         TextField{
             id: inputtext
             anchors.fill: parent
@@ -192,9 +192,11 @@ Rectangle{
                                 if(event.key===Qt.Key_Return)
                                 {
                                     var songlistname=inputtext.text;
+                                    online.kpSong(searchlist.currentIndex)
+
                                     if(db.isTableExist(songlistname)){
                                         db.insert(songlistname,online.songName[searchlist.currentIndex],online.url,online.singerName[searchlist.currentIndex],online.albumName[searchlist.currentIndex],online.turnTime(online.duration[searchlist.currentIndex]))
-                                        songplaylistmodel.append({"Title":online.songName[searchlist.currentIndex],"Artist":online.singerName[searchlist.currentIndex],"Album":online.albumName[searchlist.currentIndex],"Time":online.turnTime(online.duration[searchlist.currentIndex])})
+                                        songplaylistmodel.append({"Title":online.songName[searchlist.currentIndex],"Artist":online.singerName[searchlist.currentIndex],"Album":online.albumName[searchlist.currentIndex],"Time":online.turnTime(online.duration[searchlist.currentIndex]),"path":online.url})
                                     }else{
                                         messageDialog.open()
                                         console.log("don't have this songlist")
@@ -225,7 +227,6 @@ Rectangle{
             addsong()
         }
         onUrlChanged: {
-
 
             mdp.mdplayer.stop()
             mdp.mdplayer.source=online.url

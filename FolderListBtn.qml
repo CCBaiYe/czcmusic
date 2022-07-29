@@ -11,6 +11,7 @@ import QtQuick.Controls 2.15
      property string fileartist
      property string filetime
      property string filealbum
+     property string filepath
 
 
      id:navItemBtn;
@@ -69,8 +70,13 @@ import QtQuick.Controls 2.15
          onDoubleClicked: {
              dialogs.addplayerlist();
              mdp.mdplayer.stop();
-             footer.palyslider.musicName=dialogs.fileDialog.removeSuffix(dialogs.folderlistm.get(index,"fileName"));
-             mdp.mdplayer.source="file://"+dialogs.folderlistm.get(index,"filePath");
+             footer.palyslider.musicName=filename;
+             mdp.mdplayer.source=filepath
+
+             footer.songlist.name=filename
+             footer.songlist.album=filealbum
+             footer.songlist.artist=fileartist
+
              mdp.desktopbtncontrol();
          }
      }

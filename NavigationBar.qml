@@ -126,7 +126,7 @@ Rectangle {
         x:150
         y:200
         width: 150
-        height: 30
+        height: 40
         TextField{
             id: inputtext
             anchors.fill: parent

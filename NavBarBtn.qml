@@ -79,7 +79,7 @@ import QtQuick.Controls 2.15
                          songplaylistmodel.clear();
                          loaderSonglist.source="MyLikeList.qml";loaderSonglist.visible=true;
                          for(var i=0;i<db.songLists[j-11].songName.length;i++){
-                             songplaylistmodel.append({"Title":db.songLists[j-11].songName[i],"Artist":db.songLists[j-11].songArtist[i],"Album":db.songLists[j-11].songAlbum[i],"Time":db.songLists[j-11].songTime[i]})
+                             songplaylistmodel.append({"Title":db.songLists[j-11].songName[i],"Artist":db.songLists[j-11].songArtist[i],"Album":db.songLists[j-11].songAlbum[i],"Time":db.songLists[j-11].songTime[i],"path":db.songLists[j-11].songPath[i]})
                          }
                      }
                  }

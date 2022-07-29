@@ -53,7 +53,6 @@ public slots:
         openDb();
         if(isTableExist(tableName)){
 
-
             singleInsertData(tableName,songname,songpath,songartist,songalbum,songtime);
             int index=m_tableNames.indexOf(tableName);
             SongLists.at(index)->addSong(songname,songpath,songartist,songalbum,songtime);
@@ -92,14 +91,12 @@ public slots:
 
         int index=m_tableNames.indexOf(tableName);
         SongLists.at(index)->songListName()=tableName;
-        qDebug()<<index;
 
     }
 
     Q_INVOKABLE void querySongDatas(QString tableName)//获取歌单
     {
         int index=m_tableNames.indexOf(tableName);
-
 
         openDb();
         if(isTableExist(tableName)){
@@ -108,7 +105,6 @@ public slots:
 
         }else{
             qDebug()<<"dont't find "+tableName+"table!";
-
         }
 
         closeDb();

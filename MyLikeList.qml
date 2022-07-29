@@ -68,6 +68,7 @@ Rectangle {
             fileartist: Artist;
             filealbum: Album;
             filetime: Time;
+            filepath: path;
         }
     }
 
