@@ -18,7 +18,6 @@ class OnlineSong :public QObject
     Q_PROPERTY(QString image READ image WRITE setImage NOTIFY imageChanged)
     Q_PROPERTY(QString lyrics READ lyrics WRITE setLyrics NOTIFY lyricsChanged)
     Q_PROPERTY(QString songSavePath READ songSavePath WRITE setSongSavePath NOTIFY songSavePathChanged)
-
 public:
     OnlineSong(QObject *parent=nullptr);
 
@@ -27,6 +26,7 @@ public:
     Q_INVOKABLE void getInformation(int index);
     Q_INVOKABLE void downLoadsong(int index);
     Q_INVOKABLE void downLoadLyrics(int index);
+    Q_INVOKABLE void kpSong(int index);
 
 
     void parsejson_getIdHash(QString json);
@@ -156,6 +156,7 @@ signals:
     void lyricsChanged(QString lyrics);
     void getUrl();
     void getlyrics();
+    void keepUrl();
 
 private:
     QNetworkAccessManager *manager;

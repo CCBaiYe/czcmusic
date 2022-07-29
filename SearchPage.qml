@@ -1,5 +1,6 @@
 import QtQuick
 import QtQuick.Controls
+import QtQuick.Dialogs
 import OnlineSong
 
 Rectangle{
@@ -99,6 +100,7 @@ Rectangle{
                 id:tap1
                 acceptedButtons: Qt.RightButton
                 onTapped:  {
+                    searchlist.currentIndex=index
                     menu1.popup()
                     searchlist.currentIndex=index;
                 }
@@ -127,11 +129,14 @@ Rectangle{
                     text: qsTr("Like")
                     icon.name: "list-add"
                     onTriggered: {
-                        songplaylist.inSert(songplaylist.tableNames[0],online.songName[searchlist.currentIndex],"online.url",online.singerName[searchlist.currentIndex],online.albumName[searchlist.currentIndex],online.turnTime(online.duration[searchlist.currentIndex]));
-                        songplaylistmodel.append({"Title":online.songName[searchlist.currentIndex],"Artist":online.singerName[searchlist.currentIndex],"Album":online.albumName[searchlist.currentIndex],"Time":online.turnTime(online.duration[searchlist.currentIndex])})
+
+                        online.kpSong(searchlist.currentIndex)
+                        input.open()
 
                     }
                 }
+
+
                 Menu{
                     id:down
                     title: qsTr("Download")
@@ -163,6 +168,52 @@ Rectangle{
         }
     }
     ListModel{
+        id:loadmodel
+    }
+
+    Popup{
+        id:input
+        x:150
+        y:200
+        width: 200
+        height: 40
+        TextField{
+            id: inputtext
+            anchors.fill: parent
+            width: parent.width
+            height: parent.height
+            font.pixelSize: 13
+            placeholderText: qsTr("please input playlist name");
+            selectByMouse: true
+            verticalAlignment: Text.AlignVCenter
+            Keys.onPressed: event=>{
+                                if(event.key===Qt.Key_Return)
+                                {
+                                    var songlistname=inputtext.text;
+                                    online.kpSong(searchlist.currentIndex)
+
+                                    if(db.isTableExist(songlistname)){
+                                        db.insert(songlistname,online.songName[searchlist.currentIndex],online.url,online.singerName[searchlist.currentIndex],online.albumName[searchlist.currentIndex],online.turnTime(online.duration[searchlist.currentIndex]))
+                                        songplaylistmodel.append({"Title":online.songName[searchlist.currentIndex],"Artist":online.singerName[searchlist.currentIndex],"Album":online.albumName[searchlist.currentIndex],"Time":online.turnTime(online.duration[searchlist.currentIndex]),"path":online.url})
+                                    }else{
+                                        messageDialog.open()
+                                        console.log("don't have this songlist")
+                                    }
+                                    input.close();
+                                }
+            }
+        }
+    }
+
+    MessageDialog{
+        id:messageDialog
+        title: qsTr("error input")
+        buttons: MessageDialog.Ok
+        text: qsTr("Please choose already exist songlist.")
+
+    }
+
+    ListModel{
         id:searchmodel
     }
     OnlineSong{
@@ -172,7 +223,6 @@ Rectangle{
             addsong()
         }
         onUrlChanged: {
-
 
             mdp.mdplayer.stop()
             mdp.mdplayer.source=online.url

@@ -1,6 +1,9 @@
 import QtQuick
 import QtQuick.Controls
+
 Rectangle {
+
+    property string songlistname
     id:likelistroot
     width: parent.width
     height: parent.height
@@ -65,6 +68,11 @@ Rectangle {
             fileartist: Artist;
             filealbum: Album;
             filetime: Time;
+            filepath: path;
         }
     }
+
+
+
+
 }

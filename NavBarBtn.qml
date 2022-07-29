@@ -63,43 +63,28 @@ import QtQuick.Controls 2.15
          onClicked :  {
              switch(Count){
 
-             case 4:{pageLoader.source="LocaMusicPage.qml";pageLoader.visible=true;searchPage.visible=false; break;}
-             case 5:{pageLoader.source="LoadPage.qml";pageLoader.visible=true;searchPage.visible=false;break;}
-             case 6:{pageLoader.source="RecentPlayPage.qml";pageLoader.visible=true;searchPage.visible=false;break}
-             case 8:{pageLoader.source="LyrEditing.qml";pageLoader.visible=true;searchPage.visible=false;break;}
+             case 4:{pageLoader.source="LocaMusicPage.qml";pageLoader.visible=true;searchPage.visible=false;loaderSonglist.visible=false;break;}
+             case 5:{pageLoader.source="LoadPage.qml";pageLoader.visible=true;searchPage.visible=false;loaderSonglist.visible=false;break;}
+             case 6:{pageLoader.source="RecentPlayPage.qml";pageLoader.visible=true;searchPage.visible=false;loaderSonglist.visible=false;break}
+             case 8:{pageLoader.source="LyrEditing.qml";pageLoader.visible=true;searchPage.visible=false;loaderSonglist.visible=false;break;}
              case 9:{searchPage.visible=false;break}
              case 10:{input.open();break;}
-             case 11:{currentIndex=Count;pageLoader.source="MyLikeList.qml";pageLoader.visible=true;
-                 if(flag){
-                     songplaylist.querySongDatas(songplaylist.tableNames[0])
-
-                     for(var i=0;i<songplaylist.songName.length;i++){
-                         songplaylistmodel.append({"Title":songplaylist.songName[i],"Artist":songplaylist.songArtist[i],"Album":songplaylist.songAlbum[i],"Time":songplaylist.songTime[i]})
-                     }
-
-                     flag=false
-                 }
-
-                 break}
-             case 12:{
-                 pageLoader.source="MyLikeList.qml"
-                 pageLoader.visible=true;
-                 if(flag){
-                     songplaylist.querySongDatas(songplaylist.tableNames[1])
-
-                     for(var i=0;i<songplaylist.songName.length;i++){
-                         songplaylistmodel.append({"Title":songplaylist.songName[i],"Artist":songplaylist.songArtist[i],"Album":songplaylist.songAlbum[i],"Time":songplaylist.songTime[i]})
-                     }
-                     flag=false
-                 }
-
              }
 
+             if(Count>10){
+                 loaderSonglist.source=""
+                 for(var j=11;j<=db.tableNames.length+10;j++)
+                 {
 
-
+                     if(Count===j){
+                         songplaylistmodel.clear();
+                         loaderSonglist.source="MyLikeList.qml";loaderSonglist.visible=true;
+                         for(var i=0;i<db.songLists[j-11].songName.length;i++){
+                             songplaylistmodel.append({"Title":db.songLists[j-11].songName[i],"Artist":db.songLists[j-11].songArtist[i],"Album":db.songLists[j-11].songAlbum[i],"Time":db.songLists[j-11].songTime[i],"path":db.songLists[j-11].songPath[i]})
+                         }
+                     }
+                 }
              }
-
-
             searchPage.visible=false
          }
      }

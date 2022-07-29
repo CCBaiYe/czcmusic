@@ -126,7 +126,7 @@ Rectangle {
         x:150
         y:200
         width: 150
-        height: 30
+        height: 40
         TextField{
             id: inputtext
             anchors.fill: parent
@@ -140,7 +140,11 @@ Rectangle {
                 if(event.key===Qt.Key_Return)
                    {
                       var songlistname=inputtext.text;
-                      songplaylist.createlist(songlistname);//创建歌单
+
+                      db.createlist(songlistname)//创建歌单
+//                      songplaylist.createlist(songlistname);
+
+
                       navbarListmodel.append({"type":qsTr("List"),"itemText_":songlistname,
                                                  "symbolText_":"\uf0ca","fontfamily_":"Solid","Count":navbarListmodel.count+1})
                       input.close();

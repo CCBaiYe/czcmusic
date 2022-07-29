@@ -3,7 +3,6 @@ import QtQuick.Controls
 import QtQuick.Layouts
 import QtQuick.Dialogs
 import QtMultimedia
-//import Qt.labs.platform
 import Qt.labs.folderlistmodel
 Item{
     property alias folderfileslistxisible: folderfileslist.visible

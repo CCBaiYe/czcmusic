@@ -22,7 +22,9 @@ Rectangle{
         enabled: mdp.mdplayer.seekable
         value:mdp.mdplayer.duration > 0 ? mdp.mdplayer.position / mdp.mdplayer.duration : 0
         onMoved: function () {
-            mdp.mdplayer.position = mdp.mdplayer.duration * sliderControl.position
+
+                mdp.mdplayer.position = mdp.mdplayer.duration * sliderControl.position
+
         }
         //jindutiao
         background: Rectangle {
@@ -45,7 +47,7 @@ Rectangle{
                 cursorShape: Qt.PointingHandCursor;
             }
         }
-        //huaqiu
+        //圆点
         handle: Rectangle {
             x: sliderControl.leftPadding + sliderControl.visualPosition * (sliderControl.availableWidth - width)
             y: sliderControl.topPadding + sliderControl.availableHeight / 2 - height / 2

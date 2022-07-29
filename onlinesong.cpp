@@ -53,18 +53,21 @@ void OnlineSong::replyFinished2(QNetworkReply *reply)
         qDebug()<<"error";
     }
 
+
+
     if(!isDownloadSong&&!isDowloadLrc){
         emit urlChanged(m_url);
-        qDebug()<<"m_url";
+//        qDebug()<<"m_url";
         emit lyricsChanged(m_lyrics);
-        qDebug()<<"m_lyrics";
+//        qDebug()<<"m_lyrics";
     }else if(isDownloadSong&&!isDowloadLrc){
         emit getUrl();
-        qDebug()<<"getUrl";
+//        qDebug()<<"getUrl";
+        emit keepUrl();
     }
     else  if(!isDownloadSong&&isDowloadLrc){
         emit getlyrics();
-        qDebug()<<"getlyrics";
+//        qDebug()<<"getlyrics";
     }
 
 
@@ -130,7 +133,7 @@ void OnlineSong::downLoadsong(int index)
     isDownloadSong=true;
     getInformation(index);
 
-    qDebug()<<m_lyrics;
+//    qDebug()<<m_lyrics;
     connect(this,&OnlineSong::getUrl,this,[&](){
         request3->setUrl(m_url);
         manager3->get(*request3);
@@ -159,6 +162,17 @@ void OnlineSong::downLoadLyrics(int index)
         }
     });
 
+}
+
+void OnlineSong::kpSong(int index)
+{
+    isDownloadSong=true;
+    getInformation(index);
+
+
+    connect(this,&OnlineSong::keepUrl,this,[&](){
+        //do something
+    });
 }
 
 void OnlineSong::parsejson_getIdHash(QString json)

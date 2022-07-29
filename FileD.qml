@@ -138,7 +138,7 @@ Item{
                     }
                 }
             }
-            else if(footer.playmodel==1){
+            else if(footer.playmodel===1){
                 var x=Math.random()*(listm.count-1);
                 var j=Math.round(x);
                 mdp.mdplayer.source=listm.get(j).filePath;

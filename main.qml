@@ -2,8 +2,9 @@ import QtQuick 2.15
 import QtQuick.Window 2.15
 import QtQuick.Controls
 import GetInformation 1.0
-import SongPlayList 1.0
+//import SongPlayList 1.0
 import DataInitialization 1.0
+
 ApplicationWindow {
     id:root
     flags:Qt.FramelessWindowHint | Qt.Window;
@@ -14,13 +15,13 @@ ApplicationWindow {
     property alias rootwidth: root.width
     property alias rootheight: root.height
     property alias navwidth:nav.width
+    property alias loadsonglist: loaderSonglist
     property alias pageLoader: pageLoader
     property alias pageloaderw: pageLoader.width
     property alias splitviewheiht: splitView.height
     property alias splitView: splitView
     property alias footerheight: footer.height
     property alias getinfor: getinfor
-    property alias songplaylist: songplaylist
     property alias loadFromFile: loadFromFile
     property alias nav: nav
     property alias menu: menu
@@ -110,6 +111,12 @@ ApplicationWindow {
                 height: splitView.height
 
             }
+            Loader{
+                id:loaderSonglist
+                width: root.width-nav.width
+                height: splitView.height
+
+            }
             SearchPage{
                 id:searchPage
                 visible: false
@@ -121,9 +128,8 @@ ApplicationWindow {
     GetInformation{
         id:getinfor
     }
-    SongPlayList{
-        id:songplaylist
-    }
+
+
     ListModel{
         id:songplaylistmodel
     }
@@ -133,23 +139,19 @@ ApplicationWindow {
         visible: false
     }
     Component.onCompleted: {
-        //console.log(songplaylist.tableNames.length)
-        if(songplaylist.tableNames.length!==0){
 
-            songplaylist.readSongListTables()
-            for(var i=0;i<songplaylist.tableNames.length;i++){
-                var songlistname=songplaylist.tableNames[i];
+        if(db.tableNames.length!==0){
+
+            for(var i=0;i<db.tableNames.length;i++){
+                var songlistname=db.tableNames[i];
 
                 nav.navbarListmodel.append({"type":qsTr("List"),"itemText_":songlistname,
                                            "symbolText_":"\uf0ca","fontfamily_":"Solid","Count":nav.navbarListmodel.count+1})
             }
             flag=true
-
-
-
-
         }
 
     }
+
 
 }
