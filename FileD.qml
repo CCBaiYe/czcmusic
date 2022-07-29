@@ -3,6 +3,7 @@ import QtCore
 import QtQuick.Dialogs
 import Qt.labs.folderlistmodel
 import GetInformation 1.0
+import Qt.labs.settings
 
 Item{
     property alias listM: listm
@@ -10,6 +11,9 @@ Item{
     property alias fileDialog:fileDialog
     property alias folderlistm: folderlistm
     property alias savefoldermodel: savefoldermodel
+    property alias loadmodel: loadmodel
+    property alias recentplay: recentplay
+    //property alias setting: setting
     FileDialog {
         id: fileDialog
         title: qsTr("Please choose an image file")
@@ -57,6 +61,16 @@ Item{
                 }
             }
         }
+        //判断地址
+        function ispath(str){
+            var m=str[0];
+            console.log(str)
+            console.log(m);
+            if(m==="f")
+                return 1;
+            return 0;
+        }
+
         //查找指定路径
         function isexist(path){
             for(var i=0;i<listm.count;i++){
@@ -74,8 +88,10 @@ Item{
                 getinfor.setFileUrl(fileUrl);
                 getinfor.onEndsWith();
                 listm.append({"Count":listm.count+1,"fileName":setMusicName(str),
-                                 "filePath":fileUrl,"fileArtist":getinfor.artist,
-                                 "fileTime":dialogs.fileDialog.setTime(mdp.mdplayer.duration)});
+                                 "filePath":fileUrl,"fileAlbum":getinfor.album,
+                                 "fileTime":dialogs.fileDialog.setTime(mdp.mdplayer.duration),
+                                 "fileArtist":getinfor.artist,
+                             });
             }
             footer.palyslider.musicName=setMusicName(str);
             mdp.desktopbtncontrol()
@@ -105,7 +121,7 @@ Item{
         }
         //上一首
         function preplay(){
-            if(footer.playmodel==0||footer.playmodel===2){
+            if(footer.playmodel===0||footer.playmodel===2){
                 for(var i=0;i<listm.count;i++)
                 {
                     if(mdp.mdplayer.source===listm.get(i).filePath&&i!=0){
@@ -158,35 +174,30 @@ Item{
                 nextplay();
             }
         }
+        //播放列表
         ListModel{
             id:listm
         }
     }
+
     //选择目录
     function setFolderModel(){
         //把目录下文件保存到一个model中
-
-
-
         for(var i=0;i<folderlistm.count;i++)
         {
-//            console.log(folderlistm.folder +  "123");
-//            console.log(folderlistm.get(i,"filePath"));
-//            console.log(!(folderlistm.isFolder(i)));
             if(!(folderlistm.isFolder(i))){
             var filepath="file://"+folderlistm.get(i,"filePath");
             getinfor.setFileUrl(Qt.resolvedUrl(filepath));
             getinfor.onEndsWith();
             if(!(fileDialog.isexist(getinfor.fileUrl))){
-
                 var str=fileDialog.removeSuffix(folderlistm.get(i,"fileName"));
                 var data={"Count":savefoldermodel.count+1,"fileName":str,
-                "filePath":getinfor.fileUrl,"fileArtist":getinfor.artist,
+                "filePath":getinfor.fileUrl,
+                "fileArtist":getinfor.artist,
                 "fileTime":dialogs.fileDialog.setTime(mdp.mdplayer.duration),
                 "fileAlbum":getinfor.album}
                     savefoldermodel.append(data);
                 }
-            console.log("there");
             }
         }
     }
@@ -198,8 +209,10 @@ Item{
                 getinfor.onEndsWith();
                 var str=fileDialog.currentFiles[i].toString();
                 var data = {"filePath": arguments[0][i],"fileName":fileDialog.setMusicName(str),
-                    "Count":listm.count+1,"fileArtist":getinfor.artist,
-                    "fileTime":dialogs.fileDialog.setTime(mdp.mdplayer.duration)};
+                    "Count":listm.count+1,"fileAlbum":getinfor.album,
+                    "fileTime":dialogs.fileDialog.setTime(mdp.mdplayer.duration),
+                "fileArtist":getinfor.artist
+                };
                 listm.append(data);
             }
         }
@@ -215,9 +228,40 @@ Item{
                 listm.append({"Count":listm.count+1,"fileName":filename,
                                  "filePath":Qt.resolvedUrl(filepath),"fileArtist":getinfor.artist,
                                  "fileTime":dialogs.fileDialog.setTime(mdp.mdplayer.duration),"fileAlbum":getinfor.album});
+
+            }
+
+        }
+    }
+    //下载列表中所有文件加入到播放列表
+    function addloadlist(){
+        for(var i=0;i<loadmodel.count;i++){
+            var filename=loadmodel.get(i).songName;
+            var filepath="file://"+loadmodel.get(i).songPath;
+            if(!(fileDialog.isexist(Qt.resolvedUrl(filepath)))){
+                getinfor.setFileUrl(Qt.resolvedUrl(filepath));
+                getinfor.onEndsWith();
+                dialogs.listM.append({"Count":listm.count+1,"fileName":filename,
+                                 "filePath":Qt.resolvedUrl(filepath),"fileArtist":loadmodel.get(i).songArtist,
+                                 "fileTime":loadmodel.get(i).songTime,"fileAlbum":loadmodel.get(i).songAlbum});
             }
         }
     }
+    //最近列表中所有文件加入到播放列表
+    function addrecentlist(){
+        for(var i=0;i<recentplay.count;i++){
+            var filename=recentplay.get(i).songName;
+            var filepath="file://"+recentplay.get(i).songPath;
+            if(!(fileDialog.isexist(Qt.resolvedUrl(filepath)))){
+                getinfor.setFileUrl(Qt.resolvedUrl(filepath));
+                getinfor.onEndsWith();
+                dialogs.listM.append({"Count":listm.count+1,"fileName":filename,
+                                 "filePath":Qt.resolvedUrl(filepath),"fileArtist":recentplay.get(i).songArtist,
+                                 "fileTime":recentplay.get(i).songTime,"fileAlbum":recentplay.get(i).songAlbum});
+            }
+        }
+    }
+
     //创建歌单
 
     FolderListModel{
@@ -239,5 +283,13 @@ Item{
     //保存目录下的文件
     ListModel{
         id:savefoldermodel
+    }
+    //下载列表
+    ListModel{
+        id:loadmodel
+    }
+    //最近播放列表
+    ListModel{
+        id:recentplay;
     }
 }

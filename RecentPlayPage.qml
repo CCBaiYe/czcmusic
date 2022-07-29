@@ -1,13 +1,14 @@
 import QtQuick
 import QtQuick.Controls
+import Qt.labs.settings
 
 Item {
-    id:loadpage
+    id:recentpage
     width: parent.width
     height: parent.height
     Rectangle{
         id:songtitle
-        width: loadpage.width
+        width: recentpage.width
         height: 35
         Label{
             id:symbolText_
@@ -60,21 +61,12 @@ Item {
         anchors.top: songtitle.bottom
         width: parent.width
         height: parent.height-songtitle.height
-        Label{
-            opacity: 0.3
-            id:loadicon
-            text: "\uf019"
-            font.family: "FontAwesome"
-            font.pixelSize: 100
-            anchors.verticalCenter: songlist.verticalCenter
-            anchors.horizontalCenter: songlist.horizontalCenter
-        }
         ListView{
-            id:list
+            id:recentPlayList
             width: songlist.width
             height: songlist.height
-            model: dialogs.loadmodel
-            delegate: LoadPageBtn{
+            model: dialogs.recentplay
+            delegate: RecentPlayPageBtn{
                 count:Count;
                 filename:songName;
                 fileartist: songArtist;
@@ -83,4 +75,5 @@ Item {
             }
         }
     }
+
 }

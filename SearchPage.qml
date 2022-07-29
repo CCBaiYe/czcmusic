@@ -5,7 +5,6 @@ import OnlineSong
 Rectangle{
     property alias online: online
     property alias searchmodel: searchmodel
-    property alias loadmodel: loadmodel
     id:searchpage
     width: parent.width
     height: parent.height
@@ -101,6 +100,7 @@ Rectangle{
                 acceptedButtons: Qt.RightButton
                 onTapped:  {
                     menu1.popup()
+                    searchlist.currentIndex=index;
                 }
             }
 
@@ -116,8 +116,6 @@ Rectangle{
                 Action{
                     id:play1
                     text: qsTr("Play")
-
-
                     icon.name: "media-playback-start"
                     onTriggered: {
                         online.getInformation(searchlist.currentIndex)
@@ -129,8 +127,6 @@ Rectangle{
                     text: qsTr("Like")
                     icon.name: "list-add"
                     onTriggered: {
-
-
                         songplaylist.inSert(songplaylist.tableNames[0],online.songName[searchlist.currentIndex],"online.url",online.singerName[searchlist.currentIndex],online.albumName[searchlist.currentIndex],online.turnTime(online.duration[searchlist.currentIndex]));
                         songplaylistmodel.append({"Title":online.songName[searchlist.currentIndex],"Artist":online.singerName[searchlist.currentIndex],"Album":online.albumName[searchlist.currentIndex],"Time":online.turnTime(online.duration[searchlist.currentIndex])})
 
@@ -148,8 +144,11 @@ Rectangle{
                                 "songArtist":online.singerName[searchlist.currentIndex],
                             "songAlbum":online.albumName[searchlist.currentIndex],
                             "songTime":online.turnTime(online.duration[searchlist.currentIndex]),
-                            "Count":loadmodel.count+1}
-                            loadmodel.append(data);
+                            "Count":dialogs.loadmodel.count+1,
+                             "songPath":online.songSavePath
+                            }
+                            //console.log(online.songSavePath)
+                            dialogs.loadmodel.append(data);
                         }
                     }
                     Action{
@@ -162,17 +161,7 @@ Rectangle{
                 }
             }
         }
-
     }
-
-    ListModel{
-        id:loadmodel
-    }
-
-
-
-
-
     ListModel{
         id:searchmodel
     }
@@ -188,6 +177,25 @@ Rectangle{
             mdp.mdplayer.stop()
             mdp.mdplayer.source=online.url
             mdp.desktopbtncontrol()
+
+            //歌曲加入到播放列表
+            if(!(dialogs.fileDialog.isexist(online.url)))
+            {
+                var data={"Count":dialogs.listM.count+1,
+                    "fileName":online.songName[searchlist.currentIndex],
+                    "filePath":Qt.resolvedUrl(online.url),
+                    "fileTime":online.turnTime(online.duration[searchlist.currentIndex]),
+                    "fileAlbum":online.albumName[searchlist.currentIndex],
+                    "fileArtist":online.singerName[searchlist.currentIndex]
+                }
+                dialogs.listM.append(data);
+            }
+
+            loadFromFile.writeData(online.songName[searchlist.currentIndex],
+                                   Qt.resolvedUrl(online.url),
+                                   online.singerName[searchlist.currentIndex],
+                                   online.albumName[searchlist.currentIndex],
+                                   online.turnTime(online.duration[searchlist.currentIndex]))
 
             footer.songlist.smallimage=online.image
             footer.songlist.bigimage=online.image

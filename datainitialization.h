@@ -6,6 +6,15 @@
 #include <QUrl>
 #include <QSettings>
 #include <QDebug>
+#include <QStringList>
+struct SongInFo{
+    QString songName;
+    QString songPath;
+    QString songArtist;
+    QString songAlbum;
+    QString songTime;
+};
+
 class DataInitialization : public QObject
 {
     Q_OBJECT
@@ -41,6 +50,12 @@ public slots:
         loadFile->setValue("netFlag",m_netFlag);
         loadFile->sync();
     }
+    void writeData(QString name,QString path,QString artist,QString album,QString time);
+    QStringList readData(QString name);
+    QStringList allKey(){
+        QStringList allkey=loadFiles->childGroups();
+        return allkey;
+    }
 public:
     QString loadPath(){
         m_loadPath = loadFile->value("loadFile").toString();
@@ -55,10 +70,12 @@ public:
         return m_netFlag;
     }
 private:
+    QStringList songs;
     QString m_loadPath;
     QString m_musicName;
 
     QSettings *loadFile = new QSettings("/root/.config/loadFile.ini",QSettings::IniFormat);
+    QSettings *loadFiles = new QSettings("/root/.config/loadFiles.ini",QSettings::IniFormat);
     bool m_netFlag;
 };
 

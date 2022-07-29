@@ -21,7 +21,7 @@ Rectangle{
         delegate: Item {
             width: 700
             height: 30
-            CurrentListBtn{count:Count;filename:fileName;fileartist: fileArtist;filetime: fileTime}
+            CurrentListBtn{count:Count;filename:fileName;fileartist:fileArtist;filetime:fileTime}
             MouseArea{
                 anchors.fill: parent
                 acceptedButtons:Qt.LeftButton
@@ -65,6 +65,11 @@ Rectangle{
             footer.palyslider.musicName=dialogs.listM.get(listv.currentIndex).fileName
             mdp.mdplayer.source=dialogs.listM.get(listv.currentIndex).filePath
             mdp.desktopbtncontrol()
+            loadFromFile.writeData(dialogs.listM.get(listv.currentIndex).fileName,
+                                   dialogs.listM.get(listv.currentIndex).filePath,
+                                   dialogs.listM.get(listv.currentIndex).fileArtist,
+                                   dialogs.listM.get(listv.currentIndex).fileAlbum,
+                                   dialogs.listM.get(listv.currentIndex).fileTime)
         }
 
     }

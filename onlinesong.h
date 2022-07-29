@@ -17,6 +17,7 @@ class OnlineSong :public QObject
     Q_PROPERTY(QString url READ url WRITE setUrl NOTIFY urlChanged)
     Q_PROPERTY(QString image READ image WRITE setImage NOTIFY imageChanged)
     Q_PROPERTY(QString lyrics READ lyrics WRITE setLyrics NOTIFY lyricsChanged)
+    Q_PROPERTY(QString songSavePath READ songSavePath WRITE setSongSavePath NOTIFY songSavePathChanged)
 
 public:
     OnlineSong(QObject *parent=nullptr);
@@ -77,6 +78,9 @@ public:
     {
         return m_lyrics;
     }
+    QString songSavePath()const{
+        return m_songSavePath;
+    }
 
 
 public slots:
@@ -86,6 +90,13 @@ public slots:
              m_songName=songName;
              emit songNameChanged(m_songName);
          }
+    }
+    void setSongSavePath(QString songSavePath)
+    {
+        if(m_songSavePath!=songSavePath){
+            m_songSavePath=songSavePath;
+            emit songSavePathChanged(m_songSavePath);
+        }
     }
     void setSingerName(QList<QString> singerName)
     {
@@ -137,6 +148,7 @@ protected slots:
 signals:
     void songNameChanged(QList<QString> songName);
     void singerNameChanged(QList<QString> singerName);
+    void songSavePathChanged(QString songSavePath);
     void albumNameChanged(QList<QString> albumName);
     void durationChanged(QList<double> duration);
     void urlChanged(QString url);

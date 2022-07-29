@@ -61,6 +61,9 @@ qt_add_qml_module(appccmusic
               DesktopLrc.qml
               LyrEditing.qml
               LoadPage.qml
+              LoadPageBtn.qml
+              RecentPlayPage.qml
+              RecentPlayPageBtn.qml
     RESOURCES
             Font/font-awesome.css
             Font/fontawesome-webfont.ttf

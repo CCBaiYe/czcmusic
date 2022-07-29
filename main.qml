@@ -3,6 +3,7 @@ import QtQuick.Window 2.15
 import QtQuick.Controls
 import GetInformation 1.0
 import SongPlayList 1.0
+import DataInitialization 1.0
 ApplicationWindow {
     id:root
     flags:Qt.FramelessWindowHint | Qt.Window;
@@ -20,6 +21,7 @@ ApplicationWindow {
     property alias footerheight: footer.height
     property alias getinfor: getinfor
     property alias songplaylist: songplaylist
+    property alias loadFromFile: loadFromFile
     property alias nav: nav
     property alias menu: menu
     property real dpScale: 1.5;     //在不同的分辨率屏幕下的窗口伸缩因子
@@ -72,6 +74,9 @@ ApplicationWindow {
     FileD {
             id: dialogs
             }
+    DataInitialization {
+        id: loadFromFile
+    }
     SplitView {
         id: splitView
         height: root.height-menu.height-footer.height

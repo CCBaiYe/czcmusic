@@ -65,6 +65,7 @@ import QtQuick.Controls 2.15
 
              case 4:{pageLoader.source="LocaMusicPage.qml";pageLoader.visible=true;searchPage.visible=false; break;}
              case 5:{pageLoader.source="LoadPage.qml";pageLoader.visible=true;searchPage.visible=false;break;}
+             case 6:{pageLoader.source="RecentPlayPage.qml";pageLoader.visible=true;searchPage.visible=false;break}
              case 8:{pageLoader.source="LyrEditing.qml";pageLoader.visible=true;searchPage.visible=false;break;}
              case 9:{searchPage.visible=false;break}
              case 10:{input.open();break;}

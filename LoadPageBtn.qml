@@ -67,16 +67,19 @@ import QtQuick.Controls 2.15
      MouseArea{
          anchors.fill: parent
          onDoubleClicked: {
-             dialogs.addplayerlist();
+             dialogs.addloadlist();
              mdp.mdplayer.stop();
-             footer.palyslider.musicName=dialogs.fileDialog.removeSuffix(dialogs.folderlistm.get(index,"fileName"));
-             mdp.mdplayer.source="file://"+dialogs.folderlistm.get(index,"filePath");
+             //console.log(dialogs.loadmodel.get(index).songName)
+             footer.palyslider.musicName=dialogs.loadmodel.get(index).songName;
+             //console.log(dialogs.loadmodel.get(index).songPath)
+             mdp.mdplayer.source="file://"+dialogs.loadmodel.get(index).songPath;
              mdp.desktopbtncontrol();
-             loadFromFile.writeData(dialogs.savefoldermodel.get(index).fileName,
-                                    dialogs.savefoldermodel.get(index).filePath,
-                                    dialogs.savefoldermodel.get(index).fileArtist,
-                                    dialogs.savefoldermodel.get(index).fileAlbum,
-                                    dialogs.savefoldermodel.get(index).fileTime)
+             loadFromFile.writeData(dialogs.loadmodel.get(index).songName,
+                                    dialogs.loadmodel.get(index).songPath,
+                                    dialogs.loadmodel.get(index).songArtist,
+                                    dialogs.loadmodel.get(index).songAlbum,
+                                    dialogs.loadmodel.get(index).songTime)
          }
      }
 }
+

@@ -24,8 +24,6 @@ Rectangle{
         onMoved: function () {
             mdp.mdplayer.position = mdp.mdplayer.duration * sliderControl.position
         }
-
-
         //jindutiao
         background: Rectangle {
             x: sliderControl.leftPadding
@@ -47,7 +45,6 @@ Rectangle{
                 cursorShape: Qt.PointingHandCursor;
             }
         }
-
         //huaqiu
         handle: Rectangle {
             x: sliderControl.leftPadding + sliderControl.visualPosition * (sliderControl.availableWidth - width)
@@ -56,7 +53,6 @@ Rectangle{
             height: 10*dp;
             radius: 10*dp;
             color: "#f6f6f6"
-
             Label{
                 id:cd;
                 anchors.verticalCenter: parent.verticalCenter;
