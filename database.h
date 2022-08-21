@@ -8,6 +8,7 @@
 #include "songlist.h"
 #include <QList>
 
+
 class DataBase:public QObject
 {
     Q_OBJECT

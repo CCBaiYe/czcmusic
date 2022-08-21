@@ -72,10 +72,10 @@ import QtQuick.Controls 2.15
              footer.palyslider.musicName=dialogs.recentplay.get(index).songName;
              if(dialogs.fileDialog.ispath(dialogs.recentplay.get(index).songPath)===1)
              {
-                 mdp.mdplayer.source="file://"+dialogs.recentplay.get(index).songPath;
+                   mdp.mdplayer.source="file://"+dialogs.recentplay.get(index).songPath;
              }
              else{
-                 mdp.mdplayer.source=dialogs.recentplay.get(index).songPath
+                 mdp.mdplayer.source=dialogs.recentplay.get(index).songPath;
              }
 
              mdp.desktopbtncontrol();

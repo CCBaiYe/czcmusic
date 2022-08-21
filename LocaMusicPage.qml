@@ -157,9 +157,10 @@ Item{
                 count:Count;
                 filename:fileName;
                 fileartist: fileArtist;
-                filealbum: fileAlbum
-                filetime: fileTime
-                filepath: filePath
+
+                filealbum: fileAlbum;
+                filetime: fileTime;
+                filepath: filePath;
             }
 
         }

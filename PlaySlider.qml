@@ -19,7 +19,7 @@ Rectangle{
         anchors.top:parent.top
         anchors.topMargin: parent.height/9*2
         anchors.bottom: parent.bottom        
-        enabled: mdp.mdplayer.seekable
+        enabled: true
         value:mdp.mdplayer.duration > 0 ? mdp.mdplayer.position / mdp.mdplayer.duration : 0
         onMoved: function () {
 

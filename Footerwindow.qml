@@ -10,6 +10,7 @@ Rectangle{
     property alias songlist: songlist
     property alias footimage: footimage
     property alias showDesktop: showDesktop
+    property alias playbtnText: playBtn.text
     id:root
     color: "#ffffff"
     Rectangle{
@@ -77,16 +78,19 @@ Rectangle{
             verticalCenter: parent.verticalCenter
         }
         width: 30*dp
-        text: mdp.mdplayer.playbackState ===  MediaPlayer.PlayingState ? qsTr("\uf04c") : qsTr("\uf04b")
+        text:  qsTr("\uf04c")
         TapHandler{
 
             cursorShape: Qt.PointingHandCursor;
             onTapped:  {
                 switch(mdp.mdplayer.playbackState) {
-                    case AudioPlayer.PlayingState: mdp.desktoppausebtn(); break;
-                    case AudioPlayer.PausedState: mdp.desktopbtncontrol(); break;
+                    case AudioPlayer.PlayingState: playbtnText=qsTr("\uf04b");mdp.desktoppausebtn(); break;
+                    case AudioPlayer.PausedState: playbtnText=qsTr("\uf04c");mdp.desktopbtncontrol(); break;
                     case AudioPlayer.StoppedState: mdp.desktopbtncontrol(); break;
+
                 }
+
+
             }
         }
     }
@@ -172,12 +176,7 @@ Rectangle{
             }
 
         }
-
-
     }
-
-
-
     //播放模式
     MusicControlBtn{
         id:playModeBtn
@@ -198,7 +197,7 @@ Rectangle{
                 switch(playModeBtn.playMode)
                 {
                     case 0:playModeBtn.playMode=1;break;
-                    case 1:playModeBtn.playMode=2;mdp.mdplayer.loops=MediaPlayer.Infinite;break;
+                    case 1:playModeBtn.playMode=2;mdp.mdplayer.loops=AudioPlayer.Infinite;break;
                     case 2:playModeBtn.playMode=0;break;
                     default:break;
                 }

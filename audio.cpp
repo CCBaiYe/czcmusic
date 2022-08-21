@@ -72,9 +72,9 @@ int Audio::decode_audio_thread(void *opa)
 
                 if(!a->isPlay){
                     SDL_PauseAudio(1);
-                    emit a->paused();
+//                    emit a->paused();
                 }else{
-                    emit a->playing();
+//                    emit a->playing();
                 }
 
             }
