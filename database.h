@@ -7,6 +7,7 @@
 #include <QDebug>
 #include "songlist.h"
 #include<QList>
+#include<QMediaPlayer>
 
 class DataBase:public QObject
 {

@@ -64,8 +64,6 @@ Item{
         //判断地址
         function ispath(str){
             var m=str[0];
-            console.log(str)
-            console.log(m);
             if(m==="f")
                 return 1;
             return 0;
@@ -251,7 +249,12 @@ Item{
     function addrecentlist(){
         for(var i=0;i<recentplay.count;i++){
             var filename=recentplay.get(i).songName;
-            var filepath="file://"+recentplay.get(i).songPath;
+            var filepath;
+            if(fileDialog.ispath(recentplay.get(i).songPath)===1){
+                 filepath="file://"+recentplay.get(i).songPath;
+            }else{
+                 filepath=recentplay.get(i).songPath;
+            }
             if(!(fileDialog.isexist(Qt.resolvedUrl(filepath)))){
                 getinfor.setFileUrl(Qt.resolvedUrl(filepath));
                 getinfor.onEndsWith();

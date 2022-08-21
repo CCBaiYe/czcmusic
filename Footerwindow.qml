@@ -171,12 +171,7 @@ Rectangle{
             }
 
         }
-
-
     }
-
-
-
     //播放模式
     MusicControlBtn{
         id:playModeBtn
