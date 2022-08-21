@@ -31,6 +31,11 @@ qt_add_executable(appccmusic
     database.h
     editlyr.h
     editlyr.cpp
+    audio.cpp
+    audio.h
+    audioplay.cpp
+    audioplay.h
+
 )
 
 qt_add_qml_module(appccmusic
@@ -90,7 +95,7 @@ target_link_libraries(appccmusic PRIVATE tag Qt6::Quick Qt6::Multimedia Qt6::Wid
 
 
 find_package(Qt6 REQUIRED COMPONENTS Sql)
-target_link_libraries(appccmusic PRIVATE Qt6::Sql )
+target_link_libraries(appccmusic PRIVATE Qt6::Sql avutil avcodec avformat swresample avdevice SDL2 )
 
 
 set_target_properties(appccmusic PROPERTIES

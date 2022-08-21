@@ -6,7 +6,7 @@
 #include <QSqlError>
 #include <QDebug>
 #include "songlist.h"
-#include<QList>
+#include <QList>
 
 class DataBase:public QObject
 {

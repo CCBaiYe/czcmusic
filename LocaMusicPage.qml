@@ -115,7 +115,7 @@ Item{
                     rectangle3.visible=false;
                     label.visible=false;label1.visible=false;
                     folderfileslist.visible=true;
-                    console.log("153215")
+
                 }
 
             }
@@ -159,6 +159,7 @@ Item{
                 fileartist: fileArtist;
                 filealbum: fileAlbum
                 filetime: fileTime
+                filepath: filePath
             }
 
         }

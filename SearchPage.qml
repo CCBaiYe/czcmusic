@@ -152,7 +152,6 @@ Rectangle{
                             "Count":dialogs.loadmodel.count+1,
                              "songPath":online.songSavePath
                             }
-                            //console.log(online.songSavePath)
                             dialogs.loadmodel.append(data);
                         }
                     }
@@ -223,6 +222,8 @@ Rectangle{
             addsong()
         }
         onUrlChanged: {
+
+            console.log(online.url)
 
             mdp.mdplayer.stop()
             mdp.mdplayer.source=online.url

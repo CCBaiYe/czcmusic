@@ -19,6 +19,7 @@
 #include <string>
 
 #include <QTranslator>
+#include "audioplay.h"
 
 int main(int argc, char *argv[])
 {
@@ -32,8 +33,8 @@ int main(int argc, char *argv[])
     qmlRegisterType<OnlineSong,1>("OnlineSong",1,0,"OnlineSong");
     qmlRegisterType<DataInitialization,1>("DataInitialization",1,0,"DataInitialization");
     qmlRegisterType<LyrInfo,1>("LyrInfo",1,0,"LyrInfo");
-//    qmlRegisterType<SongList,1>("SongPlayList",1,0,"SongPlayList");
     qmlRegisterType<EditLyr,1>("EditLyr",1,0,"EditLyr");
+    qmlRegisterType<AudioPlay,1>("AudioPlay",1,0,"AudioPlayer");
 
     QCoreApplication::setOrganizationName("MySoft");
     QCoreApplication::setOrganizationDomain("mysoft.com");

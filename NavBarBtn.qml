@@ -44,6 +44,7 @@ import QtQuick.Controls 2.15
          font.pixelSize: 12*dp;
          verticalAlignment:Label.AlignVCenter;
          horizontalAlignment: Label.AlignHCenter;
+
      }
      Label{
          anchors{
@@ -67,20 +68,21 @@ import QtQuick.Controls 2.15
              case 5:{pageLoader.source="LoadPage.qml";pageLoader.visible=true;searchPage.visible=false;loaderSonglist.visible=false;break;}
              case 6:{pageLoader.source="RecentPlayPage.qml";pageLoader.visible=true;searchPage.visible=false;loaderSonglist.visible=false;break}
              case 8:{pageLoader.source="LyrEditing.qml";pageLoader.visible=true;searchPage.visible=false;loaderSonglist.visible=false;break;}
-             case 9:{searchPage.visible=false;break}
-             case 10:{input.open();break;}
+//             case 9:{searchPage.visible=false;break}
+             case 9:{input.open();break;}
              }
 
-             if(Count>10){
-                 loaderSonglist.source=""
-                 for(var j=11;j<=db.tableNames.length+10;j++)
+             if(Count>9){
+                 loaderSonglist.source=""   //销毁loader
+                 for(var j=10;j<=db.tableNames.length+9;j++)
                  {
 
                      if(Count===j){
                          songplaylistmodel.clear();
-                         loaderSonglist.source="MyLikeList.qml";loaderSonglist.visible=true;
-                         for(var i=0;i<db.songLists[j-11].songName.length;i++){
-                             songplaylistmodel.append({"Title":db.songLists[j-11].songName[i],"Artist":db.songLists[j-11].songArtist[i],"Album":db.songLists[j-11].songAlbum[i],"Time":db.songLists[j-11].songTime[i],"path":db.songLists[j-11].songPath[i]})
+                         loaderSonglist.source="MyLikeList.qml";    //动态创建mylikelist.qml
+                         loaderSonglist.visible=true;
+                         for(var i=0;i<db.songLists[j-10].songName.length;i++){
+                             songplaylistmodel.append({"Title":db.songLists[j-10].songName[i],"Artist":db.songLists[j-10].songArtist[i],"Album":db.songLists[j-10].songAlbum[i],"Time":db.songLists[j-10].songTime[i],"path":db.songLists[j-10].songPath[i]})
                          }
                      }
                  }

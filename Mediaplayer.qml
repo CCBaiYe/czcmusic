@@ -1,15 +1,14 @@
 import QtQuick
 import QtQuick.Controls
-import QtMultimedia
+import AudioPlay 1.0
 import DataInitialization 1.0
 Item {
     property alias mdplayer:player
-    property alias audioout: audioOutput
+    property alias playerVolume: player.volume
     property alias bb: mdroot
     id:mdroot
-    MediaPlayer {
+    AudioPlayer {
         id: player
-        audioOutput: audioOutput
         onPositionChanged:{
             if(mdp.mdplayer.position!==0&&mdp.mdplayer.position===mdp.mdplayer.duration){
                 dialogs.fileDialog.nextplay();
@@ -22,10 +21,6 @@ Item {
 
             else footer.songlist.fileLyr.url = player.source
         }
-    }
-    AudioOutput {
-        id: audioOutput
-        muted:false
     }
 
 

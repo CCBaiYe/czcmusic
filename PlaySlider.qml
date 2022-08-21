@@ -26,7 +26,7 @@ Rectangle{
                 mdp.mdplayer.position = mdp.mdplayer.duration * sliderControl.position
 
         }
-        //jindutiao
+        //进度条
         background: Rectangle {
             x: sliderControl.leftPadding
             y: sliderControl.topPadding + sliderControl.availableHeight / 2 - height / 2
@@ -43,7 +43,6 @@ Rectangle{
                 radius: 3*dp
             }
             TapHandler{
-                //anchors.fill: parent
                 cursorShape: Qt.PointingHandCursor;
             }
         }

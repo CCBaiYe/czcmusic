@@ -66,20 +66,20 @@ Rectangle {
             fontfamily_:"Solid"
             Count:8
         }
-        ListElement{
+//        ListElement{
 
-            type:qsTr("MySong")
-            symbolText_:"\uf0fe"
-            itemText_:qsTr("MyCollection")
-            fontfamily_:"Solid"
-            Count:9
-        }
+//            type:qsTr("MySong")
+//            symbolText_:"\uf0fe"
+//            itemText_:qsTr("MyCollection")
+//            fontfamily_:"Solid"
+//            Count:9
+//        }
         ListElement{
             type:qsTr("List")
             symbolText_:"\uf055"
             itemText_:qsTr("Create List")
             fontfamily_:"Regular"
-            Count:10
+            Count:9
         }
     }
 
@@ -141,8 +141,8 @@ Rectangle {
                    {
                       var songlistname=inputtext.text;
 
-                      db.createlist(songlistname)//创建歌单
-//                      songplaylist.createlist(songlistname);
+                        //创建歌单
+                      db.createlist(songlistname)
 
 
                       navbarListmodel.append({"type":qsTr("List"),"itemText_":songlistname,

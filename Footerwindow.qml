@@ -1,8 +1,9 @@
 import QtQuick 2.15
 import QtQuick.Controls
 import QtQuick.Layouts
-import QtMultimedia
 import Qt.labs.folderlistmodel
+import AudioPlay 1.0
+
 Rectangle{
     property alias palyslider: sliderWindow
     property alias playmodel: playModeBtn.playMode
@@ -82,9 +83,9 @@ Rectangle{
             cursorShape: Qt.PointingHandCursor;
             onTapped:  {
                 switch(mdp.mdplayer.playbackState) {
-                    case MediaPlayer.PlayingState: mdp.desktoppausebtn(); break;
-                    case MediaPlayer.PausedState: mdp.desktopbtncontrol(); break;
-                    case MediaPlayer.StoppedState: mdp.desktopbtncontrol(); break;
+                    case AudioPlayer.PlayingState: mdp.desktoppausebtn(); break;
+                    case AudioPlayer.PausedState: mdp.desktopbtncontrol(); break;
+                    case AudioPlayer.StoppedState: mdp.desktopbtncontrol(); break;
                 }
             }
         }
@@ -124,7 +125,7 @@ Rectangle{
 
     }
 
-    //yingliang
+    //音量
     VolumnControl{
         id:vc
         width: 100*dp

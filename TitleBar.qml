@@ -17,7 +17,7 @@ Rectangle{
     Rectangle{
         id:searchbox
         width: 200
-        height: 25
+        height: 23
         anchors.left: toolbarroot.left
         anchors.leftMargin: 200
         anchors.verticalCenter: toolbarroot.verticalCenter

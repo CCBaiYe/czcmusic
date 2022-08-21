@@ -64,8 +64,8 @@ Item{
         //判断地址
         function ispath(str){
             var m=str[0];
-            console.log(str)
-            console.log(m);
+//            console.log(str)
+//            console.log(m);
             if(m==="f")
                 return 1;
             return 0;
@@ -111,6 +111,7 @@ Item{
                     }
                 }
             }
+
             else if(footer.playmodel===1){
                 var x=Math.random()*(listm.count-1);
                 var j=Math.round(x);
@@ -170,7 +171,7 @@ Item{
         }
         //列表循环
         function loopplaymodel(){
-            if(mdp.mdplayer.mediaStatus===6){
+            if(mdp.mdplayer.position!==0&&mdp.mdplayer.position===mdp.mdplayer.duration){
                 nextplay();
             }
         }

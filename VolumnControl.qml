@@ -44,10 +44,13 @@ Item{
 
         Slider {
             id: sliderControl;
-            value:0.5
+            value:100
+            from: 0
+            to: 130
             z:1
             onValueChanged: {
-                mdp.audioout.volume=value
+//                mdp.audioout.volume=value
+                mdp.playerVolume=value;
             }
             anchors{
                 left: currentListBtn.right
