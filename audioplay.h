@@ -59,11 +59,19 @@ public slots:
     }
     void setPosition(qint64 inPosition)
     {
-        if(!_audio->isSeek){
+//        if(!_audio->isSeek){
+//            return;
+//        }
+//        m_position= _audio->seek(inPosition);
+
+//        emit this->positionChanged(m_position);
+
+        if(_audio->isSeek){
             return;
         }
-        m_position= _audio->seek(inPosition);
-
+        m_position=inPosition;
+        _audio->position=m_position;
+        _audio->seek(_audio->position);
         emit this->positionChanged(m_position);
 
 

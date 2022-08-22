@@ -327,16 +327,15 @@ void Audio::pause()
 
 }
 
-qint64 Audio::seek(qint64 T)
+void Audio::seek(qint64 T)
 {
     isSeek=true;
     isPlay=false;
-    qDebug()<<"1";
     SDL_PauseAudio(1);
     SDL_Delay(200);
-    av_seek_frame(pFormatCtx,m_audioIndex,(T/1000)/av_q2d(pCodecCtx->time_base),AVSEEK_FLAG_BACKWARD);
+    int64_t timebase=T/1000/av_q2d(pFormatCtx->streams[m_audioIndex]->time_base);
+    av_seek_frame(pFormatCtx,m_audioIndex,timebase,AVSEEK_FLAG_BACKWARD);
     isPlay=true;
     SDL_PauseAudio(0);
     isSeek=false;
-    return T;
 }

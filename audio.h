@@ -46,7 +46,7 @@ signals:
 
 public slots:
 
-    qint64 seek(qint64 T);
+    void seek(qint64 T);
     void setVolume(const int volume){
         if(volume!=m_volume){
             m_volume=volume;
