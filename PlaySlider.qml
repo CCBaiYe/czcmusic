@@ -8,6 +8,7 @@ import QtQuick.Layouts
 Rectangle{
     property bool nolabel: true
     property int duringTime:0
+    property alias slidervalue: sliderControl.value
     property alias musicName: songInfo.text
     property alias musicDuringText: songTimeInfo.text
     id:sliderroot
@@ -20,12 +21,13 @@ Rectangle{
         anchors.topMargin: parent.height/9*2
         anchors.bottom: parent.bottom        
         enabled: true
-        value:mdp.mdplayer.duration > 0 ? mdp.mdplayer.position / mdp.mdplayer.duration : 0
+//        value:mdp.mdplayer.duration > 0 ?( mdp.mdplayer.position / mdp.mdplayer.duration ): 0
         onMoved: function () {
 
                 mdp.mdplayer.position = mdp.mdplayer.duration * sliderControl.position
 
         }
+
         //进度条
         background: Rectangle {
             x: sliderControl.leftPadding
@@ -65,6 +67,11 @@ Rectangle{
                 font.pixelSize: 10*dp;
             }
         }
+        Component.onCompleted: {
+            if(!loadFromFile.loadPath){
+                sliderControl.value=0
+            }
+        }
     }
     Label{
         id:songInfo
@@ -92,7 +99,7 @@ Rectangle{
         id:songTimeInfo
         visible: nolabel
         width: 60*dp
-        text:qsTr(dialogs.fileDialog.setTime(mdp.mdplayer.position) + "/" + dialogs.fileDialog.setTime(mdp.mdplayer.duration))
+//        text:qsTr(dialogs.fileDialog.setTime(mdp.mdplayer.position) + "/" + dialogs.fileDialog.setTime(mdp.mdplayer.duration))
         anchors{
             right : sliderControl.right
             rightMargin: 5*dp
@@ -106,7 +113,13 @@ Rectangle{
         }
         color: "#777777"
         horizontalAlignment: Text.AlignRight
+        Component.onCompleted: {
+            if(!loadFromFile.loadPath){
+                songTimeInfo.text=""
+            }
+        }
     }
+
 
 
 }

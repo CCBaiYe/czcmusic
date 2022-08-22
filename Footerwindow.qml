@@ -10,6 +10,8 @@ Rectangle{
     property alias songlist: songlist
     property alias footimage: footimage
     property alias showDesktop: showDesktop
+    property alias psliderValue: sliderWindow.slidervalue
+    property alias pmusicTimeText: sliderWindow.musicDuringText
     id:root
     color: "#ffffff"
     Rectangle{

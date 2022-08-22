@@ -18,7 +18,7 @@ Item{
         id: fileDialog
         title: qsTr("Please choose an image file")
         nameFilters: [
-            "Audio Files (*.mp3 *.ogg *.wav *.wma *.ape *.ra)",
+            "Audio Files (*.mp3 *.ogg *.wav *.aac *.flac *.opus)",
             "*.*"
         ];
         fileMode: FileDialog.OpenFiles

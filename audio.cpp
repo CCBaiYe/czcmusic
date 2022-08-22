@@ -42,8 +42,10 @@ int Audio::decode_audio_thread(void *opa)
                     exit(0);
                 }
 
+
                 a->position = av_q2d(a->pFormatCtx->streams[a->m_audioIndex]->time_base) * a->packet->pts * 1000;
                 emit a->positionChanged(a->position);
+
 
                 //获取解码后的帧数据
                 if(avcodec_receive_frame(a->pCodecCtx,pframe)==0){

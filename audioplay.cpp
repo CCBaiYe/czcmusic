@@ -10,8 +10,6 @@ AudioPlay::AudioPlay(QObject *parent ):QObject{parent}
         QByteArray temp = m_source.toString().toLocal8Bit();
         const char *str = temp.constData();
         _audio->open(str);
-        m_state=AudioPlay::PlayingState;
-//        play();
     });
 
     connect(_audio,&Audio::positionChanged,this,[&](qint64 temp){

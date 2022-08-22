@@ -14,31 +14,38 @@ Item {
                 dialogs.fileDialog.nextplay();
             }
             footer.songlist.fileLyr.setDuration(player.position);
+
+            footer.psliderValue=mdp.mdplayer.duration > 0 ?( mdp.mdplayer.position / mdp.mdplayer.duration ): 0
+            footer.pmusicTimeText=qsTr(dialogs.fileDialog.setTime(mdp.mdplayer.position) + "/" + dialogs.fileDialog.setTime(mdp.mdplayer.duration))
         }
         onSourceChanged: {
             if(player.source.toString().search("http")!==-1)
                 footer.songlist.fileLyr.url="/tmp/lyrics.lrc"
 
-            else footer.songlist.fileLyr.url = player.source
+            else footer.songlist.fileLyr.url = player.source         
         }
     }
 
 
 
     Component.onCompleted: {
-        player.source = loadFromFile.loadPath
+        if(loadFromFile.loadPath){
+            player.source = loadFromFile.loadPath
 
-        player.pause();
+            player.pause();
 
-        footer.palyslider.musicName = loadFromFile.musicName
-        var data1=loadFromFile.allKey();
-        for(var i=0;i<data1.length;i++){
-            var data2=loadFromFile.readData(data1[i]);
-            var data3={"songName":data2[0],"songPath":data2[1],
-                "songArtist":data2[2],"songAlbum":data2[3],"songTime":data2[4],
-                "Count":dialogs.recentplay.count+1}
-            dialogs.recentplay.append(data3);
+            footer.palyslider.musicName = loadFromFile.musicName
+            var data1=loadFromFile.allKey();
+            for(var i=0;i<data1.length;i++){
+                var data2=loadFromFile.readData(data1[i]);
+                var data3={"songName":data2[0],"songPath":data2[1],
+                    "songArtist":data2[2],"songAlbum":data2[3],"songTime":data2[4],
+                    "Count":dialogs.recentplay.count+1}
+                dialogs.recentplay.append(data3);
+            }
         }
+
+
     }
     Component.onDestruction: {
         loadFromFile.setLoadPath(player.source.toString())
