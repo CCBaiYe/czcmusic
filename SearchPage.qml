@@ -225,7 +225,7 @@ Rectangle{
 
             console.log(online.url)
 
-            mdp.mdplayer.stop()
+            mdp.mdplayer.pause()
             mdp.mdplayer.source=online.url
             mdp.desktopbtncontrol()
 

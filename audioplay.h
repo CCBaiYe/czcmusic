@@ -81,6 +81,9 @@ public slots:
         {
             m_muted=muted;
             _audio->setVolume(0);
+        }else{
+            m_muted=muted;
+            _audio->setVolume(100);
         }
         emit this->mutedChanged(m_muted);
     }

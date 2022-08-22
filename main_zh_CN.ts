@@ -217,7 +217,7 @@
     </message>
     <message>
         <source>MyCollection</source>
-        <translation>我的收藏</translation>
+        <translation type="vanished">我的收藏</translation>
     </message>
     <message>
         <source>List</source>
@@ -234,6 +234,25 @@
     <message>
         <source>list name</source>
         <translation type="unfinished">输入歌单名</translation>
+    </message>
+</context>
+<context>
+    <name>RecentPlayPage</name>
+    <message>
+        <source>Title</source>
+        <translation>标题</translation>
+    </message>
+    <message>
+        <source>Singer</source>
+        <translation>歌手</translation>
+    </message>
+    <message>
+        <source>Album</source>
+        <translation>专辑</translation>
+    </message>
+    <message>
+        <source>Duration</source>
+        <translation>时长</translation>
     </message>
 </context>
 <context>

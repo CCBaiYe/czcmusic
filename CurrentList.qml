@@ -62,7 +62,7 @@ Rectangle{
 
         icon.name: "media-playback-start"
         onTriggered: {
-            mdp.mdplayer.stop()
+            mdp.mdplayer.pause()
             footer.palyslider.musicName=dialogs.listM.get(listv.currentIndex).fileName
             mdp.mdplayer.source=dialogs.listM.get(listv.currentIndex).filePath
             mdp.desktopbtncontrol()

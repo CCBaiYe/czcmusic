@@ -68,7 +68,7 @@ import QtQuick.Controls 2.15
          anchors.fill: parent
          onDoubleClicked: {
              dialogs.addloadlist();
-             mdp.mdplayer.stop();
+             mdp.mdplayer.pause();
              //console.log(dialogs.loadmodel.get(index).songName)
              footer.palyslider.musicName=dialogs.loadmodel.get(index).songName;
              //console.log(dialogs.loadmodel.get(index).songPath)

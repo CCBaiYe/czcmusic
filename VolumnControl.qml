@@ -1,6 +1,6 @@
 import QtQuick 2.0
 import QtQuick.Controls
-import QtMultimedia
+import AudioPlay 1.0
 Item{
     property  alias ul:sliderControl.value
 
@@ -26,15 +26,15 @@ Item{
                 anchors.fill: parent
                 cursorShape: Qt.PointingHandCursor;
                 onClicked:{
-                    switch(mdp.audioout.muted){
+                    switch(mdp.mdplayer.muted){
                     case true:{
-                        mdp.audioout.muted=false;
-                        currentListBtn.text="\uf026";
+                        mdp.mdplayer.muted =false;
+                        currentListBtn.text="\uf027";
                         break;
                     }
                     case false:{
-                        mdp.audioout.muted=true;
-                        currentListBtn.text="\uf027"
+                        mdp.mdplayer.muted=true;
+                        currentListBtn.text="\uf026"
                         break;
                     }
                     }

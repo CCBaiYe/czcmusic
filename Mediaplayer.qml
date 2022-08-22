@@ -27,6 +27,9 @@ Item {
 
     Component.onCompleted: {
         player.source = loadFromFile.loadPath
+
+        player.pause();
+
         footer.palyslider.musicName = loadFromFile.musicName
         var data1=loadFromFile.allKey();
         for(var i=0;i<data1.length;i++){

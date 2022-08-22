@@ -10,7 +10,6 @@ Rectangle{
     property alias songlist: songlist
     property alias footimage: footimage
     property alias showDesktop: showDesktop
-    property alias playbtnText: playBtn.text
     id:root
     color: "#ffffff"
     Rectangle{
@@ -78,18 +77,17 @@ Rectangle{
             verticalCenter: parent.verticalCenter
         }
         width: 30*dp
-        text:  qsTr("\uf04c")
+        text:  mdp.mdplayer.playbackState==1?qsTr("\uf04c"):qsTr("\uf04b")
         TapHandler{
 
             cursorShape: Qt.PointingHandCursor;
             onTapped:  {
                 switch(mdp.mdplayer.playbackState) {
-                    case AudioPlayer.PlayingState: playbtnText=qsTr("\uf04b");mdp.desktoppausebtn(); break;
-                    case AudioPlayer.PausedState: playbtnText=qsTr("\uf04c");mdp.desktopbtncontrol(); break;
+                    case AudioPlayer.PlayingState:mdp.desktoppausebtn(); break;
+                    case AudioPlayer.PausedState: mdp.desktopbtncontrol(); break;
                     case AudioPlayer.StoppedState: mdp.desktopbtncontrol(); break;
 
                 }
-
 
             }
         }
