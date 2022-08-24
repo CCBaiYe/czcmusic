@@ -1,4 +1,4 @@
-# czc音乐播放器
+ czc音乐播放器
 ## 一.项目背景
 
 + 项目介绍
@@ -23,6 +23,7 @@
   + 在线歌曲下载
   + 音乐歌单
   + 国际化
+  + 使用ffmpeg实现音乐播放
 
 ## 二.功能介绍
 
@@ -42,8 +43,14 @@
 
 ### 8. 国际化
 
+### 9. 基于ffmpeg+sdl的音频播放api
+
 ## 三.参考资料
 
 TagLib官网: https://taglib.org/
 
 TagLib官方文档: https://taglib.org/api/inherits.html
+
+FFmpeg官网: https://ffmpeg.org/
+
+FFmpeg官方文档: https://ffmpeg.org/documentation.html
