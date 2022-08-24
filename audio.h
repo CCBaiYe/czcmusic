@@ -29,11 +29,12 @@ public:
         return m_volume;
     }
 
-    //音频播放回调
+    //sdl音频播放回调
     static void audioCallBack(void *udata,unsigned char *stream,int len);
 
 
     static int decode_audio_thread(void *opa);
+
 signals:
 
     void volumeChanged(int volume);

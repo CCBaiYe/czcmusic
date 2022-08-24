@@ -16,9 +16,9 @@ Audio::~Audio()
 }
 //缓冲区
 
-static Uint8 *audio_chunk;
+static Uint8 *audio_chunk;//音频播放缓冲区
 static Uint32 audio_len;
-static Uint8 *audio_pos;
+static Uint8 *audio_pos;//当前音频播放缓冲区
 
 int Audio::decode_audio_thread(void *opa)
 {
@@ -61,6 +61,7 @@ int Audio::decode_audio_thread(void *opa)
 
                     //音频缓冲区长度
                     audio_len = outBufferSize;
+                    
                     audio_pos = audio_chunk;
 
 
@@ -81,14 +82,13 @@ int Audio::decode_audio_thread(void *opa)
 
             }
             if(a->isSeek){
-                //            avcodec_flush_buffers(a->pCodecCtx);
-                //            av_packet_unref(a->packet);
+
                 av_frame_free(&pframe);
-                //            continue;
                 SDL_Delay(100);
+
             }
 
-            av_packet_unref(a->packet);
+            av_packet_unref(a->packet);//擦包
 
         }
 
@@ -105,14 +105,14 @@ void Audio::init()
     //分配解复用器上下文内存
      pFormatCtx=avformat_alloc_context();
      if(!pFormatCtx){
-         printf("error can't create allocate context \n");
+         qDebug()<<("error can't create allocate context \n");
          return;
      }
 
      //分配解码器上下文内存
      pCodecCtx=avcodec_alloc_context3(NULL);
      if(!pCodecCtx){
-         printf("error avcodec_alloc_context3: \n");
+         qDebug()<<("error avcodec_alloc_context3: \n");
          return ;
      }
      //分配重采样上下文
@@ -124,7 +124,7 @@ void Audio::init()
 
      //初始化SDL
      if(SDL_Init(SDL_INIT_AUDIO | SDL_INIT_TIMER)) {
-         printf( "Could not initialize SDL - %s\n", SDL_GetError());
+         qDebug()<<"Could not initialize SDL -"<<SDL_GetError()<<"\n";
          return ;
      }
 
@@ -265,7 +265,7 @@ void Audio::open(const char *filePath)
 //     qDebug()<<"Channels:\t "<<pCodecCtx->channels;
 //     qDebug()<<"Sample per Second\t "<< pCodecCtx->sample_rate;
 
-     //开始播放
+     //开始播放并创建进入回调线程
      SDL_PauseAudio(0);
 
      isPlay=true;
@@ -304,18 +304,20 @@ void Audio::audioCallBack(void *udata, unsigned char *stream, int len)
 {
     Audio *a=(Audio *)udata;
 
+    //每次回调时必须先清空
     SDL_memset(stream, 0, len);
 
     if (audio_len == 0)        /*  数据未读完才执行  */
         return;
-    int temp = (len>audio_len ? audio_len : len);
+    len = (len>audio_len ? audio_len : len);
 
-    SDL_MixAudioFormat(stream,audio_pos,AUDIO_S16SYS,temp,a->m_volume);
+    SDL_MixAudioFormat(stream,audio_pos,AUDIO_S16SYS,len,a->m_volume);
 
-    audio_pos += temp;
-    audio_len -= temp;
-    stream+=temp;
-    len-=temp;
+    //当前播放指针后移len
+    audio_pos += len;
+    //剩余播放长度-len
+    audio_len -= len;
+
 }
 
 
@@ -327,7 +329,7 @@ void Audio::pause()
 
 }
 
-void Audio::seek(qint64 T)
+void Audio::seek(qint64 T)//进度条跳转
 {
     isSeek=true;
     isPlay=false;

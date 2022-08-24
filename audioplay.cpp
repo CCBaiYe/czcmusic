@@ -8,7 +8,7 @@ AudioPlay::AudioPlay(QObject *parent ):QObject{parent}
 
     connect(this,&AudioPlay::sourceChanged,this,[&](){
         QByteArray temp = m_source.toString().toLocal8Bit();
-        const char *str = temp.constData();
+        const char *str = temp.constData();//将qurl转换为char *
         _audio->open(str);
     });
 
